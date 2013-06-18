@@ -1,0 +1,20 @@
+#OpenMRS module dists
+/api/target/
+/omod/target.2/
+/omod/target/
+target/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Intellij
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Mac
+.DS_Store
+
