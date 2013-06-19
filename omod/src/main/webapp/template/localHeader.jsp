@@ -16,3 +16,4 @@
 <h2>
 	<spring:message code="patientnarratives.title" />
 </h2>
+
