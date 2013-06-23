@@ -25,9 +25,10 @@ public class HeaderInclude extends HeaderIncludeExt {
         List<String> myHeaderFiles = new ArrayList<String>();
 
 //        myHeaderFiles.add("/scripts/jquery/jquery.min.js");
+//         myHeaderFiles.add("/moduleResources/patientnarratives/js/bootstrap.min.js");
+//        myHeaderFiles.add("/scripts/jquery/jquery.min.js");
 
-//        myHeaderFiles.add("/moduleResources/patientnarratives/css/bootstrap.min.css");
-//        myHeaderFiles.add("/moduleResources/patientnarratives/js/bootstrap.min.js");
+//        myHeaderFiles.add("/moduleResources/patientnarratives/css/styles.css");
 
         return myHeaderFiles;
     }

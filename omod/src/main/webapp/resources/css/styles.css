@@ -1,0 +1,40 @@
+html, body{
+    height: 100%;
+}
+
+#main-wrap {
+    background-color: #D9D9D9;
+}
+
+#sidebar {
+    background-color: #d2d2d2;
+}
+
+#content-wrap {
+    background-color: #c5c5c5;
+}
+
+#main-wrap > div {
+    min-height: 450px;
+    height: 100%;
+}
+
+#main-wrap {
+    overflow: hidden;
+}
+
+#sidebar {
+    float: left;
+    width: 50%;
+}
+
+#content-wrap {
+    float: right;
+    width: 50%;
+}
+
+#info-wrap {
+    overflow: hidden;
+}
+
+

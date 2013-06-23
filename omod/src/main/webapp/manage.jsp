@@ -3,10 +3,6 @@
 
 <%@ include file="template/localHeader.jsp"%>
 
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/js/bootstrap.min.js"/>
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/bootstrap.css"/>
-
-
 <p>Hello ${user.systemId}!</p>
 
 <h1>Hello, world!</h1>
