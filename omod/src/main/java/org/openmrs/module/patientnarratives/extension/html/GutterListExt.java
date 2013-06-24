@@ -13,7 +13,7 @@ public class GutterListExt extends LinkExt {
     }
 
     public String getUrl() {
-        urlg = "http://www.google.com/";
+        urlg = "module/patientnarratives/submitPatientNarrative.form";
         return this.urlg;
     }
 

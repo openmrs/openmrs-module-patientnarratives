@@ -20,14 +20,31 @@
   		    http://www.springframework.org/schema/util
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<!-- Add here beans related to the web context -->
 
-	 
+
+    <bean id="patientNarrativeUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="order"><value>1</value></property>
+        <property name="mappings">
+            <props>
+                <prop key="/module/patientnarratives/submitPatientNarrative.form">submitPatientNarrative</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="submitPatientNarrative" class="org.openmrs.module.patientnarratives.web.controller.PatientNarrativesSubmitController">
+        <property name="commandName"><value>submitPatientNarrative</value></property>
+        <property name="formView"><value>/module/patientnarratives/submitPatientNarrative</value></property>
+        <property name="successView"><value>redirect:submitPatientNarrative.form</value></property>
+    </bean>
+
 	<!-- Annotation based controllers -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
-	
+
 	<context:component-scan base-package="org.openmrs.module.patientnarratives.web.controller" />
 
+    <!-- Add here beans related to the web context -->
 
-		
+
+
+
 </beans>

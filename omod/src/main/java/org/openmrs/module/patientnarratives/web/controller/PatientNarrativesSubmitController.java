@@ -13,25 +13,60 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Encounter;
+import org.openmrs.Form;
+import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindException;
+import org.springframework.validation.Errors;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.SimpleFormController;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
- * The main controller.
+ * Provides browser based XForm data entry services.
+ *
+ * @author Daniel
+ *
  */
-@Controller
-public class PatientNarrativesSubmitController {
-	
-	protected final Log log = LogFactory.getLog(getClass());
-	
-	@RequestMapping(value = "/module/patientnarratives/submitPatientNarrative", method = RequestMethod.GET)
-	public void manage(ModelMap model) {
-		model.addAttribute("user", Context.getAuthenticatedUser());
-	}
+public class PatientNarrativesSubmitController extends SimpleFormController{
 
+    /** Logger for this class and subclasses */
+    protected final Log log = LogFactory.getLog(getClass());
+
+    @Override
+    protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
+        HashMap<String,Object> map = new HashMap<String,Object>();
+
+            Integer formId = 1; //Integer.parseInt(request.getParameter("formId"));
+            map.put("formId", formId);
+//            map.put("patientId", Integer.parseInt(request.getParameter("patientId")));
+//            map.put("formName", ((FormService)Context.getService(FormService.class)).getForm(formId).getName());
+//            map.put("entityFormDefDownloadUrlSuffix", "moduleServlet/xforms/xformDownload?target=xformentry&contentType=xml&");
+//            map.put("formDataUploadUrlSuffix", "module/xforms/xformDataUpload.form");
+//            map.put("afterSubmitUrlSuffix", "patientDashboard.form?");
+
+        return map;
+    }
+
+
+    //Can't see current usage for this.
+    @Override
+    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
+        return new ModelAndView(new RedirectView(getSuccessView()));
+    }
+
+
+    @Override
+    protected Object formBackingObject(HttpServletRequest request) throws Exception {
+        return "Not Yet";
+    }
 }
