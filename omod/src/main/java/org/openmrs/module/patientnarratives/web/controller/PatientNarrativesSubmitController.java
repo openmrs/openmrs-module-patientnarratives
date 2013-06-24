@@ -48,11 +48,11 @@ public class PatientNarrativesSubmitController extends SimpleFormController{
 
             Integer formId = 1; //Integer.parseInt(request.getParameter("formId"));
             map.put("formId", formId);
-//            map.put("patientId", Integer.parseInt(request.getParameter("patientId")));
-//            map.put("formName", ((FormService)Context.getService(FormService.class)).getForm(formId).getName());
-//            map.put("entityFormDefDownloadUrlSuffix", "moduleServlet/xforms/xformDownload?target=xformentry&contentType=xml&");
-//            map.put("formDataUploadUrlSuffix", "module/xforms/xformDataUpload.form");
-//            map.put("afterSubmitUrlSuffix", "patientDashboard.form?");
+            map.put("patientId", 2); // Integer.parseInt(request.getParameter("patientId")));
+            map.put("formName", ((FormService)Context.getService(FormService.class)).getForm(formId).getName());
+            map.put("entityFormDefDownloadUrlSuffix", "moduleServlet/xforms/xformDownload?target=xformentry&contentType=xml&");
+            map.put("formDataUploadUrlSuffix", "module/xforms/xformDataUpload.form");
+            map.put("afterSubmitUrlSuffix", "patientDashboard.form?");
 
         return map;
     }
