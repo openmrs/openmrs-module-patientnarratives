@@ -1,10 +1,13 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
 
+<%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
+<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
+
 <openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.js"/>
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css"/>
+<%--<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.js"/>--%>
+<%--<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css"/>--%>
 
 <%--<script type="text/javascript" src="${pageContext.request.contextPath}/"></script>--%>
 <%--<link href="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css" type="text/css" rel="stylesheet" />--%>
@@ -13,63 +16,87 @@
 
 <openmrs:htmlInclude file="/moduleResources/xforms/formrunner/FormRunner.nocache.js"/>
 
-<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>
+<%--<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>--%>
+
+<%--<script>--%>
+    <%--var c=document.getElementById("myCanvas");--%>
+    <%--var ctx=c.getContext("2d");--%>
+    <%--ctx.fillStyle="#000000";--%>
+    <%--ctx.fillRect(0,0,400,200);--%>
+<%--</script>--%>
 
 <div id="main-wrap">
+
     <div id="sidebar">
-        Left Nav
+        <div>
+            <div id="purcformrunner"></div>
 
-        <div id="purcformrunner"></div>
+            <div id="formId" style="visibility:hidden;">${formId}</div>
+            <div id="patientId" style="visibility:hidden;">${patientId}</div>
 
-        <div id="formId" style="visibility:hidden;">${formId}</div>
-        <div id="patientId" style="visibility:hidden;">${patientId}</div>
+            <div id="dateTimeSubmitFormat" style="visibility:hidden;">${dateTimeSubmitFormat}</div>
+            <div id="dateTimeDisplayFormat" style="visibility:hidden;">${dateTimeDisplayFormat}</div>
 
-        <div id="dateTimeSubmitFormat" style="visibility:hidden;">${dateTimeSubmitFormat}</div>
-        <div id="dateTimeDisplayFormat" style="visibility:hidden;">${dateTimeDisplayFormat}</div>
+            <div id="dateSubmitFormat" style="visibility:hidden;">${dateSubmitFormat}</div>
+            <div id="dateDisplayFormat" style="visibility:hidden;">${dateDisplayFormat}</div>
 
-        <div id="dateSubmitFormat" style="visibility:hidden;">${dateSubmitFormat}</div>
-        <div id="dateDisplayFormat" style="visibility:hidden;">${dateDisplayFormat}</div>
+            <div id="entityIdName" style="visibility:hidden;">patientId</div>
+            <div id="formIdName" style="visibility:hidden;">formId</div>
 
-        <div id="entityIdName" style="visibility:hidden;">patientId</div>
-        <div id="formIdName" style="visibility:hidden;">formId</div>
+            <div id="entityFormDefDownloadUrlSuffix" style="visibility:hidden;">${entityFormDefDownloadUrlSuffix}</div>
+            <div id="formDataUploadUrlSuffix" style="visibility:hidden;">${formDataUploadUrlSuffix}</div>
+            <div id="afterSubmitUrlSuffix" style="visibility:hidden;">${afterSubmitUrlSuffix}</div>
+            <div id="afterCancelUrlSuffix" style="visibility:hidden;">${afterCancelUrlSuffix}</div>
+            <div id="externalSourceUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/widgetValueDownload?</div>
+            <div id="multimediaUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/multimediaDownload</div>
 
-        <div id="entityFormDefDownloadUrlSuffix" style="visibility:hidden;">${entityFormDefDownloadUrlSuffix}</div>
-        <div id="formDataUploadUrlSuffix" style="visibility:hidden;">${formDataUploadUrlSuffix}</div>
-        <div id="afterSubmitUrlSuffix" style="visibility:hidden;">${afterSubmitUrlSuffix}</div>
-        <div id="afterCancelUrlSuffix" style="visibility:hidden;">${afterCancelUrlSuffix}</div>
-        <div id="externalSourceUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/widgetValueDownload?</div>
-        <div id="multimediaUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/multimediaDownload</div>
+            <div id="defaultFontFamily" style="visibility:hidden;">${defaultFontFamily}</div>
+            <div id="defaultFontSize" style="visibility:hidden;">${defaultFontSize}</div>
+            <div id="defaultGroupBoxHeaderBgColor" style="visibility:hidden;">${defaultGroupBoxHeaderBgColor}</div>
 
-        <div id="defaultFontFamily" style="visibility:hidden;">${defaultFontFamily}</div>
-        <div id="defaultFontSize" style="visibility:hidden;">${defaultFontSize}</div>
-        <div id="defaultGroupBoxHeaderBgColor" style="visibility:hidden;">${defaultGroupBoxHeaderBgColor}</div>
+            <div id="appendEntityIdAfterSubmit" style="visibility:hidden;">1</div>
+            <div id="appendEntityIdAfterCancel" style="visibility:hidden;">1</div>
 
-        <div id="appendEntityIdAfterSubmit" style="visibility:hidden;">1</div>
-        <div id="appendEntityIdAfterCancel" style="visibility:hidden;">1</div>
+            <div id="timeSubmitFormat" style="visibility:hidden;">${timeSubmitFormat}</div>
+            <div id="timeDisplayFormat" style="visibility:hidden;">${timeDisplayFormat}</div>
 
-        <div id="timeSubmitFormat" style="visibility:hidden;">${timeSubmitFormat}</div>
-        <div id="timeDisplayFormat" style="visibility:hidden;">${timeDisplayFormat}</div>
+            <div id="showSubmitSuccessMsg" style="visibility:hidden;">${showSubmitSuccessMsg}</div>
 
-        <div id="showSubmitSuccessMsg" style="visibility:hidden;">${showSubmitSuccessMsg}</div>
+            <div id="localeKey" style="visibility:hidden;">${localeKey}</div>
+            <div id="decimalSeparators" style="visibility:hidden;">${decimalSeparators}</div>
+            <div id="formatXml" style="visibility:hidden;">${formatXml}</div>
 
-        <div id="localeKey" style="visibility:hidden;">${localeKey}</div>
-        <div id="decimalSeparators" style="visibility:hidden;">${decimalSeparators}</div>
-        <div id="formatXml" style="visibility:hidden;">${formatXml}</div>
+        </div>
 
     </div>
 
     <div id="content-wrap">
         <div id="info-wrap">
-            small<br><br><br><br><br>
+
+            <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
+                Your browser does not support the HTML5 canvas tag.
+            </canvas>
+
         </div>
         <div id="info-wrap">
-            small<br><br><br>
+            </br></br><span>Patient Narrative</span>
+            <textarea rows="4" cols="50">
+            Describe your narrative here.
+            </textarea>
         </div>
         <div id="info-wrap">
-            small<br><br>
+            </br></br><span>Upload file (X-ray, reports, etc)</span>
+            <input type="file" name="file" id="file" size="40"/>
         </div>
         <div id="info-wrap">
-            small<br>
+            </br></br>
+            <form action="" method="post">
+                <%
+                    ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
+                    out.print(c.createRecaptchaHtml(null, null));
+                %>
+                <input type="submit" value="Submit" />
+            </form>
         </div>
     </div>
 </div>

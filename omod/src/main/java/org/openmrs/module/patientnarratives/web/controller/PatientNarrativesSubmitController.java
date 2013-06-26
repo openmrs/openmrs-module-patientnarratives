@@ -18,6 +18,10 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,12 +65,30 @@ public class PatientNarrativesSubmitController extends SimpleFormController{
     //Can't see current usage for this.
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
-        return new ModelAndView(new RedirectView(getSuccessView()));
-    }
 
+        // Captcha: https://developers.google.com/recaptcha/docs/java
+
+        String remoteAddr = request.getRemoteAddr();
+        ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+        reCaptcha.setPrivateKey("6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb");
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+        ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+        if (reCaptchaResponse.isValid()) {
+//            out.print("Answer was entered correctly!");
+        } else {
+//            out.print("Answer is wrong");
+        }
+
+        return new ModelAndView(new RedirectView(getSuccessView()));
+
+    }
 
     @Override
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
+
         return "Not Yet";
     }
 }
