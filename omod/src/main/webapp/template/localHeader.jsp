@@ -5,18 +5,17 @@
             code="admin.title.short" /></a>
     </li>
 
-    <li <c:if test='<%= request.getRequestURI().contains("/manage") %>'>class="active"</c:if>>
-    <a href="${pageContext.request.contextPath}/module/patientnarratives/manage.form"><spring:message
-            code="patientnarratives.manage" /></a>
-    </li>
-
     <!-- Add further links here -->
     <li <c:if test='<%= request.getRequestURI().contains("/submitPatientNarrative") %>'>class="active"</c:if>>
     <a href="${pageContext.request.contextPath}/module/patientnarratives/submitPatientNarrative.form"><spring:message
-            code="patientnarratives.manage" /></a>
+            code="patientnarratives.careseeker.form" /></a>
     </li>
 
-
+    <!-- Add further links here -->
+    <li <c:if test='<%= request.getRequestURI().contains("/careProviderConsole") %>'>class="active"</c:if>>
+    <a href="${pageContext.request.contextPath}/module/patientnarratives/careProviderConsole.form"><spring:message
+            code="patientnarratives.careprovider.console" /></a>
+    </li>
 
 
 

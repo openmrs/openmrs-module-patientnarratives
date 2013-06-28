@@ -6,7 +6,7 @@
 	<artifactId>patientnarratives</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Patient Narratives Module</name>
+	<name>Patient Narratives</name>
 	<description>OpenMRS based User-driven-Health-care System</description>
 	<url>https://wiki.openmrs.org/display/docs/Patient+Narratives+Module+Module</url>
 	

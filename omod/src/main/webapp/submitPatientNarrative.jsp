@@ -12,8 +12,6 @@
 <%--<script type="text/javascript" src="${pageContext.request.contextPath}/"></script>--%>
 <%--<link href="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css" type="text/css" rel="stylesheet" />--%>
 
-<%@ include file="template/localHeader.jsp"%>
-
 <openmrs:htmlInclude file="/moduleResources/xforms/formrunner/FormRunner.nocache.js"/>
 
 <%--<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>--%>

@@ -27,6 +27,7 @@
         <property name="mappings">
             <props>
                 <prop key="/module/patientnarratives/submitPatientNarrative.form">submitPatientNarrative</prop>
+                <prop key="/module/patientnarratives/careProviderConsole.form">careProviderConsole</prop>
             </props>
         </property>
     </bean>
@@ -35,6 +36,11 @@
         <property name="commandName"><value>submitPatientNarrative</value></property>
         <property name="formView"><value>/module/patientnarratives/submitPatientNarrative</value></property>
         <property name="successView"><value>redirect:submitPatientNarrative.form</value></property>
+    </bean>
+    <bean id="careProviderConsole" class="org.openmrs.module.patientnarratives.web.controller.CareProviderConsoleController">
+        <property name="commandName"><value>careProviderConsole</value></property>
+        <property name="formView"><value>/module/patientnarratives/careProviderConsole</value></property>
+        <property name="successView"><value>redirect:careProviderConsole.form</value></property>
     </bean>
 
 	<!-- Annotation based controllers -->
