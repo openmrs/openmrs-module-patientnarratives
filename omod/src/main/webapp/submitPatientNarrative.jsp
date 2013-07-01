@@ -14,6 +14,21 @@
 
 <openmrs:htmlInclude file="/moduleResources/xforms/formrunner/FormRunner.nocache.js"/>
 
+<script type="text/javascript" src='${pageContext.request.contextPath}/dwr/engine.js'></script>
+<script type="text/javascript" src='${pageContext.request.contextPath}/dwr/util.js'></script>
+<script type="text/javascript" src='${pageContext.request.contextPath}/dwr/interface/DWRXformsService.js'></script>
+
+<openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
+<openmrs:htmlInclude file="/scripts/timepicker/timepicker.js" />
+
+<c:if test="${usingJQuery}">
+    <openmrs:htmlInclude file="/dwr/interface/DWRConceptService.js" />
+    <openmrs:htmlInclude file="/dwr/interface/DWRPersonService.js" />
+    <openmrs:htmlInclude file="/dwr/interface/DWRProviderService.js" />
+    <openmrs:htmlInclude file="/scripts/jquery/autocomplete/OpenmrsAutoComplete.js" />
+    <openmrs:htmlInclude file="/scripts/jquery/autocomplete/jquery.ui.autocomplete.autoSelect.js" />
+</c:if>
+
 <%--<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>--%>
 
 <%--<script>--%>
