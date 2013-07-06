@@ -14,6 +14,7 @@
 package org.openmrs.module.patientnarratives.web.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Encounter;
+import org.openmrs.Patient;
+import org.openmrs.api.EncounterService;
+import org.openmrs.api.context.Context;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +39,14 @@ public class CareProviderConsoleController extends SimpleFormController {
     @Override
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
         HashMap<String,Object> map = new HashMap<String,Object>();
+
+
+        Context.addProxyPrivilege("View Encounters");
+        Patient defaultNarrativePatient = Context.getPatientService().getPatient(2);
+        List<Encounter> encounters = Context.getEncounterService().getEncountersByPatient(defaultNarrativePatient);
+        Context.removeProxyPrivilege("View Encounters");
+
+        map.put("encounters", encounters);
 
         return map;
     }

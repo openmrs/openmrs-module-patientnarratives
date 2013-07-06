@@ -78,6 +78,13 @@
             <version>0.0.7</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.ocpsoft</groupId>
+            <artifactId>ocpsoft-pretty-time</artifactId>
+            <version>1.0.5</version>
+            <scope>runtime</scope>
+        </dependency>
+
 	</dependencies>
 
 	<build>
