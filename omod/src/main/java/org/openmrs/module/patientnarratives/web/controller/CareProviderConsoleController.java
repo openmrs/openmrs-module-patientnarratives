@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Encounter;
+import org.openmrs.EncounterType;
 import org.openmrs.Patient;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.context.Context;
@@ -42,8 +44,13 @@ public class CareProviderConsoleController extends SimpleFormController {
 
 
         Context.addProxyPrivilege("View Encounters");
-        Patient defaultNarrativePatient = Context.getPatientService().getPatient(2);
-        List<Encounter> encounters = Context.getEncounterService().getEncountersByPatient(defaultNarrativePatient);
+//        Patient defaultNarrativePatient = Context.getPatientService().getPatient(2);
+        String encounterType = "patient-narratives";
+
+        List<EncounterType> var = new ArrayList<EncounterType>();
+        var.add(Context.getEncounterService().getEncounterType(encounterType));
+
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, var, true);
         Context.removeProxyPrivilege("View Encounters");
 
         map.put("encounters", encounters);
