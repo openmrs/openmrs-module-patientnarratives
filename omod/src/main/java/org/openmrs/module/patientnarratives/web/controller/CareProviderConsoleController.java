@@ -55,6 +55,9 @@ public class CareProviderConsoleController extends SimpleFormController {
 
         map.put("encounters", encounters);
 
+//        Encounter enc = new Encounter();
+//        enc.
+
         return map;
     }
 

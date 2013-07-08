@@ -19,7 +19,7 @@
     <require_modules>
 
         <require_module version="1.9.1">org.openmrs.module.htmlformentry</require_module>
-        <require_module version="3.8.5">org.openmrs.module.xforms</require_module>
+        <require_module version="4.2.1.0">org.openmrs.module.xforms</require_module>
 
     </require_modules>
 
