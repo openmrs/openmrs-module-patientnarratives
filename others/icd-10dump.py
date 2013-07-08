@@ -6,6 +6,8 @@ import csv
 MySQLdb.paramstyle
 from datetime import datetime
 
+## Jonathan Galingan --> https://groups.google.com/a/openmrs.org/d/msg/implementers/Ki8Jk1PX_Qo/bP19QS0s4REJ
+
 ## csv parameters
 filename = "icdcodes.csv"
 reader = csv.reader(open(filename,"rb"), delimiter=',')
