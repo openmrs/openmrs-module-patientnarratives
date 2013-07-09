@@ -1,4 +1,21 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
+
+
+<script>
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function()
+    {
+        $j('.toggleAddTag').click(function(event)
+        {
+            $j('#addTag').slideToggle('fast');
+            event.preventDefault();
+        });
+        colorVisibleTableRows("table", "white", "whitesmoke");
+    });
+</script>
+
+
 <ul id="menu">
     <li class="first">
         <a href="${pageContext.request.contextPath}/admin"><spring:message

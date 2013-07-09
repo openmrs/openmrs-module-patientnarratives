@@ -27,6 +27,16 @@
                 { "bSearchable": true,
                     "bVisible":    true },
                 { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
                     "bVisible":    true }
             ]
 
@@ -44,19 +54,72 @@
         <thead>
         <tr>
             <th width="200">Encounter ID</th>
-
-            <th width="300">VisitType</th>
-            <th width="300">Form Name</th>
             <th width="300">Encounter Date</th>
+
+            <th width="300">Patient Name</th>
+            <th width="300">Gender</th>
+            <th width="300">Age</th>
+            <th width="300">Hometown</th>
+            <th width="300">Narrative</th>
+            <th width="300">Email</th>
+            <th width="300">Telephone</th>
+
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${encounters}" var="encountersObj" varStatus="loopStatus">
             <tr class="">
                 <td><a href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=<c:out value="${encountersObj.encounterId}"/>"><c:out value="${encountersObj.encounterId} "/> </td>
-                <td><c:out value="${encountersObj.visit.visitType} "/> </td>
-                <td><c:out value="${encountersObj.form.name} "/> </td>
+
+                <%--<c:forEach items="${encountersObj.encounterProviders}" var="encProvidersObj" varStatus="loopStatus">--%>
+                <%--<td><c:out value="${encProvidersObj.provider} "/> </td>--%>
+                <%--</c:forEach>--%>
+
+                <%--<td><c:out value="${encountersObj.encounterType.name} "/> </td>--%>
+
                 <td><c:out value="${encountersObj.encounterDatetime} "/></td>
+
+                <c:forEach items="${encountersObj.obs}" var="encObsObj" varStatus="loopStatus">
+                    <c:choose>
+                        <c:when test="${encObsObj.concept == '9'}">
+                            <c:set var="narrative_patient_story" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '11'}">
+                            <c:set var="narrative_patient_tp" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '13'}">
+                            <c:set var="narrative_patient_sex" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '7'}">
+                            <c:set var="narrative_patient_city" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '12'}">
+                            <c:set var="narrative_patient_name" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '10'}">
+                            <c:set var="narrative_patient_email" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '8'}">
+                            <c:set var="narrative_patient_age" value="${encObsObj.valueText}" />
+                        </c:when>
+                    </c:choose>
+                </c:forEach>
+
+                <td><c:out value="${narrative_patient_name} "/> </td>
+                <td><c:out value="${narrative_patient_sex} "/> </td>
+                <td><c:out value="${narrative_patient_age} "/> </td>
+                <td><c:out value="${narrative_patient_city} "/> </td>
+
+                <td>
+                    <a class="toggleAddTag" href="#">Show-Story</a>
+                    <div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">
+                        <c:out value="${narrative_patient_story}"/>
+                    </div>
+                </td>
+
+                <td><c:out value="${narrative_patient_tp} "/> </td>
+                <td><c:out value="${narrative_patient_email} "/> </td>
+
             </tr>
         </c:forEach>
 
