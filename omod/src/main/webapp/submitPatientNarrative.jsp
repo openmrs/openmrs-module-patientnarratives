@@ -96,10 +96,11 @@
 
     <div id="content-wrap">
         <div id="info-wrap">
-
-            <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
-                Your browser does not support the HTML5 canvas tag.
-            </canvas>
+            <center>
+                <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+            </center>
 
         </div>
         <div id="info-wrap">
@@ -120,7 +121,7 @@
                     out.print(c.createRecaptchaHtml(null, null));
                 %>
 
-            </br></br>
+            </br>
             <input id="submit" type="button" value="Submit" />
             <%--</form>--%>
         </div>
