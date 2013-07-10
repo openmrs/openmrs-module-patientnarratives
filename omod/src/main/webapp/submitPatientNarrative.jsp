@@ -31,12 +31,23 @@
 
 <%--<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>--%>
 
-<%--<script>--%>
+<script>
+
+    var $j = jQuery.noConflict();
+
+    $j(document).ready(function(){
+        logging: true;
+        $j("#submit").click(function() {
+            submitForm();
+        });
+    });
+
+</script>
+
     <%--var c=document.getElementById("myCanvas");--%>
     <%--var ctx=c.getContext("2d");--%>
     <%--ctx.fillStyle="#000000";--%>
     <%--ctx.fillRect(0,0,400,200);--%>
-<%--</script>--%>
 
 <div id="main-wrap">
 
@@ -103,13 +114,15 @@
         </div>
         <div id="info-wrap">
             </br></br>
-            <form action="" method="post">
+            <%--<form action="" method="post">--%>
                 <%
                     ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
                     out.print(c.createRecaptchaHtml(null, null));
                 %>
-                <input type="submit" value="Submit" />
-            </form>
+
+            </br></br>
+            <input id="submit" type="button" value="Submit" />
+            <%--</form>--%>
         </div>
     </div>
 </div>

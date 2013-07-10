@@ -111,10 +111,10 @@
                 <td><c:out value="${narrative_patient_city} "/> </td>
 
                 <td>
-                    <a class="toggleAddTag" href="#">Show-Story</a>
-                    <div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">
+                    <%--<a class="toggleAddTag" href="#">Show-Story</a>--%>
+                    <%--<div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">--%>
                         <c:out value="${narrative_patient_story}"/>
-                    </div>
+                    <%--</div>--%>
                 </td>
 
                 <td><c:out value="${narrative_patient_tp} "/> </td>
