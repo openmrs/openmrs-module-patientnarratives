@@ -85,7 +85,22 @@
             <scope>runtime</scope>
         </dependency>
 
-	</dependencies>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>htmlformentry-api</artifactId>
+            <version>${htmlformentryModuleVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>xforms</artifactId>
+            <version>${xformsModuleVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
+
+    </dependencies>
 
 	<build>
 		<finalName>${project.parent.artifactId}-${project.parent.version}</finalName>

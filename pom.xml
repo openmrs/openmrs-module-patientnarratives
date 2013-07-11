@@ -35,24 +35,14 @@
 	<properties>
 		<openMRSVersion>1.8.2</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <htmlformentryModuleVersion>2.1.1</htmlformentryModuleVersion>
+        <xformsModuleVersion>3.9.5</xformsModuleVersion>
 	</properties>
+
 
 	<dependencyManagement>
 		<dependencies>
 		
-			<!--
-			Libraries to add as dependencies with compile or runtime scope:
-			Find matching dependencies in the maven central repository.
-			<dependency>
-				<groupId>org.other.library</groupId>
-				<artifactId>library-name</artifactId>
-				<version>library.version</version>
-				<scope>compile</scope>
-			</dependency>
-			-->
-			
-			
-
 			<!-- Begin OpenMRS core -->
 			
 			<dependency>
@@ -94,8 +84,22 @@
 				<type>pom</type>
 				<scope>test</scope>
 			</dependency>
-						
-			<!-- End OpenMRS core -->
+
+            <!-- End OpenMRS core -->
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>htmlformentry-api</artifactId>
+                <version>${htmlformentryModuleVersion}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.openmrs.module</groupId>
+                <artifactId>xforms-api</artifactId>
+                <version>${xformsModuleVersion}</version>
+                <scope>provided</scope>
+            </dependency>
 
 		</dependencies>
 	</dependencyManagement>
