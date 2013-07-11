@@ -1,5 +1,10 @@
 <%@ include file="/WEB-INF/template/include.jsp" %>
 
+<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
+
+<%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
+<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
+
 <c:set var="OPENMRS_DO_NOT_SHOW_PATIENT_SET" scope="request" value="true"/>
 <c:set var="pageFragment" value="${param.pageFragment != null && param.pageFragment}"/>
 <c:set var="inPopup" value="${pageFragment || (param.inPopup != null && param.inPopup)}"/>
@@ -329,72 +334,72 @@
 	
 </script>
 
-<div id="htmlFormEntryBanner">
-	<spring:message var="backMessage" code="htmlformentry.goBack"/>
-	<c:if test="${!inPopup && (command.context.mode == 'ENTER' || command.context.mode == 'EDIT')}">
-		<spring:message var="backMessage" code="htmlformentry.discard"/>
-	</c:if>
-	<div style="float: left" id="discardAndPrintDiv">
-		<c:if test="${!inPopup}">
-			<span id="discardLinkSpan"><a href="<c:choose><c:when test="${not empty command.returnUrlWithParameters}">${command.returnUrlWithParameters}</c:when><c:otherwise>${pageContext.request.contextPath}/patientDashboard.form?patientId=${command.patient.patientId}</c:otherwise></c:choose>" class="html-form-entry-discard-changes">${backMessage}</a></span> | 
-		</c:if>
-		<span id="printLinkSpan"><a href="javascript:window.print();"><spring:message code="htmlformentry.print"/></a></span> &nbsp;<br/>
-	</div>
-	<div style="float:right">
-		<c:if test="${command.context.mode == 'VIEW'}">
-			<c:if test="${!inPopup}">
-				<openmrs:hasPrivilege privilege="Edit Encounters,Edit Observations">
-					<c:url var="editUrl" value="/module/htmlformentry/htmlFormEntry.form">
-						<c:forEach var="p" items="${param}">
-							<c:if test="${p.key != 'mode'}">
-								<c:param name="${p.key}" value="${p.value}"/>
-							</c:if>
-						</c:forEach>
-						<c:param name="mode" value="EDIT"/>
-					</c:url>
-					<a href="${editUrl}"><spring:message code="general.edit"/></a> |
-				</openmrs:hasPrivilege>
-			</c:if>
-			<openmrs:hasPrivilege privilege="Delete Encounters,Delete Observations">
-				<a onClick="handleDeleteButton()"><spring:message code="general.delete"/></a>
-				<div id="confirmDeleteFormPopup" style="position: absolute; z-axis: 1; right: 0px; background-color: #ffff00; border: 2px black solid; display: none; padding: 10px">
-					<center>
-						<spring:message code="htmlformentry.deleteReason"/>
-						<br/>
-						<textarea name="reason" id="deleteReason"></textarea>
-						<br/><br/>
-						<input type="button" value="<spring:message code="general.cancel"/>" onClick="cancelDeleteForm()"/>
-						&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="button" value="<spring:message code="general.delete"/>" id="deleteButton"/>
-					</center>
-				</div>
-			</openmrs:hasPrivilege>
-		</c:if>
-	</div>
-	<c:if test="${!inPopup}">
-		<b>
-			${command.patient.personName} |
-			<c:choose>
-				<c:when test="${not empty command.form}">
-					${command.form.name} (${command.form.encounterType.name})
-				</c:when>
-				<c:otherwise>
-					<c:if test="${not empty command.encounter}">
-						${command.encounter.form.name} (${command.encounter.encounterType.name})
-					</c:if>
-				</c:otherwise> 
-			</c:choose>
-			
-			|
-			<c:if test="${not empty command.encounter}">
-				<openmrs:formatDate date="${command.encounter.encounterDatetime}"/> | ${command.encounter.location.name} 
-			</c:if>
-			<c:if test="${empty command.encounter}">
-				<spring:message code="htmlformentry.newForm"/>
-			</c:if>
-		</b>
-	</c:if>
-</div>
+<%--<div id="htmlFormEntryBanner">--%>
+	<%--<spring:message var="backMessage" code="htmlformentry.goBack"/>--%>
+	<%--<c:if test="${!inPopup && (command.context.mode == 'ENTER' || command.context.mode == 'EDIT')}">--%>
+		<%--<spring:message var="backMessage" code="htmlformentry.discard"/>--%>
+	<%--</c:if>--%>
+	<%--<div style="float: left" id="discardAndPrintDiv">--%>
+		<%--<c:if test="${!inPopup}">--%>
+			<%--<span id="discardLinkSpan"><a href="<c:choose><c:when test="${not empty command.returnUrlWithParameters}">${command.returnUrlWithParameters}</c:when><c:otherwise>${pageContext.request.contextPath}/patientDashboard.form?patientId=${command.patient.patientId}</c:otherwise></c:choose>" class="html-form-entry-discard-changes">${backMessage}</a></span> | --%>
+		<%--</c:if>--%>
+		<%--<span id="printLinkSpan"><a href="javascript:window.print();"><spring:message code="htmlformentry.print"/></a></span> &nbsp;<br/>--%>
+	<%--</div>--%>
+	<%--<div style="float:right">--%>
+		<%--<c:if test="${command.context.mode == 'VIEW'}">--%>
+			<%--<c:if test="${!inPopup}">--%>
+				<%--<openmrs:hasPrivilege privilege="Edit Encounters,Edit Observations">--%>
+					<%--<c:url var="editUrl" value="/module/htmlformentry/htmlFormEntry.form">--%>
+						<%--<c:forEach var="p" items="${param}">--%>
+							<%--<c:if test="${p.key != 'mode'}">--%>
+								<%--<c:param name="${p.key}" value="${p.value}"/>--%>
+							<%--</c:if>--%>
+						<%--</c:forEach>--%>
+						<%--<c:param name="mode" value="EDIT"/>--%>
+					<%--</c:url>--%>
+					<%--<a href="${editUrl}"><spring:message code="general.edit"/></a> |--%>
+				<%--</openmrs:hasPrivilege>--%>
+			<%--</c:if>--%>
+			<%--<openmrs:hasPrivilege privilege="Delete Encounters,Delete Observations">--%>
+				<%--<a onClick="handleDeleteButton()"><spring:message code="general.delete"/></a>--%>
+				<%--<div id="confirmDeleteFormPopup" style="position: absolute; z-axis: 1; right: 0px; background-color: #ffff00; border: 2px black solid; display: none; padding: 10px">--%>
+					<%--<center>--%>
+						<%--<spring:message code="htmlformentry.deleteReason"/>--%>
+						<%--<br/>--%>
+						<%--<textarea name="reason" id="deleteReason"></textarea>--%>
+						<%--<br/><br/>--%>
+						<%--<input type="button" value="<spring:message code="general.cancel"/>" onClick="cancelDeleteForm()"/>--%>
+						<%--&nbsp;&nbsp;&nbsp;&nbsp;--%>
+						<%--<input type="button" value="<spring:message code="general.delete"/>" id="deleteButton"/>--%>
+					<%--</center>--%>
+				<%--</div>--%>
+			<%--</openmrs:hasPrivilege>--%>
+		<%--</c:if>--%>
+	<%--</div>--%>
+	<%--<c:if test="${!inPopup}">--%>
+		<%--<b>--%>
+			<%--${command.patient.personName} |--%>
+			<%--<c:choose>--%>
+				<%--<c:when test="${not empty command.form}">--%>
+					<%--${command.form.name} (${command.form.encounterType.name})--%>
+				<%--</c:when>--%>
+				<%--<c:otherwise>--%>
+					<%--<c:if test="${not empty command.encounter}">--%>
+						<%--${command.encounter.form.name} (${command.encounter.encounterType.name})--%>
+					<%--</c:if>--%>
+				<%--</c:otherwise> --%>
+			<%--</c:choose>--%>
+			<%----%>
+			<%--|--%>
+			<%--<c:if test="${not empty command.encounter}">--%>
+				<%--<openmrs:formatDate date="${command.encounter.encounterDatetime}"/> | ${command.encounter.location.name} --%>
+			<%--</c:if>--%>
+			<%--<c:if test="${empty command.encounter}">--%>
+				<%--<spring:message code="htmlformentry.newForm"/>--%>
+			<%--</c:if>--%>
+		<%--</b>--%>
+	<%--</c:if>--%>
+<%--</div>--%>
 
 <c:if test="${command.context.mode != 'VIEW'}">
 	<spring:hasBindErrors name="command">
@@ -426,9 +431,56 @@
 		<spring:message code="htmlformentry.form.reconstruct.warning" />
 	</div>
 </c:if>
-	
-	${command.htmlToDisplay}
-	
+
+
+
+<div id="main-wrap">
+
+    <div id="sidebar">
+        <div>
+
+            ${command.htmlToDisplay}
+        </div>
+
+    </div>
+    <div id="content-wrap">
+        <div id="info-wrap">
+            <center>
+                <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
+                    Your browser does not support the HTML5 canvas tag.
+                </canvas>
+            </center>
+
+        </div>
+        <div id="info-wrap">
+            </br></br><span>Patient Narrative</span>
+            <textarea rows="4" cols="50">
+                Describe your narrative here.
+            </textarea>
+        </div>
+        <div id="info-wrap">
+            </br></br><span>Upload file (X-ray, reports, etc)</span>
+            <input type="file" name="file" id="file" size="40"/>
+        </div>
+        <div id="info-wrap">
+            </br></br>
+            <%--<form action="" method="post">--%>
+            <%
+                ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
+                out.print(c.createRecaptchaHtml(null, null));
+            %>
+
+            </br>
+            <input id="submit" type="button" value="Submit" />
+            <%--</form>--%>
+        </div>
+    </div>
+
+
+</div>
+
+
+
 <c:if test="${command.context.mode != 'VIEW'}">
 	<div id="passwordPopup" style="position: absolute; z-axis: 1; bottom: 25px; background-color: #ffff00; border: 2px black solid; display: none; padding: 10px">
 		<center>
