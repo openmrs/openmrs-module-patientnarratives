@@ -22,12 +22,14 @@ import javax.servlet.http.HttpServletResponse;
 import net.tanesha.recaptcha.ReCaptchaImpl;
 import net.tanesha.recaptcha.ReCaptchaResponse;
 
+import org.openmrs.module.xforms.XformConstants;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.patientnarratives.api.XformConstants;
-//import org.openmrs.module.xforms.XformConstants;
+
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
