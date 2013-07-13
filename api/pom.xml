@@ -63,12 +63,19 @@
 				
 		<!-- End OpenMRS core -->
 
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>htmlformentry-api</artifactId>
-            <version>${htmlformentryModuleVersion}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.openmrs.module</groupId>-->
+            <!--<artifactId>htmlformentry-api</artifactId>-->
+            <!--<version>${htmlformentryModuleVersion}</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.openmrs.module</groupId>-->
+            <!--<artifactId>xforms-api</artifactId>-->
+            <!--<version>${xformsModuleVersion}</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 		
 	</dependencies>
 	

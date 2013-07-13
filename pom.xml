@@ -36,7 +36,7 @@
 		<openMRSVersion>1.8.2</openMRSVersion>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <htmlformentryModuleVersion>2.1.1</htmlformentryModuleVersion>
-        <xformsModuleVersion>3.9.5</xformsModuleVersion>
+        <xformsModuleVersion>4.2.1.0</xformsModuleVersion>
 	</properties>
 
 
