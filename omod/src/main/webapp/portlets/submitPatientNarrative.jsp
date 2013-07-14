@@ -1,16 +1,4 @@
-<%@ include file="/WEB-INF/template/include.jsp"%>
-<%@ include file="/WEB-INF/template/header.jsp"%>
-
-<%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
-<%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
-
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
-
-<%--<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.js"/>--%>
-<%--<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css"/>--%>
-
-<%--<script type="text/javascript" src="${pageContext.request.contextPath}/"></script>--%>
-<%--<link href="${pageContext.request.contextPath}/moduleResources/htmlformentry/htmlFormEntry.css" type="text/css" rel="stylesheet" />--%>
+<%@ include file="/WEB-INF/template/include.jsp" %>
 
 <openmrs:htmlInclude file="/moduleResources/xforms/formrunner/FormRunner.nocache.js"/>
 
@@ -49,84 +37,45 @@
     <%--ctx.fillStyle="#000000";--%>
     <%--ctx.fillRect(0,0,400,200);--%>
 
-<div id="main-wrap">
-
-    <div id="sidebar">
         <div>
             <div id="purcformrunner"></div>
 
-            <div id="formId" style="visibility:hidden;">${formId}</div>
-            <div id="patientId" style="visibility:hidden;">${patientId}</div>
+            <div id="formId" style="visibility:hidden;">${model.formId}</div>
+            <div id="patientId" style="visibility:hidden;">${model.patientId}</div>
 
-            <div id="dateTimeSubmitFormat" style="visibility:hidden;">${dateTimeSubmitFormat}</div>
-            <div id="dateTimeDisplayFormat" style="visibility:hidden;">${dateTimeDisplayFormat}</div>
+            <div id="dateTimeSubmitFormat" style="visibility:hidden;">${model.dateTimeSubmitFormat}</div>
+            <div id="dateTimeDisplayFormat" style="visibility:hidden;">${model.dateTimeDisplayFormat}</div>
 
-            <div id="dateSubmitFormat" style="visibility:hidden;">${dateSubmitFormat}</div>
-            <div id="dateDisplayFormat" style="visibility:hidden;">${dateDisplayFormat}</div>
+            <div id="dateSubmitFormat" style="visibility:hidden;">${model.dateSubmitFormat}</div>
+            <div id="dateDisplayFormat" style="visibility:hidden;">${model.dateDisplayFormat}</div>
 
             <div id="entityIdName" style="visibility:hidden;">patientId</div>
             <div id="formIdName" style="visibility:hidden;">formId</div>
 
-            <div id="entityFormDefDownloadUrlSuffix" style="visibility:hidden;">${entityFormDefDownloadUrlSuffix}</div>
-            <div id="formDataUploadUrlSuffix" style="visibility:hidden;">${formDataUploadUrlSuffix}</div>
-            <div id="afterSubmitUrlSuffix" style="visibility:hidden;">${afterSubmitUrlSuffix}</div>
-            <div id="afterCancelUrlSuffix" style="visibility:hidden;">${afterCancelUrlSuffix}</div>
+            <div id="entityFormDefDownloadUrlSuffix" style="visibility:hidden;">${model.entityFormDefDownloadUrlSuffix}</div>
+            <div id="formDataUploadUrlSuffix" style="visibility:hidden;">${model.formDataUploadUrlSuffix}</div>
+            <div id="afterSubmitUrlSuffix" style="visibility:hidden;">${model.afterSubmitUrlSuffix}</div>
+            <div id="afterCancelUrlSuffix" style="visibility:hidden;">${model.afterCancelUrlSuffix}</div>
             <div id="externalSourceUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/widgetValueDownload?</div>
             <div id="multimediaUrlSuffix" style="visibility:hidden;">moduleServlet/xforms/multimediaDownload</div>
 
-            <div id="defaultFontFamily" style="visibility:hidden;">${defaultFontFamily}</div>
-            <div id="defaultFontSize" style="visibility:hidden;">${defaultFontSize}</div>
-            <div id="defaultGroupBoxHeaderBgColor" style="visibility:hidden;">${defaultGroupBoxHeaderBgColor}</div>
+            <div id="defaultFontFamily" style="visibility:hidden;">${model.defaultFontFamily}</div>
+            <div id="defaultFontSize" style="visibility:hidden;">${model.defaultFontSize}</div>
+            <div id="defaultGroupBoxHeaderBgColor" style="visibility:hidden;">${model.defaultGroupBoxHeaderBgColor}</div>
 
             <div id="appendEntityIdAfterSubmit" style="visibility:hidden;">1</div>
             <div id="appendEntityIdAfterCancel" style="visibility:hidden;">1</div>
 
-            <div id="timeSubmitFormat" style="visibility:hidden;">${timeSubmitFormat}</div>
-            <div id="timeDisplayFormat" style="visibility:hidden;">${timeDisplayFormat}</div>
+            <div id="timeSubmitFormat" style="visibility:hidden;">${model.timeSubmitFormat}</div>
+            <div id="timeDisplayFormat" style="visibility:hidden;">${model.timeDisplayFormat}</div>
 
-            <div id="showSubmitSuccessMsg" style="visibility:hidden;">${showSubmitSuccessMsg}</div>
+            <div id="showSubmitSuccessMsg" style="visibility:hidden;">${model.showSubmitSuccessMsg}</div>
 
-            <div id="localeKey" style="visibility:hidden;">${localeKey}</div>
-            <div id="decimalSeparators" style="visibility:hidden;">${decimalSeparators}</div>
-            <div id="formatXml" style="visibility:hidden;">${formatXml}</div>
-
-        </div>
-
-    </div>
-
-    <div id="content-wrap">
-        <div id="info-wrap">
-            <center>
-                <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
-            </center>
+            <div id="localeKey" style="visibility:hidden;">${model.localeKey}</div>
+            <div id="decimalSeparators" style="visibility:hidden;">${model.decimalSeparators}</div>
+            <div id="formatXml" style="visibility:hidden;">${model.formatXml}</div>
 
         </div>
-        <div id="info-wrap">
-            </br></br><span>Patient Narrative</span>
-            <textarea rows="4" cols="50">
-            Describe your narrative here.
-            </textarea>
-        </div>
-        <div id="info-wrap">
-            </br></br><span>Upload file (X-ray, reports, etc)</span>
-            <input type="file" name="file" id="file" size="40"/>
-        </div>
-        <div id="info-wrap">
-            </br></br>
-            <%--<form action="" method="post">--%>
-                <%
-                    ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
-                    out.print(c.createRecaptchaHtml(null, null));
-                %>
-
-            </br>
-            <input id="submit" type="button" value="Submit" />
-            <%--</form>--%>
-        </div>
-    </div>
-</div>
 
 <script language="javascript">
 
@@ -463,6 +412,5 @@ function checkIfLoggedInCallback(isLoggedIn) {
 
 </script>
 
-<%@ include file="/WEB-INF/template/footer.jsp"%>
 
 

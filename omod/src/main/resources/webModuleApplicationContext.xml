@@ -26,17 +26,31 @@
         <property name="order"><value>1</value></property>
         <property name="mappings">
             <props>
-                <prop key="/module/patientnarratives/submitPatientNarrative.form">submitPatientNarrative</prop>
+                <!--<prop key="/module/patientnarratives/submitPatientNarrative.form">submitPatientNarrative</prop>-->
+                <prop key="/module/patientnarratives/formNarrative.form">formNarrative</prop>
                 <prop key="/module/patientnarratives/careProviderConsole.form">careProviderConsole</prop>
+                <prop key="**/submitPatientNarrative.portlet">submitPatientNarrative</prop>
             </props>
         </property>
     </bean>
 
+
     <bean id="submitPatientNarrative" class="org.openmrs.module.patientnarratives.web.controller.PatientNarrativesSubmitController">
-        <property name="commandName"><value>submitPatientNarrative</value></property>
-        <property name="formView"><value>/module/patientnarratives/submitPatientNarrative</value></property>
-        <property name="successView"><value>redirect:submitPatientNarrative.form</value></property>
     </bean>
+
+    <!--<bean id="submitPatientNarrative" class="org.openmrs.module.patientnarratives.web.controller.PatientNarrativesSubmitController">-->
+        <!--<property name="commandName"><value>submitPatientNarrative</value></property>-->
+        <!--<property name="formView"><value>/module/patientnarratives/submitPatientNarrative</value></property>-->
+        <!--<property name="successView"><value>redirect:submitPatientNarrative.form</value></property>-->
+    <!--</bean>-->
+
+    <bean id="formNarrative" class="org.openmrs.module.patientnarratives.web.controller.NarrativesFormController">
+    <property name="commandName"><value>formNarrative</value></property>
+    <property name="formView"><value>/module/patientnarratives/formNarrative</value></property>
+    <property name="successView"><value>redirect:formNarrative.form</value></property>
+    </bean>
+
+
     <bean id="careProviderConsole" class="org.openmrs.module.patientnarratives.web.controller.CareProviderConsoleController">
         <property name="commandName"><value>careProviderConsole</value></property>
         <property name="formView"><value>/module/patientnarratives/careProviderConsole</value></property>

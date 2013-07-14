@@ -23,8 +23,8 @@
     </li>
 
     <!-- Add further links here -->
-    <li <c:if test='<%= request.getRequestURI().contains("/submitPatientNarrative") %>'>class="active"</c:if>>
-    <a href="${pageContext.request.contextPath}/module/patientnarratives/submitPatientNarrative.form"><spring:message
+    <li <c:if test='<%= request.getRequestURI().contains("/formNarrative") %>'>class="active"</c:if>>
+    <a href="${pageContext.request.contextPath}/module/patientnarratives/formNarrative.form"><spring:message
             code="patientnarratives.careseeker.form" /></a>
     </li>
 

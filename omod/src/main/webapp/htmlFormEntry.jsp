@@ -433,52 +433,7 @@
 </c:if>
 
 
-
-<div id="main-wrap">
-
-    <div id="sidebar">
-        <div>
-
             ${command.htmlToDisplay}
-        </div>
-
-    </div>
-    <div id="content-wrap">
-        <div id="info-wrap">
-            <center>
-                <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
-            </center>
-
-        </div>
-        <div id="info-wrap">
-            </br></br><span>Patient Narrative</span>
-            <textarea rows="4" cols="50">
-                Describe your narrative here.
-            </textarea>
-        </div>
-        <div id="info-wrap">
-            </br></br><span>Upload file (X-ray, reports, etc)</span>
-            <input type="file" name="file" id="file" size="40"/>
-        </div>
-        <div id="info-wrap">
-            </br></br>
-            <%--<form action="" method="post">--%>
-            <%
-                ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
-                out.print(c.createRecaptchaHtml(null, null));
-            %>
-
-            </br>
-            <input id="btnSubmit" type="button" value="Submit" />
-            <%--</form>--%>
-        </div>
-    </div>
-
-
-</div>
-
 
 
 <c:if test="${command.context.mode != 'VIEW'}">
