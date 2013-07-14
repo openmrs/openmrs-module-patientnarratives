@@ -471,7 +471,7 @@
             %>
 
             </br>
-            <input id="submit" type="button" value="Submit" />
+            <input id="btnSubmit" type="button" value="Submit" />
             <%--</form>--%>
         </div>
     </div>
