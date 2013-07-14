@@ -43,7 +43,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.view.RedirectView;
 
-public class PatientNarrativesSubmitController extends PortletController{
+public class XFormEntryPortletController extends PortletController{
     /** Logger for this class and subclasses */
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -167,46 +167,6 @@ public class PatientNarrativesSubmitController extends PortletController{
 
 //        map.put("useOpenmrsMessageTag", XformsUtil.isOnePointNineOneAndAbove());
 
-
-
-//        if (model.containsKey("formToEntryUrlMap")) {
-//            return;
-//        }
-//        Person person = (Person) model.get("person");
-//        if (person == null)
-//            throw new IllegalArgumentException("This portlet may only be used in the context of a Person");
-//        FormEntryContext fec = new FormEntryContext(person);
-//        Map<Form, FormEntryHandler> entryUrlMap = new TreeMap<Form, FormEntryHandler>(new Comparator<Form>() {
-//
-//            public int compare(Form left, Form right) {
-//                int temp = left.getName().toLowerCase().compareTo(right.getName().toLowerCase());
-//                if (temp == 0)
-//                    temp = OpenmrsUtil.compareWithNullAsLowest(left.getVersion(), right.getVersion());
-//                if (temp == 0)
-//                    temp = OpenmrsUtil.compareWithNullAsGreatest(left.getId(), right.getId());
-//                return temp;
-//            }
-//        });
-//        List<Extension> handlers = ModuleFactory.getExtensions("org.openmrs.module.web.extension.FormEntryHandler",
-//                Extension.MEDIA_TYPE.html);
-//        if (handlers != null) {
-//            for (Extension ext : handlers) {
-//                FormEntryHandler handler = (FormEntryHandler) ext;
-//                Collection<Form> toEnter = handler.getFormsModuleCanEnter(fec);
-//                if (toEnter != null) {
-//                    for (Form form : toEnter) {
-//                        entryUrlMap.put(form, handler);
-//                    }
-//                }
-//            }
-//        }
-//        model.put("formToEntryUrlMap", entryUrlMap);
-//        model.put("anyUpdatedFormEntryModules", handlers != null && handlers.size() > 0);
-
-        // determine whether it's need to show disclaimer on jsp page or not
-        // as current user does not have enough permissions to view at least one
-        // type of encounters
-//        model.put("showDisclaimer", !Context.getEncounterService().canViewAllEncounterTypes(Context.getAuthenticatedUser()));
     }
 }
 

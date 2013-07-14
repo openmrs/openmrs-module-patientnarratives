@@ -11,14 +11,14 @@
 
 <c:if test="${not pageFragment}">
     <c:set var="DO_NOT_INCLUDE_JQUERY" value="true"/>
-	<c:choose>
-		<c:when test="${inPopup}">
-			<%@ include file="/WEB-INF/template/headerMinimal.jsp" %>
-		</c:when>
-		<c:otherwise>
-			<%@ include file="/WEB-INF/template/header.jsp" %>
-		</c:otherwise>
-	</c:choose>
+	<%--<c:choose>--%>
+		<%--<c:when test="${inPopup}">--%>
+			<%--<%@ include file="/WEB-INF/template/headerMinimal.jsp" %>--%>
+		<%--</c:when>--%>
+		<%--<c:otherwise>--%>
+			<%--<%@ include file="/WEB-INF/template/header.jsp" %>--%>
+		<%--</c:otherwise>--%>
+	<%--</c:choose>--%>
 
 	<openmrs:htmlInclude file="/dwr/engine.js" />
 	<openmrs:htmlInclude file="/dwr/util.js" />
@@ -55,15 +55,15 @@
 			
 			// do the post that does the actual delete
 			$j.post("<c:url value="/module/htmlformentry/deleteEncounter.form"/>", 
-				{ 	encounterId: "${command.encounter.encounterId}", 
-				    htmlFormId: "${command.htmlFormId}",
-					returnUrl: "${command.returnUrlWithParameters}", 
+				{ 	encounterId: "${model.command.encounter.encounterId}",
+				    htmlFormId: "${model.command.htmlFormId}",
+					returnUrl: "${model.command.returnUrlWithParameters}",
 					reason: $j('#deleteReason').val()
 			 	}, 
 			 	function(data) {
-				 	var url = "${command.returnUrlWithParameters}";
+				 	var url = "${model.command.returnUrlWithParameters}";
 				 	if (url == null || url == "") {
-					 	url = "${pageContext.request.contextPath}/patientDashboard.form?patientId=${command.patient.patientId}";
+					 	url = "${pageContext.request.contextPath}/patientDashboard.form?patientId=${model.command.patient.patientId}";
 				 	}
 				 	window.parent.location.href = url;
 			 	}
@@ -401,7 +401,7 @@
 	<%--</c:if>--%>
 <%--</div>--%>
 
-<c:if test="${command.context.mode != 'VIEW'}">
+<c:if test="${model.command.context.mode != 'VIEW'}">
 	<spring:hasBindErrors name="command">
 		<spring:message code="fix.error"/>
 		<div class="error">
@@ -413,30 +413,30 @@
 	</spring:hasBindErrors>
 </c:if>
 
-<c:if test="${command.context.mode != 'VIEW'}">
+<c:if test="${model.command.context.mode != 'VIEW'}">
 	<form id="htmlform" method="post" onSubmit="submitHtmlForm(); return false;">
-		<input type="hidden" name="personId" value="${ command.patient.personId }"/>
-		<input type="hidden" name="htmlFormId" value="${ command.htmlFormId }"/>
-		<input type="hidden" name="formModifiedTimestamp" value="${ command.formModifiedTimestamp }"/>
-		<input type="hidden" name="encounterModifiedTimestamp" value="${ command.encounterModifiedTimestamp }"/>
-		<c:if test="${ not empty command.encounter }">
-			<input type="hidden" name="encounterId" value="${ command.encounter.encounterId }"/>
+		<input type="hidden" name="personId" value="${ model.command.patient.personId }"/>
+		<input type="hidden" name="htmlFormId" value="${ model.command.htmlFormId }"/>
+		<input type="hidden" name="formModifiedTimestamp" value="${ model.command.formModifiedTimestamp }"/>
+		<input type="hidden" name="encounterModifiedTimestamp" value="${ model.command.encounterModifiedTimestamp }"/>
+		<c:if test="${ not empty model.command.encounter }">
+			<input type="hidden" name="encounterId" value="${ model.command.encounter.encounterId }"/>
 		</c:if>
 		<input type="hidden" name="closeAfterSubmission" value="${param.closeAfterSubmission}"/>
-		<input type="hidden" name="hasChangedInd" class="has-changed-ind" value="${ command.hasChangedInd }" />
+		<input type="hidden" name="hasChangedInd" class="has-changed-ind" value="${ model.command.hasChangedInd }" />
 </c:if>
 
-<c:if test="${command.context.guessingInd == 'true'}">
+<c:if test="${model.command.context.guessingInd == 'true'}">
 	<div class="error">
 		<spring:message code="htmlformentry.form.reconstruct.warning" />
 	</div>
 </c:if>
 
 
-            ${command.htmlToDisplay}
+            ${model.command.htmlToDisplay}
 
 
-<c:if test="${command.context.mode != 'VIEW'}">
+<c:if test="${model.command.context.mode != 'VIEW'}">
 	<div id="passwordPopup" style="position: absolute; z-axis: 1; bottom: 25px; background-color: #ffff00; border: 2px black solid; display: none; padding: 10px">
 		<center>
 			<table>
@@ -460,16 +460,16 @@
 </form>
 </c:if>
 
-<c:if test="${not empty command.fieldAccessorJavascript}">
+<c:if test="${not empty model.command.fieldAccessorJavascript}">
 	<script type="text/javascript">
-		${command.fieldAccessorJavascript}
+		${model.command.fieldAccessorJavascript}
 	</script>
 </c:if>
-<c:if test="${not empty command.setLastSubmissionFieldsJavascript || not empty command.lastSubmissionErrorJavascript}"> 
+<c:if test="${not empty model.command.setLastSubmissionFieldsJavascript || not empty model.command.lastSubmissionErrorJavascript}">
 	<script type="text/javascript">
 		$j(document).ready( function() {
-			${command.setLastSubmissionFieldsJavascript}
-			${command.lastSubmissionErrorJavascript}
+			${model.command.setLastSubmissionFieldsJavascript}
+			${model.command.lastSubmissionErrorJavascript}
 
 			$j('input[toggleDim]:not(:checked)').each(function () {
 				var target = $j(this).attr("toggleDim");
@@ -497,13 +497,13 @@
 	</script>
 </c:if>
 
-<c:if test="${!pageFragment}">
-	<c:choose>
-		<c:when test="${inPopup}">
-			<%@ include file="/WEB-INF/template/footerMinimal.jsp" %>
-		</c:when>
-		<c:otherwise>
-			<%@ include file="/WEB-INF/template/footer.jsp" %>
-		</c:otherwise>
-	</c:choose>
-</c:if>
+<%--<c:if test="${!pageFragment}">--%>
+	<%--<c:choose>--%>
+		<%--<c:when test="${inPopup}">--%>
+			<%--<%@ include file="/WEB-INF/template/footerMinimal.jsp" %>--%>
+		<%--</c:when>--%>
+		<%--<c:otherwise>--%>
+			<%--<%@ include file="/WEB-INF/template/footer.jsp" %>--%>
+		<%--</c:otherwise>--%>
+	<%--</c:choose>--%>
+<%--</c:if>--%>

@@ -27,8 +27,9 @@
             <%--<openmrs:portlet url="${extension.portletUrl}" moduleId="${extension.moduleId}" id="${extension.portletUrl}" />--%>
 
                 <c:catch var="ex">
-                    sdfsdfsdfsdfsdfsdfsdfsdfsdf
-                    <openmrs:portlet url="submitPatientNarrative" id="submitPatientNarrative2" moduleId="patientnarratives" />
+                    <%--<openmrs:portlet url="xFormEntry" id="submitPatientNarrative2" moduleId="patientnarratives" />--%>
+
+                    <openmrs:portlet url="htmlFormEntry" id="submitPatientNarrative2" moduleId="patientnarratives" />
                 </c:catch>
                 <c:if test="${not empty ex}">
                     <div class="error">
