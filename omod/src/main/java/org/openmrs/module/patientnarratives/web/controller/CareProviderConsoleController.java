@@ -45,10 +45,12 @@ public class CareProviderConsoleController extends SimpleFormController {
 
         Context.addProxyPrivilege("View Encounters");
 //        Patient defaultNarrativePatient = Context.getPatientService().getPatient(2);
-        String encounterType = "patient_narratives";
+
+        String globalPropertyEnctype = Context.getAdministrationService().getGlobalProperty("patientnarratives.enctype");
+//        String encounterType = "patient_narratives";
 
         List<EncounterType> var = new ArrayList<EncounterType>();
-        var.add(Context.getEncounterService().getEncounterType(encounterType));
+        var.add(Context.getEncounterService().getEncounterType(globalPropertyEnctype));
 
         List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, var, true);
         Context.removeProxyPrivilege("View Encounters");

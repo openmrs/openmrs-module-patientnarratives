@@ -20,6 +20,10 @@
                 <td><input type="text" name="formID" value="<openmrs:globalProperty key="patientnarratives.formid"/>"></td>
             </tr>
             <tr>
+                <td valign="top"><br/></td>
+                <td></td>
+            </tr>
+            <tr>
                 <td valign="top">Patient ID</td>
                 <td><input type="text" name="patientID" value="<openmrs:globalProperty key="patientnarratives.patientid"/>"></td>
             </tr>

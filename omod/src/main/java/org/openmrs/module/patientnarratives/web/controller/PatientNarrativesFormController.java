@@ -46,6 +46,9 @@ public class PatientNarrativesFormController extends SimpleFormController{
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
+        String formType = Context.getAdministrationService().getGlobalProperty("patientnarratives.formtype");
+        map.put("formType", formType);
+
         return map;
     }
 

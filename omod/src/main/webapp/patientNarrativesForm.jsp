@@ -23,25 +23,27 @@
     <div id="sidebar">
 
         <div id="formEntryDialog22">
-            <%--<openmrs:portlet url="personFormEntry" personId="${patient.personId}" id="encounterTabFormEntryPopup" parameters="showLastThreeEncounters=false|returnUrl=${model.formEntryReturnUrl}"/>--%>
-            <%--<openmrs:portlet url="${extension.portletUrl}" moduleId="${extension.moduleId}" id="${extension.portletUrl}" />--%>
-
-                <c:catch var="ex">
-                    <%--<openmrs:portlet url="xFormEntry" id="submitPatientNarrative2" moduleId="patientnarratives" />--%>
-
-                    <openmrs:portlet url="htmlFormEntry" id="submitPatientNarrative2" moduleId="patientnarratives" />
-                </c:catch>
-                <c:if test="${not empty ex}">
-                    <div class="error">
-                        <openmrs:message code="fix.error.plain"/> <br/>
-                        <b>${ex}</b>
-                        <div style="height: 200px; width: 800px; overflow: scroll">
-                            <c:forEach var="row" items="${ex.cause.stackTrace}">
-                                ${row}<br/>
-                            </c:forEach>
-                        </div>
+            <c:catch var="ex">
+                <c:choose>
+                    <c:when test="${formType == 'HTML-Form'}">
+                        <openmrs:portlet url="htmlFormEntry" id="htmlFormEntryForm" moduleId="patientnarratives" />
+                    </c:when>
+                    <c:when test="${formType == 'X-Form'}">
+                        <openmrs:portlet url="xFormEntry" id="xFormEntryForm" moduleId="patientnarratives" />
+                    </c:when>
+                </c:choose>
+            </c:catch>
+            <c:if test="${not empty ex}">
+                <div class="error">
+                    <openmrs:message code="fix.error.plain"/> <br/>
+                    <b>${ex}</b>
+                    <div style="height: 200px; width: 800px; overflow: scroll">
+                        <c:forEach var="row" items="${ex.cause.stackTrace}">
+                            ${row}<br/>
+                        </c:forEach>
                     </div>
-                </c:if>
+                </div>
+            </c:if>
         </div>
 
 

@@ -66,10 +66,14 @@ public class HtmlFormEntryPortletController extends PortletController {
         Long encounterModifiedTimestamp = null;
         String hasChangedInd = null;
 
+        String globalPropertyFormId = Context.getAdministrationService().getGlobalProperty("patientnarratives.formid");
+        String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
+
+        Integer formId = Integer.valueOf(globalPropertyFormId);
+        Integer patientId = Integer.valueOf(globalPropertyPatientId);
+
         Integer personId = null;
-        Integer patientId   = 2;
-        Integer  formId = 3;
-        Integer htmlFormId = 1;
+        Integer htmlFormId = null;
 
         String modeParam = request.getParameter("mode");
         if ("enter".equalsIgnoreCase(modeParam)) {

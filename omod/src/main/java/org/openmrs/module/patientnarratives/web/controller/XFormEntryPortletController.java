@@ -127,9 +127,14 @@ public class XFormEntryPortletController extends PortletController{
     @Override
     protected void populateModel(HttpServletRequest request, Map<String, Object> model) {
 
-        Integer formId = 1; //Integer.parseInt(request.getParameter("formId"));
+        String globalPropertyFormId = Context.getAdministrationService().getGlobalProperty("patientnarratives.formid");
+        String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
+
+        Integer formId = Integer.valueOf(globalPropertyFormId);
+        Integer patientId = Integer.valueOf(globalPropertyPatientId);
+
         model.put("formId", formId);
-        model.put("patientId", 2); // Integer.parseInt(request.getParameter("patientId")));
+        model.put("patientId", patientId);
         model.put("formName", ((FormService) Context.getService(FormService.class)).getForm(formId).getName());
         model.put("entityFormDefDownloadUrlSuffix", "moduleServlet/xforms/xformDownload?target=xformentry&contentType=xml&");
         model.put("formDataUploadUrlSuffix", "module/xforms/xformDataUpload.form");
