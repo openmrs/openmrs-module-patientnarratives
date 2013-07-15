@@ -13,6 +13,8 @@
  */
 package org.openmrs.module.patientnarratives.api;
 
+import org.openmrs.annotation.Authorized;
+import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,8 +31,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface PatientNarrativesService extends OpenmrsService {
      
-	/*
-	 * Add service methods here
-	 * 
-	 */
 }

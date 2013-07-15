@@ -48,6 +48,7 @@ public class AdminList extends AdministrationSectionExt {
 
         map.put("/module/patientnarratives/patientNarrativesForm.form", "patientnarratives.careseeker.form");
         map.put("/module/patientnarratives/careProviderConsole.form", "patientnarratives.careprovider.console");
+        map.put("/module/patientnarratives/moduleSettings.form", "patientnarratives.module.settings");
 
         return map;
 	}

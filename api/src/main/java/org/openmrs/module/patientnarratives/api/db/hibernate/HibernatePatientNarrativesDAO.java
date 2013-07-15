@@ -16,6 +16,7 @@ package org.openmrs.module.patientnarratives.api.db.hibernate;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.SessionFactory;
+import org.openmrs.api.db.DAOException;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 
 /**
@@ -39,4 +40,5 @@ public class HibernatePatientNarrativesDAO implements PatientNarrativesDAO {
     public SessionFactory getSessionFactory() {
 	    return sessionFactory;
     }
+
 }

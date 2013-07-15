@@ -13,6 +13,7 @@
  */
 package org.openmrs.module.patientnarratives.api.db;
 
+import org.openmrs.api.db.DAOException;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 
 /**
@@ -20,7 +21,5 @@ import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
  */
 public interface PatientNarrativesDAO {
 	
-	/*
-	 * Add DAO methods here
-	 */
+
 }

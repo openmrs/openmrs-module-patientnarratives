@@ -28,6 +28,7 @@
             <props>
                 <prop key="/module/patientnarratives/patientNarrativesForm.form">patientNarrativesForm</prop>
                 <prop key="/module/patientnarratives/careProviderConsole.form">careProviderConsole</prop>
+                <prop key="/module/patientnarratives/moduleSettings.form">moduleSettings</prop>
                 <prop key="**/xFormEntry.portlet">xFormEntry</prop>
                 <prop key="**/htmlFormEntry.portlet">htmlFormEntry</prop>
             </props>
@@ -54,7 +55,13 @@
         <property name="successView"><value>redirect:careProviderConsole.form</value></property>
     </bean>
 
-	<!-- Annotation based controllers -->
+    <bean id="moduleSettings" class="org.openmrs.module.patientnarratives.web.controller.ModuleSettingsController">
+        <property name="commandName"><value>moduleSettings</value></property>
+        <property name="formView"><value>/module/patientnarratives/moduleSettings</value></property>
+        <property name="successView"><value>redirect:moduleSettings.form</value></property>
+    </bean>
+
+    <!-- Annotation based controllers -->
 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
 
 	<context:component-scan base-package="org.openmrs.module.patientnarratives.web.controller" />

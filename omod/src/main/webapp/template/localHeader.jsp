@@ -34,6 +34,11 @@
             code="patientnarratives.careprovider.console" /></a>
     </li>
 
+    <li <c:if test='<%= request.getRequestURI().contains("/moduleSettings") %>'>class="active"</c:if>>
+    <a href="${pageContext.request.contextPath}/module/patientnarratives/moduleSettings.form"><spring:message
+            code="patientnarratives.module.settings" /></a>
+    </li>
+
 
 
 </ul>
