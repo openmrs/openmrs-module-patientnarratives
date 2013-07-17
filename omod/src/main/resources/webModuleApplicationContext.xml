@@ -21,6 +21,12 @@
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 
+    <!--<bean id="authorizationInterceptor" class="org.openmrs.module.patientnarratives.api.advice.HtmlFormParametersAroundAdvisor"/>-->
+
+    <!--<util:list id="serviceInterceptors">-->
+        <!--<ref local="authorizationInterceptor"/>-->
+    <!--</util:list>-->
+
 
     <bean id="patientNarrativeUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="order"><value>1</value></property>

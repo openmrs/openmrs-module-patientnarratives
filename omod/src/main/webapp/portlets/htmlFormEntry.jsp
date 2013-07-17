@@ -250,9 +250,9 @@
 		
 		var state_beforeValidation=true;
 		
-		if (!isLoggedIn) {
-			showAuthenticateDialog();
-		}else{
+//		if (!isLoggedIn) {
+//			showAuthenticateDialog();
+//		}else{
 			
 			// first call any beforeValidation functions that may have been defined by the html form
 			if (beforeValidation.length > 0){
@@ -280,7 +280,7 @@
         			doSubmitHtmlForm();
         		}
 			}
-		}
+//		}
 	}
 
 	function showAuthenticateDialog() {

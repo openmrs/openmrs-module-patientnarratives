@@ -25,7 +25,7 @@ public class GutterListExt extends LinkExt {
      * @return Privilege string
      */
     public String getRequiredPrivilege() {
-        return "";
+        return "Add Patient Narratives,Add Feedback";
     }
 
 }

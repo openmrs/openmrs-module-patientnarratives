@@ -127,6 +127,11 @@ public class XFormEntryPortletController extends PortletController{
     @Override
     protected void populateModel(HttpServletRequest request, Map<String, Object> model) {
 
+        Context.addProxyPrivilege("View Users");
+        Context.addProxyPrivilege("View Global Properties");
+
+//        Context.removeProxyPrivilege("View Users");
+
         String globalPropertyFormId = Context.getAdministrationService().getGlobalProperty("patientnarratives.formid");
         String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
 
