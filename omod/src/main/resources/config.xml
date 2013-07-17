@@ -41,6 +41,24 @@
         <class>org.openmrs.module.patientnarratives.extension.html.GutterListExt</class>
     </extension>
 
+
+    <advice>
+        <point>org.openmrs.api.EncounterService</point>
+        <class>org.openmrs.module.patientnarratives.api.advice.HtmlFormParametersAroundAdvisor</class>
+    </advice>
+
+    <!-- Required Privileges -->
+    <privilege>
+        <name>Add Patient Narratives</name>
+        <description>Able to submit Patient Narratives</description>
+    </privilege>
+
+    <privilege>
+        <name>Manage Patient Narratives</name>
+        <description>Able to manage the Patient Narratives</description>
+    </privilege>
+    <!-- /Required Privileges -->
+
     <!--<extension>-->
 		<!--<point>org.openmrs.headerFullIncludeExt</point>-->
 		<!--<class>${project.parent.groupId}.${project.parent.artifactId}.api.extension.html.HeaderInclude</class>-->
