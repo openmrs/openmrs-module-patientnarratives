@@ -21,7 +21,7 @@
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
 
-    <!--<bean id="authorizationInterceptor" class="org.openmrs.module.patientnarratives.api.advice.HtmlFormParametersAroundAdvisor"/>-->
+    <!--<bean id="authorizationInterceptor" class="org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor>-->
 
     <!--<util:list id="serviceInterceptors">-->
         <!--<ref local="authorizationInterceptor"/>-->

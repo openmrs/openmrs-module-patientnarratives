@@ -1,0 +1,5 @@
+TODO
+-----------------------------------
+
+1. View html form entry output properly like this:
+http://localhost:8088/openmrs22/module/htmlformentry/htmlFormEntry.form?encounterId=55

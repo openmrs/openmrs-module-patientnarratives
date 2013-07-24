@@ -42,10 +42,15 @@
     </extension>
 
 
-    <advice>
-        <point>org.openmrs.api.EncounterService</point>
-        <class>org.openmrs.module.patientnarratives.api.advice.HtmlFormParametersAroundAdvisor</class>
-    </advice>
+    <!--<advice>-->
+        <!--<point>org.openmrs.api.EncounterService</point>-->
+        <!--<class>org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor</class>-->
+    <!--</advice>-->
+
+    <!--<advice>-->
+        <!--<point>org.openmrs.api.OpenmrsService</point>-->
+        <!--<class>org.openmrs.module.patientnarratives.api.advice.ObsServiceAroundAdvisor</class>-->
+    <!--</advice>-->
 
     <!-- Required Privileges -->
     <privilege>
