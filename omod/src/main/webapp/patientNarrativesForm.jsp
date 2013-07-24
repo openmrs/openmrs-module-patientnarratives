@@ -6,18 +6,6 @@
 
 <openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 
-<script>
-    var $j = jQuery.noConflict();
-
-    $j(document).ready(function(){
-        logging: true;
-        $j("#submit").click(function() {
-            submitForm();
-        });
-    });
-
-</script>
-
 <div id="main-wrap">
 
     <div id="sidebar">
@@ -77,7 +65,7 @@
             %>
 
             </br>
-            <input id="submit" type="button" value="Submit" />
+            <input id="submitMainForm" type="button" value="Submit" />
             <%--</form>--%>
         </div>
     </div>

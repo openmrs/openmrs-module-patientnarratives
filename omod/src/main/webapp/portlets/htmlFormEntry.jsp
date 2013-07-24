@@ -27,11 +27,21 @@
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/htmlFormEntry.css" />
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/jquery-ui-1.8.17.custom.css" />
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/jquery-1.4.2.min.js" />
-    <script type="text/javascript">
-        $j = jQuery.noConflict();
-    </script>
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/jquery-ui-1.8.17.custom.min.js" />
 </c:if>
+
+<script>
+
+    var $j = jQuery.noConflict();
+    $j(document).ready(function(){
+        logging: true;
+        $j("#submitMainForm").click(function() {
+            submitHtmlForm();
+            return false;
+        });
+    });
+
+</script>
 
 <script type="text/javascript">
 	var propertyAccessorInfo = new Array();
@@ -299,7 +309,10 @@
 	}
 
 	function doSubmitHtmlForm() {
-		
+
+
+        console.log("************asdsad");
+
 		// first call any beforeSubmit functions that may have been defined by the form
 		var state_beforeSubmit=true;
 		if (beforeSubmit.length > 0){
@@ -314,7 +327,7 @@
 				}
 			}
 		}
-		
+
 		// only do the submit if all the beforeSubmit functions returned "true"
 		if (state_beforeSubmit){
 			var form = document.getElementById('htmlform');

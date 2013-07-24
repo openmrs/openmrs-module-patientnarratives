@@ -15,6 +15,9 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Person;
+import org.openmrs.Role;
+import org.openmrs.User;
 import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
@@ -30,9 +33,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PatientNarrativesFormController extends SimpleFormController{
 
@@ -46,7 +47,26 @@ public class PatientNarrativesFormController extends SimpleFormController{
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
-        Context.authenticate("harsha", "Password123");
+        if (Context.isAuthenticated() == false){
+            Context.authenticate("anonymous", "Password123");
+        }
+
+//        User anonymousUser = new User();
+//        User userAdmin = Context.getUserService().getUser(1);
+//
+//        Set<Role>  rolesForAdminUser = Context.getAllRoles(userAdmin);
+//        Set<Role> rolesForAnonymousUser = new LinkedHashSet<Role>();
+//        for(Role role : rolesForAdminUser)  {
+//           if (role.getName().equals("Anonymous"))
+//           rolesForAnonymousUser.add(role);
+//        }
+//
+//        anonymousUser.setRoles(rolesForAnonymousUser);
+//        anonymousUser.setUsername("anonymous");
+//        anonymousUser.setName("anonymous");
+//
+//        Context.getUserService().saveUser(anonymousUser, "Password123");
+
         String formType = Context.getAdministrationService().getGlobalProperty("patientnarratives.formtype");
         map.put("formType", formType);
 

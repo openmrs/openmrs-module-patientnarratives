@@ -25,7 +25,7 @@
 
     $j(document).ready(function(){
         logging: true;
-        $j("#submit").click(function() {
+        $j("#submitMainForm").click(function() {
             submitForm();
         });
     });
