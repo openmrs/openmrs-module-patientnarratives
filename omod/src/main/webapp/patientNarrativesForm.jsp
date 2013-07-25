@@ -4,6 +4,10 @@
 <%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
 <%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
 
+<openmrs:htmlInclude file="/dwr/engine.js" />
+<openmrs:htmlInclude file="/dwr/util.js" />
+<openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
+
 <openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 
 <script type="text/javascript">
@@ -11,7 +15,7 @@
         theme : 'clean'
     };
 
-//    var $j = jQuery.noConflict();
+    //    var $j = jQuery.noConflict();
 //    $j(document).ready(function(){
 //
 //        logging: true;

@@ -22,7 +22,10 @@
 
 	<openmrs:htmlInclude file="/dwr/engine.js" />
 	<openmrs:htmlInclude file="/dwr/util.js" />
-	<openmrs:htmlInclude file="/dwr/interface/DWRHtmlFormEntryService.js" />
+
+	<openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
+    <openmrs:htmlInclude file="/dwr/interface/DWRHtmlFormEntryService.js" />
+
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/htmlFormEntry.js" />
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/htmlFormEntry.css" />
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/jquery-ui-1.8.17.custom.css" />
@@ -30,19 +33,46 @@
 	<openmrs:htmlInclude file="/moduleResources/htmlformentry/jquery-ui-1.8.17.custom.min.js" />
 </c:if>
 
+
+<%
+    String remoteip = request.getRemoteAddr();
+%>
+
 <script>
 
     var $j = jQuery.noConflict();
+    var flagCaptcha = false;
+
     $j(document).ready(function(){
 
         logging: true;
 
         $j("#submitMainForm").click(function() {
-            $j("#captchaForm").submit();
-            submitHtmlForm();
-            return false;
+
+            var remoteip = "<%=remoteip%>";
+            var challenge = $j('#recaptcha_challenge_field').val();
+            var uresponse = $j('#recaptcha_response_field').val();
+            DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
+
+//            $j("#captchaForm").submit();
+            if(flagCaptcha==true){
+                submitHtmlForm();
+                return false;
+            }
+            else{
+                alert("Captcha is Incorrect, please fix!");
+            }
+
         });
     });
+
+
+    function captchaValidate(isCorrect) {
+
+        if (isCorrect){
+            flagCaptcha=true;
+        }
+    }
 
 </script>
 

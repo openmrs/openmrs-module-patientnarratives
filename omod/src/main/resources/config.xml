@@ -42,6 +42,22 @@
     </extension>
 
 
+    <dwr>
+        <allow>
+            <create creator="new" javascript="DWRreCaptchaService">
+                <param name="class" value="org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService"/>
+                <include method="validateCaptcha"/>
+            </create>
+        </allow>
+
+        <signatures>
+            <![CDATA[
+				import org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService;
+				DWRreCaptchaService.validateCaptcha(String challenge, String uresponse, String remoteip);
+			]]>
+        </signatures>
+    </dwr>
+
     <!--<advice>-->
         <!--<point>org.openmrs.api.EncounterService</point>-->
         <!--<class>org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor</class>-->

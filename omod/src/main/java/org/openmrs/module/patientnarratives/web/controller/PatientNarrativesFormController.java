@@ -81,34 +81,6 @@ public class PatientNarrativesFormController extends SimpleFormController{
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
 
-        // Captcha: https://developers.google.com/recaptcha/docs/java
-
-        String challenge = request.getParameter("recaptcha_challenge_field");
-        String uresponse = request.getParameter("recaptcha_response_field");
-
-        if (challenge != null){
-
-            String remoteAddr = request.getRemoteAddr();
-            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-            reCaptcha.setPrivateKey("6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb");
-
-            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
-
-            String x= "sd";
-
-            log.info("\n\n*****Answer was entered correctly!");
-
-            if (reCaptchaResponse.isValid()) {
-                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.notification.captcha.correct");
-
-                log.info("\n\n*****Answer was entered correctly!");
-            } else {
-                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.notification.captcha.incorrect");
-
-                log.info("\n\n******Answer is wrong");
-            }
-        }
-
         HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
         FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
 //        Errors errors;
