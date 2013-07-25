@@ -4,6 +4,8 @@
 <%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
 <%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
 
+<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
+
 <script type="text/javascript">
     var RecaptchaOptions = {
         theme : 'clean'
@@ -38,7 +40,6 @@
 
 </script>
 
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 
 <div id="main-wrap">
 
@@ -73,11 +74,29 @@
 
     <div id="content-wrap">
         <div id="info-wrap">
-            <center>
-                <canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">
-                    Your browser does not support the HTML5 canvas tag.
-                </canvas>
-            </center>
+
+            <%--WebRTC--%>
+
+                <center>
+                    <%--<h2 id="demo">Demo</h2>--%>
+                        <p>
+                            <video id="video" width="400" height="250" autoplay="autoplay">
+                                Your browser does not support the HTML5 video tag.
+                            </video>
+                        </p>
+                    <%--<p><input type="button" id="buttonSnap" value="Take screenshot" onclick="snapshot()" /></p>--%>
+                    <p>
+                        <input type="button" id="buttonStart" value="Start" onclick="start()" />
+                        <input type="button" id="buttonStop" value="Stop" onclick="stop()" />
+                    </p>
+                    <%--<p><canvas id="canvas" width="640" height="480"></canvas></p>--%>
+
+                    <%----%>
+
+                    <%--<canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">--%>
+                        <%--Your browser does not support the HTML5 canvas tag.--%>
+                    <%--</canvas>--%>
+                </center>
 
         </div>
         <div id="info-wrap">
@@ -106,6 +125,9 @@
         </div>
     </div>
 </div>
+
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRTC.js" />
+
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
 

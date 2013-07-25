@@ -37,4 +37,7 @@ html, body{
     overflow: hidden;
 }
 
+video {
+    border:2px solid black;
+}
 
