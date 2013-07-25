@@ -13,6 +13,8 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
+import net.tanesha.recaptcha.ReCaptchaImpl;
+import net.tanesha.recaptcha.ReCaptchaResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Person;
@@ -22,6 +24,7 @@ import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
 import org.openmrs.module.xforms.XformConstants;
+import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
@@ -77,6 +80,34 @@ public class PatientNarrativesFormController extends SimpleFormController{
     //Can't see current usage for this.
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
+
+        // Captcha: https://developers.google.com/recaptcha/docs/java
+
+        String challenge = request.getParameter("recaptcha_challenge_field");
+        String uresponse = request.getParameter("recaptcha_response_field");
+
+        if (challenge != null){
+
+            String remoteAddr = request.getRemoteAddr();
+            ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
+            reCaptcha.setPrivateKey("6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb");
+
+            ReCaptchaResponse reCaptchaResponse = reCaptcha.checkAnswer(remoteAddr, challenge, uresponse);
+
+            String x= "sd";
+
+            log.info("\n\n*****Answer was entered correctly!");
+
+            if (reCaptchaResponse.isValid()) {
+                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.notification.captcha.correct");
+
+                log.info("\n\n*****Answer was entered correctly!");
+            } else {
+                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.notification.captcha.incorrect");
+
+                log.info("\n\n******Answer is wrong");
+            }
+        }
 
         HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
         FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);

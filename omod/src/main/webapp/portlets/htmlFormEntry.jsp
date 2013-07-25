@@ -34,8 +34,11 @@
 
     var $j = jQuery.noConflict();
     $j(document).ready(function(){
+
         logging: true;
+
         $j("#submitMainForm").click(function() {
+            $j("#captchaForm").submit();
             submitHtmlForm();
             return false;
         });

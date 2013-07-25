@@ -4,6 +4,40 @@
 <%@ page import="net.tanesha.recaptcha.ReCaptcha" %>
 <%@ page import="net.tanesha.recaptcha.ReCaptchaFactory" %>
 
+<script type="text/javascript">
+    var RecaptchaOptions = {
+        theme : 'clean'
+    };
+
+//    var $j = jQuery.noConflict();
+//    $j(document).ready(function(){
+//
+//        logging: true;
+//
+//        function doSubmitCaptchaForm() {
+//            $j("#captchaForm").submit();
+//
+//            $j("#captchaForm").submit(function(){
+//                        var thistarget = this.target;
+//                        jQuery.ajax({
+//                            data: $j(this).serialize(),
+//                            url: this.action,
+//                            type: this.method,
+//                            error: function() {
+//                                $j(thistarget).html("<span class='error'>Failed to submit form!</span>");
+//                            },
+//                            success: function(results) {
+//                                $j(thistarget).html(results);
+//                            }
+//                        })
+//                        return false;
+//                    }
+//            );
+//        }
+//    });
+
+</script>
+
 <openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 
 <div id="main-wrap">
@@ -58,15 +92,17 @@
         </div>
         <div id="info-wrap">
             </br></br>
-            <%--<form action="" method="post">--%>
+            <form id="captchaForm" method="post">
             <%
                 ReCaptcha c = ReCaptchaFactory.newReCaptcha("6LdAWuMSAAAAAD3RQXMNBKgI9-1OiYjDx_sl0xYy", "6LdAWuMSAAAAALxWgnM5yRj_tGVRQCk4lit8rLHb", false);
                 out.print(c.createRecaptchaHtml(null, null));
             %>
 
             </br>
+            </form>
+
             <input id="submitMainForm" type="button" value="Submit" />
-            <%--</form>--%>
+
         </div>
     </div>
 </div>
