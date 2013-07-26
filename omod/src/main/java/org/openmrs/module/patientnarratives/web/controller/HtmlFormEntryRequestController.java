@@ -1,61 +1,30 @@
-/**
- * The contents of this file are subject to the OpenMRS Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://license.openmrs.org
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
- * License for the specific language governing rights and limitations
- * under the License.
- *
- * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
- */
 package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
-import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.List;
 
-public class PatientNarrativesFormController extends SimpleFormController{
+@Controller
+public class HtmlFormEntryRequestController {
 
-    /** Logger for this class and subclasses */
     protected final Log log = LogFactory.getLog(getClass());
-    public final static String FORM_IN_PROGRESS_KEY = "HTML_FORM_IN_PROGRESS_KEY";
-    public final static String FORM_IN_PROGRESS_VALUE = "HTML_FORM_IN_PROGRESS_VALUE";
-    public final static String FORM_PATH = "/module/patientnarratives/htmlFormEntry";
+    public final static String FORM_PATH = "/module/patientnarratives/processhtml";
 
-    @Override
-    protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
-        HashMap<String,Object> map = new HashMap<String,Object>();
-
-        if (Context.isAuthenticated() == false){
-            Context.authenticate("anonymous", "Password123");
-        }
-
-        String formType = Context.getAdministrationService().getGlobalProperty("patientnarratives.formtype");
-        map.put("formType", formType);
-
-        return map;
-    }
-
-
-    //Can't see current usage for this.
-    @Override
-    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
+    @RequestMapping(value = "/module/patientnarratives/processhtml", method = RequestMethod.POST)
+    protected String processHTMLForm(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
 
         HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
         FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
@@ -72,10 +41,11 @@ public class PatientNarrativesFormController extends SimpleFormController{
         }
 
         if (errors.hasErrors()) {
-            return new ModelAndView(FORM_PATH, "command", session);
+            return "OK";
         }
 
         // no form validation errors, proceed with submission
+
         session.prepareForSubmit();
 
         if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
@@ -94,7 +64,7 @@ public class PatientNarrativesFormController extends SimpleFormController{
             if (StringUtils.hasText(request.getParameter("closeAfterSubmission"))) {
 //                return new ModelAndView(closeDialogView, "dialogToClose", request.getParameter("closeAfterSubmission"));
             } else {
-                return new ModelAndView(new RedirectView(successView));
+                return "OK";
             }
         } catch (ValidationException ex) {
             log.error("Invalid input:", ex);
@@ -110,12 +80,7 @@ public class PatientNarrativesFormController extends SimpleFormController{
         }
 
         // if we get here it's because we caught an error trying to submit/apply
-        return new ModelAndView(FORM_PATH, "command", session);
+        return "OK";
     }
 
-    @Override
-    protected Object formBackingObject(HttpServletRequest request) throws Exception {
-
-        return "Not Yet";
-    }
 }

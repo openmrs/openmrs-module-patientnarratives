@@ -1,7 +1,5 @@
 package org.openmrs.module.patientnarratives.web.controller;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -15,33 +13,14 @@ import org.openmrs.Encounter;
 import org.openmrs.Form;
 import org.openmrs.Patient;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.htmlformentry.BadFormDesignException;
 import org.openmrs.module.htmlformentry.FormEntryContext.Mode;
 import org.openmrs.module.htmlformentry.FormEntrySession;
-import org.openmrs.module.htmlformentry.FormSubmissionError;
 import org.openmrs.module.htmlformentry.HtmlForm;
 import org.openmrs.module.htmlformentry.HtmlFormEntryUtil;
-import org.openmrs.module.htmlformentry.ValidationException;
 import org.openmrs.util.OpenmrsUtil;
 import org.openmrs.web.controller.PortletController;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
-/**
- * The controller for entering/viewing a form.
- * <p/>
- * Handles {@code htmlFormEntry.form} requests. Renders view {@code htmlFormEntry.jsp}.
- * <p/>
- * TODO: This has a bit too much logic in the onSubmit method. Move that into the FormEntrySession.
- */
 public class HtmlFormEntryPortletController extends PortletController {
 
     protected final Log log = LogFactory.getLog(getClass());
@@ -192,71 +171,4 @@ public class HtmlFormEntryPortletController extends PortletController {
         return null;
     }
 
-    /*
-     * I'm using a return type of ModelAndView so I can use RedirectView rather than "redirect:" and preserve the fact that
-     * returnUrl values from the pre-annotated-controller days will have the context path already
-     */
-//    @RequestMapping(method=RequestMethod.POST, value=FORM_PATH)
-
-//    public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, java.io.IOException {
-//
-//        FormEntrySession session = getFormEntrySession(request);
-////        Errors errors;
-//
-//        try {
-//            List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
-//            if (validationErrors != null && validationErrors.size() > 0) {
-////                errors.reject("Fix errors");
-//            }
-//        } catch (Exception ex) {
-//            log.error("Exception during form validation", ex);
-////            errors.reject("Exception during form validation, see log for more details: " + ex);
-//        }
-//
-////        if (errors.hasErrors()) {
-////            return new ModelAndView(FORM_PATH, "command", session);
-////        }
-//
-//        // no form validation errors, proceed with submission
-//
-//        session.prepareForSubmit();
-//
-//        if (session.getContext().getMode() == Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
-//                && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
-//            throw new IllegalArgumentException("This form is not going to create an Patient");
-//
-//        if (session.getContext().getMode() == Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
-//            throw new IllegalArgumentException("This form is not going to create an encounter");
-//
-//        try {
-//            session.getSubmissionController().handleFormSubmission(session, request);
-//            HtmlFormEntryUtil.getService().applyActions(session);
-//            String successView = session.getReturnUrlWithParameters();
-//            if (successView == null)
-//                successView = request.getContextPath() + "/patientDashboard.form" + getQueryPrameters(request, session);
-//            if (StringUtils.hasText(request.getParameter("closeAfterSubmission"))) {
-////                return new ModelAndView(closeDialogView, "dialogToClose", request.getParameter("closeAfterSubmission"));
-//            } else {
-//                return new ModelAndView(new RedirectView(successView));
-//            }
-//        } catch (ValidationException ex) {
-//            log.error("Invalid input:", ex);
-////            errors.reject(ex.getMessage());
-//        } catch (BadFormDesignException ex) {
-//            log.error("Bad Form Design:", ex);
-////            errors.reject(ex.getMessage());
-//        } catch (Exception ex) {
-//            log.error("Exception trying to submit form", ex);
-//            StringWriter sw = new StringWriter();
-//            ex.printStackTrace(new PrintWriter(sw));
-////            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
-//        }
-//
-//        // if we get here it's because we caught an error trying to submit/apply
-//        return new ModelAndView(FORM_PATH, "command", session);
-//    }
-//
-//    protected String getQueryPrameters(HttpServletRequest request, FormEntrySession formEntrySession) {
-//        return "?patientId=" + formEntrySession.getPatient().getPersonId();
-//    }
 }
