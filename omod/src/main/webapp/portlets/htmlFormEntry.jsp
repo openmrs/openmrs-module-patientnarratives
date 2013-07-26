@@ -34,9 +34,7 @@
 </c:if>
 
 
-<%
-    String remoteip = request.getRemoteAddr();
-%>
+<% String remoteip = request.getRemoteAddr(); %>
 
 <script>
 
@@ -46,15 +44,6 @@
     $j(document).ready(function(){
 
         logging: true;
-
-//        function validateAgreement() {
-//            if ($j('#agreement').attr('checked') == "true") {
-//               return true;
-//            }
-//            else{
-//                return false;
-//            }
-//        }
 
         $j("#submitMainForm").click(function() {
 
@@ -71,7 +60,7 @@
                 return false;
             }
             else{
-                alert("Captcha is Incorrect, please fix!");
+                alert("Captcha incorrect, please fix!");
             }
 
         });

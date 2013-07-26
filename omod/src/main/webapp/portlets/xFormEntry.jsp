@@ -9,6 +9,8 @@
 <openmrs:htmlInclude file="/scripts/calendar/calendar.js" />
 <openmrs:htmlInclude file="/scripts/timepicker/timepicker.js" />
 
+<openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
+
 <c:if test="${usingJQuery}">
     <openmrs:htmlInclude file="/dwr/interface/DWRConceptService.js" />
     <openmrs:htmlInclude file="/dwr/interface/DWRPersonService.js" />
@@ -19,18 +21,59 @@
 
 <%--<iframe src="javascript:''" id="__gwt_historyFrame" tabIndex='-1' style="position:absolute;width:0;height:0;border:0"></iframe>--%>
 
+<%--<script>--%>
+
+    <%--var $j = jQuery.noConflict();--%>
+
+    <%--$j(document).ready(function(){--%>
+        <%--logging: true;--%>
+        <%--$j("#submitMainForm").click(function() {--%>
+            <%--submitForm();--%>
+        <%--});--%>
+    <%--});--%>
+    <%----%>
+
+<%--</script>--%>
+
+<% String remoteip = request.getRemoteAddr(); %>
+
 <script>
 
     var $j = jQuery.noConflict();
+    var flagCaptcha = false;
 
     $j(document).ready(function(){
+
         logging: true;
+
         $j("#submitMainForm").click(function() {
-            submitForm();
+
+            var remoteip = "<%=remoteip%>";
+            var challenge = $j('#recaptcha_challenge_field').val();
+            var uresponse = $j('#recaptcha_response_field').val();
+            DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
+
+            if(flagCaptcha==true){
+                submitForm();
+                return false;
+            }
+            else{
+                alert("Captcha incorrect, please fix!");
+            }
+
         });
     });
 
+
+    function captchaValidate(isCorrect) {
+
+        if (isCorrect){
+            flagCaptcha=true;
+        }
+    }
+
 </script>
+
 
     <%--var c=document.getElementById("myCanvas");--%>
     <%--var ctx=c.getContext("2d");--%>
