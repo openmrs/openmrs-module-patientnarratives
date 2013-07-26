@@ -47,6 +47,15 @@
 
         logging: true;
 
+//        function validateAgreement() {
+//            if ($j('#agreement').attr('checked') == "true") {
+//               return true;
+//            }
+//            else{
+//                return false;
+//            }
+//        }
+
         $j("#submitMainForm").click(function() {
 
             var remoteip = "<%=remoteip%>";
@@ -57,7 +66,7 @@
 //            $j("#captchaForm").submit();
 
 //            if(flagCaptcha==true){
-            if(flagCaptcha==true || flagCaptcha==false){
+            if(flagCaptcha==true){
                 submitHtmlForm();
                 return false;
             }
@@ -462,7 +471,7 @@
 </c:if>
 
 <c:if test="${model.command.context.mode != 'VIEW'}">
-	<form id="htmlform" method="post" onSubmit="submitHtmlForm(); return false;">
+	<form id="htmlform" method="post" action="<openmrs:contextPath/>/module/patientnarratives/htmlFormProcess.form"  onSubmit="submitHtmlForm(); return false;">
 		<input type="hidden" name="personId" value="${ model.command.patient.personId }"/>
 		<input type="hidden" name="htmlFormId" value="${ model.command.htmlFormId }"/>
 		<input type="hidden" name="formModifiedTimestamp" value="${ model.command.formModifiedTimestamp }"/>

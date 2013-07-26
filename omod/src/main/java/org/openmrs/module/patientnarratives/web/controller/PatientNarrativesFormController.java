@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
+import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
@@ -57,60 +58,64 @@ public class PatientNarrativesFormController extends SimpleFormController{
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
 
-        HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
-        FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
-//        Errors errors;
 
-        try {
-            List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
-            if (validationErrors != null && validationErrors.size() > 0) {
-                errors.reject("Fix errors");
-            }
-        } catch (Exception ex) {
-            log.error("Exception during form validation", ex);
-            errors.reject("Exception during form validation, see log for more details: " + ex);
-        }
-
-        if (errors.hasErrors()) {
-            return new ModelAndView(FORM_PATH, "command", session);
-        }
-
-        // no form validation errors, proceed with submission
-        session.prepareForSubmit();
-
-        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
-                && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
-            throw new IllegalArgumentException("This form is not going to create an Patient");
-
-        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
-            throw new IllegalArgumentException("This form is not going to create an encounter");
-
-        try {
-            session.getSubmissionController().handleFormSubmission(session, request);
-            HtmlFormEntryUtil.getService().applyActions(session);
-            String successView = session.getReturnUrlWithParameters();
-            if (successView == null)
-                successView = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
-            if (StringUtils.hasText(request.getParameter("closeAfterSubmission"))) {
-//                return new ModelAndView(closeDialogView, "dialogToClose", request.getParameter("closeAfterSubmission"));
-            } else {
-                return new ModelAndView(new RedirectView(successView));
-            }
-        } catch (ValidationException ex) {
-            log.error("Invalid input:", ex);
-            errors.reject(ex.getMessage());
-        } catch (BadFormDesignException ex) {
-            log.error("Bad Form Design:", ex);
-            errors.reject(ex.getMessage());
-        } catch (Exception ex) {
-            log.error("Exception trying to submit form", ex);
-            StringWriter sw = new StringWriter();
-            ex.printStackTrace(new PrintWriter(sw));
-            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
-        }
+//        HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
+//        FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
+////        Errors errors;
+//
+//        try {
+//            List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
+//            if (validationErrors != null && validationErrors.size() > 0) {
+//                errors.reject("Fix errors");
+//            }
+//        } catch (Exception ex) {
+//            log.error("Exception during form validation", ex);
+//            errors.reject("Exception during form validation, see log for more details: " + ex);
+//        }
+//
+//        if (errors.hasErrors()) {
+//            return new ModelAndView(FORM_PATH, "command", session);
+//        }
+//
+//        // no form validation errors, proceed with submission
+//        session.prepareForSubmit();
+//
+//        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
+//                && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
+//            throw new IllegalArgumentException("This form is not going to create an Patient");
+//
+//        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
+//            throw new IllegalArgumentException("This form is not going to create an encounter");
+//
+//        try {
+//            session.getSubmissionController().handleFormSubmission(session, request);
+//            HtmlFormEntryUtil.getService().applyActions(session);
+//            String successView = session.getReturnUrlWithParameters();
+//            if (successView == null)
+//                successView = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
+//            if (StringUtils.hasText(request.getParameter("closeAfterSubmission"))) {
+////                return new ModelAndView(closeDialogView, "dialogToClose", request.getParameter("closeAfterSubmission"));
+//            } else {
+//                return new ModelAndView(new RedirectView(successView));
+//            }
+//        } catch (ValidationException ex) {
+//            log.error("Invalid input:", ex);
+//            errors.reject(ex.getMessage());
+//        } catch (BadFormDesignException ex) {
+//            log.error("Bad Form Design:", ex);
+//            errors.reject(ex.getMessage());
+//        } catch (Exception ex) {
+//            log.error("Exception trying to submit form", ex);
+//            StringWriter sw = new StringWriter();
+//            ex.printStackTrace(new PrintWriter(sw));
+//            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
+//        }
 
         // if we get here it's because we caught an error trying to submit/apply
-        return new ModelAndView(FORM_PATH, "command", session);
+
+//        return new ModelAndView(FORM_PATH, "command", session);
+
+        return new ModelAndView(FORM_PATH, "command", null);
     }
 
     @Override
