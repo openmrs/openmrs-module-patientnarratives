@@ -5,4 +5,4 @@ openmrs-module-patientnarratives
 
 Development of OpenMRS based User-driven-Health-care system (with this module installed on top of OpenMRS-core)
 
-More-info: https://wiki.openmrs.org/x/zwBkAg
+More-info: https://wiki.openmrs.org/x/IAIzAw
