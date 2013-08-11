@@ -59,7 +59,6 @@ public class CareProviderConsoleController extends SimpleFormController {
 
 //        Encounter enc = new Encounter();
 //        enc.
-
         return map;
     }
 
