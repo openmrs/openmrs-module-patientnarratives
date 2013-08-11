@@ -2,3 +2,5 @@ Notes:
 
 To create new concepts:
 use this tool > https://groups.google.com/a/openmrs.org/d/msg/implementers/Ki8Jk1PX_Qo/bP19QS0s4REJ
+
+Get a SQL Dump of OpenMRS db
