@@ -8,7 +8,3 @@ http://localhost:8088/openmrs22/module/htmlformentry/htmlFormEntry.form?encounte
 Issues: the User need "setCreator" again, so who gonna set that in an unauthenticated environment?
 
 3. Automate initial Concepts creation, Xform and HTML form creation
-
-4. Make the design look good
-
-5. Anonymous spam prevention using Captcha
