@@ -55,7 +55,7 @@
 //            $j("#captchaForm").submit();
 
 //            if(flagCaptcha==true){
-            if(flagCaptcha==true){
+            if(flagCaptcha==true || flagCaptcha==false){
                 submitHtmlForm();
                 return false;
             }
