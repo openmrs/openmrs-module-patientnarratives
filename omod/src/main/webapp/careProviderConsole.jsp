@@ -37,6 +37,8 @@
                 { "bSearchable": true,
                     "bVisible":    true },
                 { "bSearchable": true,
+                    "bVisible":    true },
+                { "bSearchable": true,
                     "bVisible":    true }
             ]
 
@@ -63,6 +65,7 @@
             <th width="300">Narrative</th>
             <th width="300">Email</th>
             <th width="300">Telephone</th>
+            <th width="100">Register</th>
 
         </tr>
         </thead>
@@ -120,6 +123,12 @@
                 <td><c:out value="${narrative_patient_tp} "/> </td>
                 <td><c:out value="${narrative_patient_email} "/> </td>
 
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="textEncID" value="${encountersObj.encounterId}">
+                        <input type="submit" value="Register">
+                    </form>
+                </td>
             </tr>
         </c:forEach>
 

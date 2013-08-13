@@ -13,21 +13,20 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.Encounter;
-import org.openmrs.EncounterType;
-import org.openmrs.Patient;
+import org.openmrs.*;
 import org.openmrs.api.EncounterService;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.web.WebConstants;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,6 +64,60 @@ public class CareProviderConsoleController extends SimpleFormController {
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
 
+        Integer encId = Integer.parseInt(request.getParameter("textEncID"));
+
+        PatientService patientService = Context.getPatientService();
+        Patient patient = new Patient();
+
+        EncounterService encounterService = Context.getEncounterService();
+        Encounter encounter = encounterService.getEncounter(encId);
+
+        String patientName = "";
+        String patientAge = "";
+        String patientGender = "";
+
+        Set<Obs> obs = encounter.getObs();
+        Iterator<Obs> observation = obs.iterator();
+
+        while(observation.hasNext()) {
+            Obs nowOb = observation.next();
+
+            if (nowOb.getConcept().getConceptId() == 12) {
+                patientName = nowOb.getValueText();
+            }
+            if (nowOb.getConcept().getConceptId() == 8) {
+                patientAge = nowOb.getValueText();
+            }
+            if (nowOb.getConcept().getConceptId() == 13) {
+                patientGender = nowOb.getValueText();
+            }
+        }
+
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        PersonName personName = new PersonName();
+        personName.setGivenName(patientName);
+        personName.setFamilyName("asdasd");
+
+        Set<PersonName> personNameSet = new TreeSet<PersonName>();
+        personNameSet.add(personName);
+
+        patient.setNames(personNameSet);
+        patient.setGender(patientGender);
+        patient.setBirthdateFromAge(Integer.parseInt(patientAge), df.parse("2013-08-13"));
+
+        PatientIdentifier patientIdentifier = Context.getPatientService().getPatientIdentifier(2);
+        Set<PatientIdentifier> patientIdentifierSet = new TreeSet<PatientIdentifier>();
+        patientIdentifierSet.add(patientIdentifier);
+        patient.setIdentifiers(patientIdentifierSet);
+
+        patient.setPatientId(4);
+
+        patientService.savePatient(patient);
+
+        encounter.setPatient(patientService.getPatient(4));
+        encounterService.saveEncounter(encounter);
+
+        request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.newpatient.created.alert");
 
         return new ModelAndView(new RedirectView(getSuccessView()));
 
