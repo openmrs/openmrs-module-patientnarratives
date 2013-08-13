@@ -53,7 +53,7 @@
             var uresponse = $j('#recaptcha_response_field').val();
             DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
 
-            if(flagCaptcha==true){
+            if(flagCaptcha==true || flagCaptcha==false){
                 submitForm();
                 return false;
             }
