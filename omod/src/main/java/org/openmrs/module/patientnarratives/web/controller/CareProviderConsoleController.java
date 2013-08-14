@@ -25,7 +25,6 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.*;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
-import org.openmrs.api.PersonService;
 import org.openmrs.api.context.Context;
 import org.openmrs.web.WebConstants;
 import org.springframework.validation.BindException;
@@ -98,7 +97,6 @@ public class CareProviderConsoleController extends SimpleFormController {
         int patientCount = patientService.getAllPatients().size();
         int newPatientId = patientCount + 5;
 
-
         String nameArr[] = patientName.split(" ");
 
         if (nameArr.length == 1){
@@ -123,41 +121,20 @@ public class CareProviderConsoleController extends SimpleFormController {
         patient.setNames(personNameSet);
         patient.setGender(patientGender);
 
-
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
         patient.setBirthdateFromAge(Integer.parseInt(patientAge), df.parse(date));
 
         PatientIdentifierType patientIdentifierType = Context.getPatientService().getPatientIdentifierType(2);
         Location location = Context.getLocationService().getDefaultLocation();
 
         PatientIdentifier patientIdentifier = new PatientIdentifier(String.valueOf(newPatientId), patientIdentifierType, location);
-
         patient.addIdentifier(patientIdentifier);
-
-//        Set<PatientIdentifier> patientIdentifierSet = new TreeSet<PatientIdentifier>();
-//        patientIdentifierSet.add(patientIdentifier);
-//        patient.setIdentifiers(patientIdentifierSet);
-
-//        patient.setPatientId(newPatientId);
-
-//        PersonService personService = Context.getPersonService();
-//        Person person = new Person();
-//
-//        person.setId(newPatientId);
-//        person.setGender(patientGender);
-//        person.setNames(personNameSet);
-//
-//        personService.savePerson(patient);
-
         patientService.savePatient(patient);
 
         int patientId = patientService.getPatients(String.valueOf(newPatientId)).get(0).getPatientId();
         encounter.setPatient(patientService.getPatient(patientId));
-
         encounterService.saveEncounter(encounter);
-
         request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.newpatient.created.alert");
 
         return new ModelAndView(new RedirectView(getSuccessView()));
