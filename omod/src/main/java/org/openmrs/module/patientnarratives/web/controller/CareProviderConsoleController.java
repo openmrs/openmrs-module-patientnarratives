@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.*;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
+import org.openmrs.api.PersonService;
 import org.openmrs.api.context.Context;
 import org.openmrs.web.WebConstants;
 import org.springframework.validation.BindException;
@@ -93,34 +94,98 @@ public class CareProviderConsoleController extends SimpleFormController {
             }
         }
 
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         PersonName personName = new PersonName();
-        personName.setGivenName(patientName);
-        personName.setFamilyName("asdasd");
+        int patientCount = patientService.getAllPatients().size();
+        int newPatientId = patientCount + 5;
+
+
+        String nameArr[] = patientName.split(" ");
+
+        if (nameArr.length == 1){
+            personName.setGivenName(nameArr[0]);
+            personName.setFamilyName("----");
+        }
+        else if (nameArr.length == 2){
+            personName.setGivenName(nameArr[0]);
+            personName.setFamilyName(nameArr[1]);
+        }
+        else if (nameArr.length >= 3){
+            String nameArr2[] = parseFullName(patientName);
+
+            personName.setGivenName(nameArr2[0]);
+            personName.setMiddleName(nameArr2[1]);
+            personName.setFamilyName(nameArr2[2]);
+        }
 
         Set<PersonName> personNameSet = new TreeSet<PersonName>();
         personNameSet.add(personName);
 
         patient.setNames(personNameSet);
         patient.setGender(patientGender);
-        patient.setBirthdateFromAge(Integer.parseInt(patientAge), df.parse("2013-08-13"));
 
-        PatientIdentifier patientIdentifier = Context.getPatientService().getPatientIdentifier(2);
-        Set<PatientIdentifier> patientIdentifierSet = new TreeSet<PatientIdentifier>();
-        patientIdentifierSet.add(patientIdentifier);
-        patient.setIdentifiers(patientIdentifierSet);
 
-        patient.setPatientId(4);
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+        patient.setBirthdateFromAge(Integer.parseInt(patientAge), df.parse(date));
+
+        PatientIdentifierType patientIdentifierType = Context.getPatientService().getPatientIdentifierType(2);
+        Location location = Context.getLocationService().getDefaultLocation();
+
+        PatientIdentifier patientIdentifier = new PatientIdentifier(String.valueOf(newPatientId), patientIdentifierType, location);
+
+        patient.addIdentifier(patientIdentifier);
+
+//        Set<PatientIdentifier> patientIdentifierSet = new TreeSet<PatientIdentifier>();
+//        patientIdentifierSet.add(patientIdentifier);
+//        patient.setIdentifiers(patientIdentifierSet);
+
+//        patient.setPatientId(newPatientId);
+
+//        PersonService personService = Context.getPersonService();
+//        Person person = new Person();
+//
+//        person.setId(newPatientId);
+//        person.setGender(patientGender);
+//        person.setNames(personNameSet);
+//
+//        personService.savePerson(patient);
 
         patientService.savePatient(patient);
 
-        encounter.setPatient(patientService.getPatient(4));
+        int patientId = patientService.getPatients(String.valueOf(newPatientId)).get(0).getPatientId();
+        encounter.setPatient(patientService.getPatient(patientId));
+
         encounterService.saveEncounter(encounter);
 
         request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.newpatient.created.alert");
 
         return new ModelAndView(new RedirectView(getSuccessView()));
 
+    }
+
+    public String[] parseFullName(String name) {
+        String nameArr[] = new String[3];
+
+        int start = name.indexOf(' ');
+        int end = name.lastIndexOf(' ');
+
+        String firstName = "";
+        String middleName = "";
+        String lastName = "";
+
+        if (start >= 0) {
+            firstName = name.substring(0, start);
+            if (end > start)
+                middleName = name.substring(start + 1, end);
+            lastName = name.substring(end + 1, name.length());
+        }
+
+        nameArr[0] = firstName;
+        nameArr[1] = middleName;
+        nameArr[2] = lastName;
+
+        return nameArr;
     }
 
     @Override
