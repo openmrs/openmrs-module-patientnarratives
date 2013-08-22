@@ -73,6 +73,8 @@
 
     function sendAudioVideoBlobs(){
 
+        console.log("Sending blobs!");
+
         var recordForm = new FormData();
 
         recordForm.append("video", videoBlob);
@@ -82,7 +84,11 @@
 //        data.append("audio", audioBlob, (new Date()).getTime() + ".wav");
 
         var oReq = new XMLHttpRequest();
-        oReq.open("POST", "http://foo.com/submitform.php");
+
+        formSubmitURL = "http://localhost:8088/openmrs/module/patientnarratives/webRtcMedia.form";
+        console.log(formSubmitURL);
+
+        oReq.open("POST", formSubmitURL);
         oReq.send(recordForm);
 
     }

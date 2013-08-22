@@ -77,7 +77,7 @@
             <center>
                 <%--<h2 id="demo">Demo</h2>--%>
 
-                    <video id="client-video" width="400" height="250" autoplay loop muted></video>
+                    <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
                     <br/><br/>
 
