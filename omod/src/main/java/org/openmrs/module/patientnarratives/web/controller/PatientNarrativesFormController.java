@@ -15,8 +15,11 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.*;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
+import org.openmrs.obs.ComplexData;
+import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
@@ -25,10 +28,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.*;
 
 public class PatientNarrativesFormController extends SimpleFormController{
@@ -38,6 +42,8 @@ public class PatientNarrativesFormController extends SimpleFormController{
     public final static String FORM_IN_PROGRESS_KEY = "HTML_FORM_IN_PROGRESS_KEY";
     public final static String FORM_IN_PROGRESS_VALUE = "HTML_FORM_IN_PROGRESS_VALUE";
     public final static String FORM_PATH = "/module/patientnarratives/htmlFormEntry";
+
+    private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/";
 
     @Override
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
@@ -58,62 +64,24 @@ public class PatientNarrativesFormController extends SimpleFormController{
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
 
+        String hello = request.getParameter("ss");
 
-//        HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
-//        FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
-////        Errors errors;
-//
-//        try {
-//            List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
-//            if (validationErrors != null && validationErrors.size() > 0) {
-//                errors.reject("Fix errors");
-//            }
-//        } catch (Exception ex) {
-//            log.error("Exception during form validation", ex);
-//            errors.reject("Exception during form validation, see log for more details: " + ex);
-//        }
-//
-//        if (errors.hasErrors()) {
-//            return new ModelAndView(FORM_PATH, "command", session);
-//        }
-//
-//        // no form validation errors, proceed with submission
-//        session.prepareForSubmit();
-//
-//        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
-//                && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
-//            throw new IllegalArgumentException("This form is not going to create an Patient");
-//
-//        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
-//            throw new IllegalArgumentException("This form is not going to create an encounter");
-//
-//        try {
-//            session.getSubmissionController().handleFormSubmission(session, request);
-//            HtmlFormEntryUtil.getService().applyActions(session);
-//            String successView = session.getReturnUrlWithParameters();
-//            if (successView == null)
-//                successView = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
-//            if (StringUtils.hasText(request.getParameter("closeAfterSubmission"))) {
-////                return new ModelAndView(closeDialogView, "dialogToClose", request.getParameter("closeAfterSubmission"));
-//            } else {
-//                return new ModelAndView(new RedirectView(successView));
-//            }
-//        } catch (ValidationException ex) {
-//            log.error("Invalid input:", ex);
-//            errors.reject(ex.getMessage());
-//        } catch (BadFormDesignException ex) {
-//            log.error("Bad Form Design:", ex);
-//            errors.reject(ex.getMessage());
-//        } catch (Exception ex) {
-//            log.error("Exception trying to submit form", ex);
-//            StringWriter sw = new StringWriter();
-//            ex.printStackTrace(new PrintWriter(sw));
-//            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
-//        }
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, null, true);
 
-        // if we get here it's because we caught an error trying to submit/apply
+        Encounter lastEncounter = encounters.get(encounters.size()-1);
+        Integer lastEncId = lastEncounter.getId();
 
-//        return new ModelAndView(FORM_PATH, "command", session);
+        Person patient = lastEncounter.getPatient();
+        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(14);
+        Location location = Context.getLocationService().getDefaultLocation();
+        Obs obs = new Obs(patient, conceptComplex, new Date(), location) ;
+
+        InputStream out1 = new FileInputStream(new File(mergedUrl, "mergedFile1.flv"));
+        ComplexData complexData = new ComplexData("mergedFile1.flv", out1);
+        obs.setComplexData(complexData);
+        obs.setEncounter(lastEncounter);
+
+        Context.getObsService().saveObs(obs, null);
 
         return new ModelAndView(FORM_PATH, "command", null);
     }

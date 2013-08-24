@@ -17,12 +17,14 @@
     recorder.onVideoReady(function(blob) {
         attachLink(blob, "video");
         videoBlob = blob;
+        localStorage.setItem('videoFile', videoBlob);
 //        upload(blob);
     });
 
     recorder.onAudioReady(function(blob) {
         attachLink(blob, "audio");
         audioBlob = blob;
+        localStorage.setItem('audioFile', audioBlob);
 //        upload(blob);
     });
 

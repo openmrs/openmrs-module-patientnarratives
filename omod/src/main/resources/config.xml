@@ -48,12 +48,22 @@
                 <param name="class" value="org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService"/>
                 <include method="validateCaptcha"/>
             </create>
+
+            <create creator="new" javascript="DWRmediaStreamService">
+                <param name="class" value="org.openmrs.module.patientnarratives.dwr.DWRmediaStreamService"/>
+                <include method="validateCaptcha"/>
+            </create>
         </allow>
 
         <signatures>
             <![CDATA[
 				import org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService;
 				DWRreCaptchaService.validateCaptcha(String challenge, String uresponse, String remoteip);
+			]]>
+
+            <![CDATA[
+				import org.openmrs.module.patientnarratives.dwr.DWRmediaStreamService;
+				DWRmediaStreamService.uploadVideo(MultipartFile videofile, MultipartFile audiofile);
 			]]>
         </signatures>
     </dwr>

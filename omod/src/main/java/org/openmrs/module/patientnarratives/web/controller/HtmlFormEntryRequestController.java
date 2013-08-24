@@ -2,7 +2,12 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.*;
+import org.openmrs.api.EncounterService;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
+import org.openmrs.obs.ComplexData;
+import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -27,6 +34,8 @@ public class HtmlFormEntryRequestController {
     private String returnUrl;
     public final static String FORM_PATH = "/module/patientnarratives/htmlFormProcess.form";
     protected final Log log = LogFactory.getLog(getClass());
+
+    private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/";
 
     @RequestMapping(FORM_PATH)
     public ModelAndView handleRequest(HttpServletRequest request) throws Exception {
@@ -89,6 +98,35 @@ public class HtmlFormEntryRequestController {
             ex.printStackTrace(new PrintWriter(sw));
 //            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
         }
+
+        List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, null, true);
+
+        Encounter lastEncounter = encounters.get(encounters.size()-1);
+        Integer lastEncId = lastEncounter.getId();
+
+        Person patient = lastEncounter.getPatient();
+        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(14);
+        Location location = Context.getLocationService().getDefaultLocation();
+        Obs obs = new Obs(patient, conceptComplex, new Date(), location) ;
+
+        InputStream out1 = new FileInputStream(new File(mergedUrl, "mergedFile1.flv"));
+        ComplexData complexData = new ComplexData("mergedFile1.flv", out1);
+        obs.setComplexData(complexData);
+        obs.setEncounter(lastEncounter);
+
+        Context.getObsService().saveObs(obs, null);
+
+        ////////////////////////
+
+        // obs.getComplexData() will be null here
+        //        Retrieve a complex obs and its data
+
+//        Integer obsId = obs.getObsId();
+//        Obs complexObs = Context.getObsService().getComplexObs(obsId, OpenmrsConstants.RAW_VIEW);
+//        ComplexData complexData2 = complexObs.getComplexData();
+//        Object object2 = complexData.getData();
+
+// object will be a BufferedImage object
 
 
 //        if ((alert != null) && (alert == true)) {

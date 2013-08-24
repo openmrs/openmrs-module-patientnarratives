@@ -10,6 +10,7 @@
 <openmrs:htmlInclude file="/scripts/timepicker/timepicker.js" />
 
 <openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
+<%--<openmrs:htmlInclude file="/dwr/interface/DWRmediaStreamService.js" />--%>
 
 <c:if test="${usingJQuery}">
     <openmrs:htmlInclude file="/dwr/interface/DWRConceptService.js" />
@@ -41,6 +42,7 @@
 
     var $j = jQuery.noConflict();
     var flagCaptcha = false;
+    var flagDoneUpload = false;
 
     $j(document).ready(function(){
 
@@ -51,7 +53,9 @@
             var remoteip = "<%=remoteip%>";
             var challenge = $j('#recaptcha_challenge_field').val();
             var uresponse = $j('#recaptcha_response_field').val();
+
             DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
+//            DWRmediaStreamService.uploadVideo(videoBlob, audioBlob, doneUpload);
 
             if(flagCaptcha==true || flagCaptcha==false){
                 submitForm();
@@ -71,6 +75,13 @@
             flagCaptcha=true;
         }
     }
+
+//    function doneUpload(isCorrect) {
+//
+//        if (isCorrect){
+//            flagDoneUpload=true;
+//        }
+//    }
 
 </script>
 
