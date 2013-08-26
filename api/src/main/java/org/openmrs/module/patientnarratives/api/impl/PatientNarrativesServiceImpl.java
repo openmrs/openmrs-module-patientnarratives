@@ -13,32 +13,39 @@
  */
 package org.openmrs.module.patientnarratives.api.impl;
 
-import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.api.APIException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.patientnarratives.api.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
+
+import java.util.List;
 
 /**
  * It is a default implementation of {@link PatientNarrativesService}.
  */
-public class PatientNarrativesServiceImpl extends BaseOpenmrsService implements PatientNarrativesService {
+public class PatientNarrativesServiceImpl implements PatientNarrativesService {
 	
 	protected final Log log = LogFactory.getLog(this.getClass());
 	
-	private PatientNarrativesDAO dao;
-	
-	/**
-     * @param dao the dao to set
-     */
-    public void setDao(PatientNarrativesDAO dao) {
-	    this.dao = dao;
+	private PatientNarrativesDAO patientNarrativesDAO;
+
+    public PatientNarrativesServiceImpl() {}
+
+    public void setPatientNarrativesDAO(PatientNarrativesDAO patientNarrativesDAO) {
+	    this.patientNarrativesDAO = patientNarrativesDAO;
     }
-    
-    /**
-     * @return the dao
-     */
-    public PatientNarrativesDAO getDao() {
-	    return dao;
+
+    public PatientNarrativesDAO getPatientNarrativesDAO() {
+	    return patientNarrativesDAO;
+    }
+
+    public void saveNarrativesComment(NarrativeComments narrativeComments) throws APIException {
+        getPatientNarrativesDAO().saveNarrativeComments(narrativeComments);
+    }
+
+    public List<NarrativeComments> getNarrativeComments(Integer encounterId) throws APIException {
+        return getPatientNarrativesDAO().getNarrativeComments(encounterId);
     }
 }

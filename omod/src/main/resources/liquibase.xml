@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+
+    <changeSet id="patientnarratives-2013-08-26-10:46" author="harshadura">
+        <preConditions onFail="MARK_RAN">
+            <not><tableExists tableName="patientnarratives_comments"/></not>
+        </preConditions>
+
+        <comment>
+            Creating the patient narratives comments tables
+        </comment>
+
+        <createTable tableName="patientnarratives_comments">
+            <column name="patientnarratives_comment_id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="creator" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="changed_by" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="comment" type="mediumtext">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_changed" type="timestamp" />
+            <column name="uuid" type="varchar(38)"/>
+            <column name="attachment" type="mediumblob"/>
+            <column name="encounter_id" type="int" />
+        </createTable>
+
+        <addAutoIncrement tableName="patientnarratives_comments" columnName="patientnarratives_comment_id" columnDataType="int"/>
+
+    </changeSet>
+
+</databaseChangeLog>

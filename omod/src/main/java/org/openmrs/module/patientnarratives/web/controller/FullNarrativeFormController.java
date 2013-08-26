@@ -22,6 +22,9 @@
     import org.apache.commons.logging.LogFactory;
     import org.openmrs.*;
     import org.openmrs.api.context.Context;
+    import org.openmrs.module.patientnarratives.api.NarrativeComments;
+    import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
+    import org.springframework.util.StringUtils;
     import org.springframework.validation.BindException;
     import org.springframework.validation.Errors;
     import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +38,9 @@
         @Override
         protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
             HashMap<String,Object> map = new HashMap<String,Object>();
+
+            PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
+            map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encId"))));
 
             int encId  = Integer.parseInt(request.getParameter("encId"));
             Encounter encounter = Context.getEncounterService().getEncounter(encId);
@@ -56,6 +62,8 @@
                     case 12: map.put("name", nowOb.getValueText()); continue;
                     case 10: map.put("email", nowOb.getValueText()); continue;
                     case 8: map.put("age", nowOb.getValueText()); continue;
+                    case 15: map.put("status", nowOb.getValueText()); continue;
+                    case 16: map.put("subject", nowOb.getValueText()); continue;
                     default: continue;
                 }
             }
@@ -65,6 +73,18 @@
 
         @Override
         protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
+
+            if (StringUtils.hasLength(request.getParameter("comment"))) {
+                PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
+
+                NarrativeComments narrativeComments = new NarrativeComments();
+                narrativeComments.setComment(request.getParameter("comment"));
+
+                String encId = request.getParameter("encId");
+                narrativeComments.setEncounterId(Integer.parseInt(encId));
+                patientNarrativesService.saveNarrativesComment(narrativeComments);
+            }
+
 
             return new ModelAndView(new RedirectView(getSuccessView()));
 

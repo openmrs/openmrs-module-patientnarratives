@@ -24,7 +24,7 @@
     <spring:message code="patientnarratives.fullinfo"/>
 </h2>
 <%--<div id="feedbackPhotoDialog">--%>
-    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackId=<c:out value="${feedback.feedbackId}"/>" >--%>
+    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?encounterId=<c:out value="${feedback.encounterId}"/>" >--%>
 <%--</div>--%>
 
 <b class="boxHeader">General Information</b>
@@ -67,6 +67,11 @@
         </tr>
 
         <tr>
+            <th width="400">Subject</th>
+            <td> <c:out value="${subject}"/> </td>
+        </tr>
+
+        <tr>
             <th width="400">Patient Narrative</th>
             <td>
                 <a class="toggleAddTag" href="#">Show story</a>
@@ -87,8 +92,8 @@
         <tr>
             <th width="400">Video</th>
             <td>
-                <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" >--%>
-                <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="200" width="400">--%>
+                <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" >--%>
+                <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" height="200" width="400">--%>
                 <%--</img>--%>
                 </a>
             </td>
@@ -99,7 +104,7 @@
             <th width="400">Attachements</th>
             <td>
                 <%--<a href="javascript:fdbkPhotoPopUp()" >--%>
-                    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackId=<c:out value="${feedback.feedbackId}"/>" height="100" width="100">--%>
+                    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?encounterId=<c:out value="${feedback.encounterId}"/>" height="100" width="100">--%>
                     <%--</img>--%>
                 </a>
             </td>
@@ -122,7 +127,7 @@
                 <%--<th width="400"><spring:message code="feedback.assigned.user"/> </th>--%>
                 <%--<form method="post">--%>
                     <%--<td>--%>
-                        <%--<input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >--%>
+                        <%--<input type=hidden name=encounterId value=<c:out value="${feedback.encounterId}"/> >--%>
                         <%--<select name="delAssignedUser">--%>
                             <%--<c:forEach items="${assigned_users}" var="usersObj" >--%>
                                 <%--<option value="<c:out value="${usersObj.username}"/>"> <c:out value="${usersObj.username}"/> </option>--%>
@@ -139,7 +144,7 @@
                 <%--<th></th>--%>
                 <%--<form method="post">--%>
                     <%--<td>--%>
-                        <%--<input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >--%>
+                        <%--<input type=hidden name=encounterId value=<c:out value="${feedback.encounterId}"/> >--%>
                         <%--<select name="addAssignedUser">--%>
                             <%--<c:forEach items="${allusers}" var="usersObj" >--%>
                                 <%--<option value="<c:out value="${usersObj.username}"/>"> <c:out value="${usersObj.username}"/> </option>--%>
@@ -159,14 +164,15 @@
 <%--</openmrs:hasPrivilege>--%>
 <%----%>
 
-    <%--<b class="boxHeader"><spring:message code="feedback.manage.form.status"/></b>--%>
-    <%--<div class="box" >--%>
-        <%--<table id="table5">--%>
-            <%--<tr>--%>
-                <%--<th width="400"><spring:message code="feedback.status"/></th>--%>
-                <%--<td>--%>
+    <b class="boxHeader">Status of the Narrative</b>
+    <div class="box" >
+        <table id="table5">
+            <tr>
+                <th width="400">Status</th>
+                <td>
+                    <c:out value="${status}"/>
                     <%--<form method="post">--%>
-                        <%--<input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >--%>
+                        <%--<input type=hidden name=encounterId value=<c:out value="${feedback.encounterId}"/> >--%>
                         <%--<select name="status">--%>
                             <%--<c:forEach items="${statuses}" var="statusObj" >--%>
                                 <%--<option value="<c:out value="${statusObj.status}"/>"> <c:out value="${statusObj.status}"/> </option>--%>
@@ -175,28 +181,26 @@
                         <%--</select>--%>
                         <%--<input type="submit" value="<spring:message code="feedback.status.change" />" />--%>
                     <%--</form>--%>
-                <%--</td>--%>
+                </td>
 
-            <%--</tr>--%>
+            </tr>
 
-        <%--</table>--%>
-    <%--</div>--%>
+        </table>
+    </div>
 
 
-    <%--<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>--%>
     <%--<div class="box" >--%>
-
         <%--<table id="table75">--%>
             <%--<tr>--%>
                 <%--<th width="400"></th>--%>
                 <%--<td>--%>
                     <%--&lt;%&ndash;<form method="post">&ndash;%&gt;--%>
                     <%--&lt;%&ndash;<input type=hidden name=delete value= "1"/>&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<input type=hidden name=feedbackId value="${feedback.feedbackId}"/>&ndash;%&gt;--%>
+                    <%--&lt;%&ndash;<input type=hidden name=encounterId value="${feedback.encounterId}"/>&ndash;%&gt;--%>
                     <%--&lt;%&ndash;<input type="submit" value="<spring:message code="feedback.delete"/>" />&ndash;%&gt;--%>
                     <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
                     <%--<form method="get" action="<openmrs:contextPath/>/module/feedback/forwardFeedback.form">--%>
-                        <%--<input type=hidden name=feedbackId value="${feedback.feedbackId}"/>--%>
+                        <%--<input type=hidden name=encounterId value="${feedback.encounterId}"/>--%>
                         <%--<input type="submit" value="<spring:message code="feedback.forward"/>" />--%>
                     <%--</form>--%>
                 <%--</td>--%>
@@ -206,58 +210,58 @@
     <%--</div>--%>
 
 
-<%--<b class="boxHeader"><spring:message code="feedback.manage.form.add.comment"/></b>--%>
-<%--<div class="box" >--%>
-    <%--<table id="table6">--%>
+<b class="boxHeader">Submit a Comment</b>
+<div class="box" >
+    <table id="table6">
 
-        <%--<form method="post"   enctype="multipart/form-data">--%>
-            <%--<tr>--%>
-                <%--<th width="400"><spring:message code="feedback.attachment"/> </th>--%>
-                <%--<td><input type="file" accept="image" name="file" size="40" />--%>
-                    <%--<div class="description">--%>
-                        <%--<spring:message code="feedback.attachment.comment.mandatory"/>--%>
-                    <%--</div>--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-            <%--<tr>--%>
-                <%--<th valign="top"><spring:message code="feedback.comment"/> </th>--%>
-                <%--<td><textarea name="comment" rows="10" cols="120" type="_moz" size="35"></textarea> </td>--%>
-            <%--</tr>--%>
+        <form method="post"   enctype="multipart/form-data">
+            <tr>
+                <th width="400">Attachments</th>
+                <td><input type="file" accept="image" name="file" size="40" />
+                    <div class="description">
+                        Attachments
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <th valign="top">Comment </th>
+                <td><textarea name="comment" rows="10" cols="120" type="_moz" size="35"></textarea> </td>
+            </tr>
 
-            <%--<td>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<input type=hidden name=feedbackId value=<c:out value="${feedback.feedbackId}"/> >--%>
-                <%--<input type="submit" value="<spring:message code="feedback.comment.add" />" />--%>
-            <%--</td>--%>
-        <%--</form>--%>
+            <td>
+            </td>
+            <td>
+                <input type=hidden name=encId value=<c:out value="${encId}"/> >
+                <input type="submit" value="Add Comment" />
+            </td>
+        </form>
 
-    <%--</table>--%>
-<%--</div>--%>
+    </table>
+</div>
 
 
-<%--<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>--%>
-<%--<div class="box" >--%>
-    <%--&lt;%&ndash;<table id="table3">&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<tr>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<th width="400"><spring:message code="feedback.reply.list"/></th>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;<td colspan="2">&ndash;%&gt;--%>
-    <%--<c:forEach items="${comments}" var="commentObj" >--%>
-        <%--<c:out value="${commentObj.comment}"/>--%>
-        <%--<div class="description">--%>
+<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>
+<div class="box" >
+    <%--<table id="table3">--%>
+    <%--<tr>--%>
+    <%--<th width="400"><spring:message code="feedback.reply.list"/></th>--%>
+    <%--<td colspan="2">--%>
+    <c:forEach items="${comments}" var="commentObj" >
+        <c:out value="${commentObj.comment}"/>
+        <div class="description">
             <%--<c:if test="${not empty commentObj.attachment}">--%>
-                <%--<a href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackCommentId=<c:out value="${commentObj.feedbackCommentId}"/> ">--%>
+                <%--<a href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?narrativesCommentId=<c:out value="${commentObj.narrativesCommentId}"/> ">--%>
                 <%--Attachment--%>
                 <%--</a>--%>
             <%--</c:if >--%>
 
-            <%--<c:out value="${commentObj.creator.personName}"/>--%>
-            <%--<kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>--%>
-        <%--</div>--%>
-    <%--</c:forEach>--%>
-    <%--&lt;%&ndash;</td>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</tr>&ndash;%&gt;--%>
-    <%--&lt;%&ndash;</table>&ndash;%&gt;--%>
-<%--</div>--%>
+            <c:out value="${commentObj.creator.personName}"/>
+            <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
+        </div>
+    </c:forEach>
+    <%--</td>--%>
+    <%--</tr>--%>
+    <%--</table>--%>
+</div>
 
 <%@ include file="/WEB-INF/template/footer.jsp" %>

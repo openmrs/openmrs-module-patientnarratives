@@ -35,8 +35,11 @@
                 <prop key="/module/patientnarratives/patientNarrativesForm.form">patientNarrativesForm</prop>
                 <prop key="/module/patientnarratives/careProviderConsole.form">careProviderConsole</prop>
                 <prop key="/module/patientnarratives/fullNarrativeForm.form">fullNarrativeForm</prop>
+
                 <prop key="/module/patientnarratives/moduleSettings.form">moduleSettings</prop>
                 <prop key="**/xFormEntry.portlet">xFormEntry</prop>
+
+
                 <prop key="**/htmlFormEntry.portlet">htmlFormEntry</prop>
             </props>
         </property>

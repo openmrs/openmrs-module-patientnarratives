@@ -13,10 +13,11 @@
  */
 package org.openmrs.module.patientnarratives.api;
 
-import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
-import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
@@ -29,6 +30,12 @@ import org.springframework.transaction.annotation.Transactional;
  * @see org.openmrs.api.context.Context
  */
 @Transactional
-public interface PatientNarrativesService extends OpenmrsService {
-     
+public interface PatientNarrativesService {
+
+    public void setPatientNarrativesDAO(PatientNarrativesDAO dao);
+
+    public void saveNarrativesComment(NarrativeComments narrativeComments) throws APIException;
+
+    public List<NarrativeComments> getNarrativeComments(Integer encounterId) throws APIException;
+
 }

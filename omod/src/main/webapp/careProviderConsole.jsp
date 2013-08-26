@@ -16,8 +16,10 @@
             "bProcessing": true,
             "bJQueryUI": true,
             "sPaginationType": "full_numbers",
-            "aaSorting": [[ 6, "desc" ]],
+            "aaSorting": [[ 7, "desc" ]],
             "aoColumns": [
+                { "bSearchable": true,
+                    "bVisible":    true },
                 { "bSearchable": true,
                     "bVisible":    true },
                 { "bSearchable": true,
@@ -53,7 +55,7 @@
             <%--<th width="300">Age</th>--%>
             <%--<th width="300">Hometown</th>--%>
             <%--<th width="300">Narrative</th>--%>
-            <%--<th width="300">Email</th>--%>
+            <th width="300">Subject</th>
             <th width="300">Telephone</th>
             <th width="300">Status</th>
 
@@ -100,6 +102,12 @@
                         <c:when test="${encObsObj.concept == '8'}">
                             <c:set var="narrative_patient_age" value="${encObsObj.valueText}" />
                         </c:when>
+                        <c:when test="${encObsObj.concept == '15'}">
+                            <c:set var="narrative_patient_status" value="${encObsObj.valueText}" />
+                        </c:when>
+                        <c:when test="${encObsObj.concept == '16'}">
+                            <c:set var="narrative_patient_subject" value="${encObsObj.valueText}" />
+                        </c:when>
                     </c:choose>
                 </c:forEach>
 
@@ -116,10 +124,9 @@
                 <%--</td>--%>
 
 
-                <%--<td><c:out value="${narrative_patient_email} "/> </td>--%>
+                <td><c:out value="${narrative_patient_subject} "/> </td>
                 <td><c:out value="${narrative_patient_tp} "/> </td>
-
-                <td><c:out value="Status-OK"/> </td>
+                <td><c:out value="${narrative_patient_status} "/> </td>
 
                 <td>
                     <form method="post">

@@ -14,12 +14,17 @@
 package org.openmrs.module.patientnarratives.api.db;
 
 import org.openmrs.api.db.DAOException;
+import org.openmrs.module.patientnarratives.api.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
+
+import java.util.List;
 
 /**
  *  Database methods for {@link PatientNarrativesService}.
  */
 public interface PatientNarrativesDAO {
-	
 
+    public void saveNarrativeComments(NarrativeComments narrativeComments) throws DAOException;
+
+    public List<NarrativeComments> getNarrativeComments(Integer encounterId) throws DAOException;
 }
