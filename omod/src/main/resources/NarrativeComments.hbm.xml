@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-  <class name="org.openmrs.module.patientnarratives.api.NarrativeComments" table="patientnarratives_comments">
+  <class name="org.openmrs.module.patientnarratives.NarrativeComments" table="patientnarratives_comments">
     <id name="narrativesCommentId" type="java.lang.Integer">
       <column name="patientnarratives_comment_id"/>
       <generator class="identity"/>

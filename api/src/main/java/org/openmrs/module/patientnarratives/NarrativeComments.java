@@ -1,4 +1,4 @@
-package org.openmrs.module.patientnarratives.api;
+package org.openmrs.module.patientnarratives;
 
 import org.openmrs.Auditable;
 import org.openmrs.User;

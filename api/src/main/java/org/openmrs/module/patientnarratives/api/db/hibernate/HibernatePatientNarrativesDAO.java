@@ -19,7 +19,7 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.api.db.DAOException;
-import org.openmrs.module.patientnarratives.api.NarrativeComments;
+import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 
 import java.util.List;

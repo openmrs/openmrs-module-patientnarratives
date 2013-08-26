@@ -14,7 +14,7 @@
 package org.openmrs.module.patientnarratives.api.db;
 
 import org.openmrs.api.db.DAOException;
-import org.openmrs.module.patientnarratives.api.NarrativeComments;
+import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 
 import java.util.List;

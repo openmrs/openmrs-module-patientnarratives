@@ -22,7 +22,7 @@
     import org.apache.commons.logging.LogFactory;
     import org.openmrs.*;
     import org.openmrs.api.context.Context;
-    import org.openmrs.module.patientnarratives.api.NarrativeComments;
+    import org.openmrs.module.patientnarratives.NarrativeComments;
     import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
     import org.springframework.util.StringUtils;
     import org.springframework.validation.BindException;

@@ -14,6 +14,7 @@
 package org.openmrs.module.patientnarratives.api;
 
 import org.openmrs.api.APIException;
+import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 import org.springframework.transaction.annotation.Transactional;
 

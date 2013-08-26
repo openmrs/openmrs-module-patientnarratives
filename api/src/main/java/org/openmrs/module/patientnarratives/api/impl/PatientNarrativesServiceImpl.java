@@ -16,7 +16,7 @@ package org.openmrs.module.patientnarratives.api.impl;
 import org.openmrs.api.APIException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.patientnarratives.api.NarrativeComments;
+import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 
