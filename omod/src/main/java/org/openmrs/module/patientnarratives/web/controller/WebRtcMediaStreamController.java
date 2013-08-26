@@ -55,8 +55,6 @@ public class WebRtcMediaStreamController {
     public final static String FORM_PATH = "/module/patientnarratives/webRtcMedia.form";
     protected final Log log = LogFactory.getLog(getClass());
 
-    private String audioUrl = "/home/harshadura/gsoc2013/TestWebm/audioFile1.wav";
-    private String videoUrl = "/home/harshadura/gsoc2013/TestWebm/videoFile1.webm";
     private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/mergedFile1.flv";
 
     @RequestMapping(FORM_PATH)
