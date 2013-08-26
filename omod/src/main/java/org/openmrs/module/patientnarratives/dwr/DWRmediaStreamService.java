@@ -20,50 +20,9 @@ public class DWRmediaStreamService {
     private String videoUrl = "/home/harshadura/gsoc2013/TestWebm/videoFile1.webm";
     private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/mergedFile1.flv";
 
-
-//    public boolean uploadVideo
-//        if (request instanceof MultipartHttpServletRequest) {
-//            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
-//            MultipartFile videofile             = (MultipartFile) multipartRequest.getFile("video");
-//            MultipartFile audiofile             = (MultipartFile) multipartRequest.getFile("audio");
-
-//        try{
-
-
-//            mergeVideo();
-
-//            if (!videofile.isEmpty()) {
-//                if (videofile.getSize() > 0) {  // limit video length or size.
-//
-//                    OutputStream out1 = new FileOutputStream(new File(videoUrl));
-//                    out1.write(videoData);
-//                    out1.close();
-//
-//                    OutputStream out2 = new FileOutputStream(new File(audioUrl));
-//                    out2.write(audioData);
-//                    out2.close();
-//                }
-//
-//            }
-//        }
-
-//        }catch(Exception e){
-
-//        }
-//        returnUrl = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
-//        return new ModelAndView(new RedirectView(returnUrl));
-//        return false;
-//    }
-
     public boolean uploadVideo(MultipartFile videofile, MultipartFile audiofile){
 
         try{
-//            byte[] videoData = videofile.getBytes();
-//            byte[] audioData = audiofile.getBytes();
-
-//            String filenamevideo = videoUrl; //"f:/testvidfol/video.mp4"; //this is the input file for video. you can change extension
-//            String filenameaudio = audioUrl; //"f:/testvidfol/audio.wav"; //this is the input file for audio. you can change extension
-
             IMediaWriter mWriter = ToolFactory.makeWriter(mergedUrl); //output file
 
             IContainer containerVideo = IContainer.make();

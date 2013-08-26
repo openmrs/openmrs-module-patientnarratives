@@ -15,6 +15,9 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.*;
+import org.openmrs.api.context.Context;
+import org.openmrs.obs.ComplexData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,7 +37,11 @@ import com.xuggle.xuggler.IStream;
 import com.xuggle.xuggler.IStreamCoder;
 import com.xuggle.xuggler.IVideoPicture;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class WebRtcMediaStreamController {
@@ -43,7 +50,7 @@ public class WebRtcMediaStreamController {
     public final static String FORM_PATH = "/module/patientnarratives/webRtcMedia.form";
     protected final Log log = LogFactory.getLog(getClass());
 
-    private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/mergedFile1.flv";
+    private File tempMergedVideoFile = null;
 
     @RequestMapping(FORM_PATH)
     public ModelAndView handleRequest(HttpServletRequest request) throws Exception {
@@ -54,6 +61,9 @@ public class WebRtcMediaStreamController {
             MultipartFile audiofile             = (MultipartFile) multipartRequest.getFile("audio");
 
             try{
+                tempMergedVideoFile = File.createTempFile("mergedVideoFile", ".flv");
+                String mergedUrl = tempMergedVideoFile.getCanonicalPath();
+
                 IMediaWriter mWriter = ToolFactory.makeWriter(mergedUrl); //output file
 
                 IContainer containerVideo = IContainer.make();
@@ -168,7 +178,35 @@ public class WebRtcMediaStreamController {
             }
         }
 
+        saveAndTransferVideoComplexObs();
+
         returnUrl = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
         return new ModelAndView(new RedirectView(returnUrl));
+    }
+
+    public void saveAndTransferVideoComplexObs(){
+
+        try{
+            List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, null, true);
+            Encounter lastEncounter = encounters.get(encounters.size()-1);
+
+            Person patient = lastEncounter.getPatient();
+            ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(14);
+            Location location = Context.getLocationService().getDefaultLocation();
+            Obs obs = new Obs(patient, conceptComplex, new Date(), location) ;
+
+            String mergedUrl = tempMergedVideoFile.getCanonicalPath();
+            InputStream out1 = new FileInputStream(new File(mergedUrl));
+
+            ComplexData complexData = new ComplexData("mergedFile1.flv", out1);
+            obs.setComplexData(complexData);
+            obs.setEncounter(lastEncounter);
+
+            Context.getObsService().saveObs(obs, null);
+            tempMergedVideoFile.delete();
+
+        }catch (Exception e){
+
+        }
     }
 }

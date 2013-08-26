@@ -99,22 +99,7 @@ public class HtmlFormEntryRequestController {
 //            errors.reject("Exception! " + ex.getMessage() + "<br/>" + sw.toString());
         }
 
-        List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, null, true);
 
-        Encounter lastEncounter = encounters.get(encounters.size()-1);
-        Integer lastEncId = lastEncounter.getId();
-
-        Person patient = lastEncounter.getPatient();
-        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(14);
-        Location location = Context.getLocationService().getDefaultLocation();
-        Obs obs = new Obs(patient, conceptComplex, new Date(), location) ;
-
-        InputStream out1 = new FileInputStream(new File(mergedUrl, "mergedFile1.flv"));
-        ComplexData complexData = new ComplexData("mergedFile1.flv", out1);
-        obs.setComplexData(complexData);
-        obs.setEncounter(lastEncounter);
-
-        Context.getObsService().saveObs(obs, null);
 
         ////////////////////////
 
