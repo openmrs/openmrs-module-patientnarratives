@@ -96,11 +96,9 @@
 	<!--</extension>-->
 
 	<!-- Maps hibernate file's, if present -->
-	<mappingFiles>
-				
-		PatientNarratives.hbm.xml
-				
-	</mappingFiles>
+    <mappingFiles>
+        ${omodHbmConfig}
+    </mappingFiles>
 
 	<!-- Internationalization -->
 	<!-- All message codes should start with ${project.parent.artifactId}. -->
