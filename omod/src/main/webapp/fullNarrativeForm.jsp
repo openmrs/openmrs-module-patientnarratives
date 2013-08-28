@@ -171,16 +171,17 @@
                 <th width="400">Status</th>
                 <td>
                     <c:out value="${status}"/>
-                    <%--<form method="post">--%>
-                        <%--<input type=hidden name=encounterId value=<c:out value="${feedback.encounterId}"/> >--%>
-                        <%--<select name="status">--%>
+                    <form method="post">
+                        <input type=hidden name=encId value=<c:out value="${encId}"/> >
+                        <input type="text" name="newStatus" >
+                    <%--<select name="status">--%>
                             <%--<c:forEach items="${statuses}" var="statusObj" >--%>
                                 <%--<option value="<c:out value="${statusObj.status}"/>"> <c:out value="${statusObj.status}"/> </option>--%>
                             <%--</c:forEach>--%>
                             <%--<option value="-" selected="selected">-</option>--%>
                         <%--</select>--%>
-                        <%--<input type="submit" value="<spring:message code="feedback.status.change" />" />--%>
-                    <%--</form>--%>
+                        <input type="submit" value="Update Status" />
+                    </form>
                 </td>
 
             </tr>

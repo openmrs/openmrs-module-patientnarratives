@@ -194,9 +194,6 @@
     </div>
 </div>
 
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRTC.js" />
-
-
 <%@ include file="/WEB-INF/template/footer.jsp"%>
 
 
