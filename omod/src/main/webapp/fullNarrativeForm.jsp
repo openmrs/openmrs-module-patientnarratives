@@ -173,6 +173,7 @@
                     <c:out value="${status}"/>
                     <form method="post">
                         <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
+                        <br/>
                         <input type="text" name="newStatus" >
                     <%--<select name="status">--%>
                             <%--<c:forEach items="${statuses}" var="statusObj" >--%>

@@ -13,6 +13,9 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +29,7 @@ import org.openmrs.api.ObsService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
+import org.openmrs.obs.ComplexData;
 import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
@@ -108,18 +112,19 @@ public class FullNarrativeFormController extends SimpleFormController {
                     if (nowOb.getConcept().getConceptId() == 15 && !nowOb.isVoided()) {
                         statusObsId = nowOb.getId();
                         Obs statusObs = Context.getObsService().getObs(statusObsId);
-                        statusObs.setVoided(true);
-                        Context.getObsService().saveObs(statusObs, "obs voided");
+                        Context.getObsService().voidObs(statusObs, "obs voided");
                         break;
                     }
                 }
 
-                Obs newObs = new Obs();
-                newObs.setConcept(nowOb.getConcept());
+                Person patient = encounter.getPatient();
+                Location location = Context.getLocationService().getDefaultLocation();
+
+                Obs newObs = new Obs(patient, nowOb.getConcept(), new Date(), location) ;
                 newObs.setValueText(newStatus);
-                newObs = Context.getObsService().saveObs(newObs, "New obs");
-                encounter.addObs(newObs);
-                Context.getEncounterService().saveEncounter(encounter);
+                newObs.setEncounter(encounter);
+
+                Context.getObsService().saveObs(newObs, null);
 
                 request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.status.updated");
             }
