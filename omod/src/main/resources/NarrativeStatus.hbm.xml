@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="org.openmrs.module.patientnarratives.NarrativeStatus" table="patientnarratives_status">
+        <id name="encounterId" type="java.lang.Integer">
+            <column name="encounterId"/>
+            <generator class="native"/>
+        </id>
+        <many-to-one class="org.openmrs.User" column="creator" name="creator" not-null="true"/>
+        <many-to-one class="org.openmrs.User" column="changed_by" name="changedBy"/>
+        <property name="status" type="string">
+            <column length="100" name="status" not-null="true"/>
+        </property>
+        <property name="dateCreated" type="timestamp">
+            <column length="19" name="date_created" not-null="true"/>
+        </property>
+        <property name="dateChanged" type="timestamp">
+            <column length="19" name="date_changed"/>
+        </property>
+        <property name="uuid" type="string">
+            <column length="38" name="uuid"/>
+        </property>
+    </class>
+</hibernate-mapping>

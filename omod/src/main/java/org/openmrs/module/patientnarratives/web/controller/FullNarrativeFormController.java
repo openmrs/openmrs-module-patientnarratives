@@ -43,13 +43,13 @@ public class FullNarrativeFormController extends SimpleFormController {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
         PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
-        map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encId"))));
+        map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encounterId"))));
 
-        int encId  = Integer.parseInt(request.getParameter("encId"));
-        Encounter encounter = Context.getEncounterService().getEncounter(encId);
+        int encounterId  = Integer.parseInt(request.getParameter("encounterId"));
+        Encounter encounter = Context.getEncounterService().getEncounter(encounterId);
 
         map.put("encDate", encounter.getEncounterDatetime());
-        map.put("encId", encId);
+        map.put("encounterId", encounterId);
 
         Set<Obs> obs = encounter.getObs();
         Iterator<Obs> observation = obs.iterator();
@@ -84,8 +84,8 @@ public class FullNarrativeFormController extends SimpleFormController {
                 NarrativeComments narrativeComments = new NarrativeComments();
                 narrativeComments.setComment(request.getParameter("comment"));
 
-                String encId = request.getParameter("encId");
-                narrativeComments.setEncounterId(Integer.parseInt(encId));
+                String encounterId = request.getParameter("encounterId");
+                narrativeComments.setEncounterId(Integer.parseInt(encounterId));
                 patientNarrativesService.saveNarrativesComment(narrativeComments);
 
                 request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.comment.added");
@@ -94,26 +94,32 @@ public class FullNarrativeFormController extends SimpleFormController {
             if (StringUtils.hasLength(request.getParameter("newStatus"))) {
 
                 String newStatus = request.getParameter("newStatus");
-                int encId  = Integer.parseInt(request.getParameter("encId"));
-                Encounter encounter = Context.getEncounterService().getEncounter(encId);
+                int encounterId  = Integer.parseInt(request.getParameter("encounterId"));
+                Encounter encounter = Context.getEncounterService().getEncounter(encounterId);
 
                 Set<Obs> obs = encounter.getObs();
                 Iterator<Obs> observation = obs.iterator();
 
                 Integer statusObsId = null;
+                Obs nowOb = null;
 
                 while(observation.hasNext()) {
-                    Obs nowOb = observation.next();
-                    if (nowOb.getConcept().getConceptId() == 15) {
+                    nowOb = observation.next();
+                    if (nowOb.getConcept().getConceptId() == 15 && !nowOb.isVoided()) {
                         statusObsId = nowOb.getId();
+                        Obs statusObs = Context.getObsService().getObs(statusObsId);
+                        statusObs.setVoided(true);
+                        Context.getObsService().saveObs(statusObs, "obs voided");
                         break;
                     }
                 }
 
-                ObsService obsService = Context.getObsService();
-                Obs statusObs = obsService.getObs(statusObsId);
-                statusObs.setValueText(newStatus);
-                obsService.saveObs(statusObs, "status updated");
+                Obs newObs = new Obs();
+                newObs.setConcept(nowOb.getConcept());
+                newObs.setValueText(newStatus);
+                newObs = Context.getObsService().saveObs(newObs, "New obs");
+                encounter.addObs(newObs);
+                Context.getEncounterService().saveEncounter(encounter);
 
                 request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.status.updated");
             }

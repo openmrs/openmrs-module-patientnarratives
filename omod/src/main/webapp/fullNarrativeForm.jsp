@@ -34,7 +34,7 @@
         </tr>
         <tr>
             <th width="100">Encounter Id</th>
-            <td><c:out value="${encId} "/> </td>
+            <td><c:out value="${encounterId} "/> </td>
         </tr>
         <tr>
             <th width="400">Date of Encounter</th>
@@ -172,7 +172,7 @@
                 <td>
                     <c:out value="${status}"/>
                     <form method="post">
-                        <input type=hidden name=encId value=<c:out value="${encId}"/> >
+                        <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
                         <input type="text" name="newStatus" >
                     <%--<select name="status">--%>
                             <%--<c:forEach items="${statuses}" var="statusObj" >--%>
@@ -232,7 +232,7 @@
             <td>
             </td>
             <td>
-                <input type=hidden name=encId value=<c:out value="${encId}"/> >
+                <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
                 <input type="submit" value="Add Comment" />
             </td>
         </form>

@@ -26,6 +26,8 @@ import org.openmrs.*;
 import org.openmrs.api.EncounterService;
 import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.patientnarratives.NarrativeStatus;
+import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 import org.openmrs.web.WebConstants;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
@@ -64,13 +66,13 @@ public class CareProviderConsoleController extends SimpleFormController {
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
 
-        Integer encId = Integer.parseInt(request.getParameter("textEncID"));
+        Integer encounterId = Integer.parseInt(request.getParameter("textEncID"));
 
         PatientService patientService = Context.getPatientService();
         Patient patient = new Patient();
 
         EncounterService encounterService = Context.getEncounterService();
-        Encounter encounter = encounterService.getEncounter(encId);
+        Encounter encounter = encounterService.getEncounter(encounterId);
 
         String patientName = "";
         String patientAge = "";
