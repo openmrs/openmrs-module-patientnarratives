@@ -100,20 +100,6 @@ public class HtmlFormEntryRequestController {
         }
 
 
-
-        ////////////////////////
-
-        // obs.getComplexData() will be null here
-        //        Retrieve a complex obs and its data
-
-//        Integer obsId = obs.getObsId();
-//        Obs complexObs = Context.getObsService().getComplexObs(obsId, OpenmrsConstants.RAW_VIEW);
-//        ComplexData complexData2 = complexObs.getComplexData();
-//        Object object2 = complexData.getData();
-
-// object will be a BufferedImage object
-
-
 //        if ((alert != null) && (alert == true)) {
 //        }
         // if we get here it's because we caught an error trying to submit/apply

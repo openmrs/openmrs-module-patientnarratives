@@ -4,6 +4,15 @@
 
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/patientnarratives/"%>
 
+<%--<openmrs:htmlInclude file="/moduleResources/patientnarratives/flowplayer/flowplayer-3.2.12.min.js" />--%>
+<%--<openmrs:htmlInclude file="/moduleResources/patientnarratives/css/mediaelementplayer.css" />--%>
+<%--<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/mediaelement-and-player.min.js" />--%>
+
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/jwplayer/jwplayer.js" />
+
+
+
+
 <script>
     $j(document).ready(function()
     {
@@ -92,10 +101,43 @@
         <tr>
             <th width="400">Video</th>
             <td>
+
+                <div id="mediaspace">Loading the player...</div>
+
+
+                <embed height="385" width="640" type="application/x-flv" src="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" id="movie_player" flashvars="rv.7.length_seconds=107&amp;rv.2.thumbnailUrl=http%3A%2F%2Fi4....." allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" />
+
+            <%--<video id="test123-video" src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" width="320" height="240" controls>--%>
+                <%--</video>--%>
+
+                <%--<video--%>
+                        <%--src="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"--%>
+                        <%--id="myvideo" controls="controls" preload="true">--%>
+                <%--</video>--%>
+
+                <%--<object id="flowplayer" width="300" height="200"--%>
+                        <%--data="http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf"--%>
+                        <%--type="application/x-shockwave-flash">--%>
+
+                    <%--<param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf" />--%>
+                    <%--<param name="allowfullscreen" value="true" />--%>
+
+                    <%--<param name="flashvars"--%>
+                           <%--value='config={"clip":"http://localhost:8088/openmrs/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"}' />--%>
+                <%--</object>--%>
+
+                <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" >--%>
+                <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="200" width="400">--%>
+                <%--</img>--%>
+                <%--</a>--%>
+
+                <br/>  <br/>
+                <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" >
+                TEST VIDEO
+                </a>
                 <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" >--%>
                 <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" height="200" width="400">--%>
                 <%--</img>--%>
-                </a>
             </td>
         </tr>
 
@@ -267,3 +309,13 @@
 </div>
 
 <%@ include file="/WEB-INF/template/footer.jsp" %>
+
+<%--<script type='text/javascript'>--%>
+    <%--jwplayer('mediaspace').setup({--%>
+        <%--'flashplayer': '<openmrs:contextPath/>/moduleResources/patientnarratives/jwplayer/jwplayer.flash.swf',--%>
+        <%--'file': '<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>',--%>
+        <%--'controlbar': 'bottom',--%>
+        <%--'width': '470',--%>
+        <%--'height': '320'--%>
+    <%--});--%>
+<%--</script>--%>

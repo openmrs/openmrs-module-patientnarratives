@@ -30,10 +30,12 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 import org.openmrs.obs.ComplexData;
+import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.view.RedirectView;
@@ -58,6 +60,8 @@ public class FullNarrativeFormController extends SimpleFormController {
         Set<Obs> obs = encounter.getObs();
         Iterator<Obs> observation = obs.iterator();
 
+        Integer complexObsId = null;
+
         while(observation.hasNext()) {
             Obs nowOb = observation.next();
 
@@ -71,6 +75,7 @@ public class FullNarrativeFormController extends SimpleFormController {
                 case 8: map.put("age", nowOb.getValueText()); continue;
                 case 15: map.put("status", nowOb.getValueText()); continue;
                 case 16: map.put("subject", nowOb.getValueText()); continue;
+                case 14: map.put("videoObsId", nowOb.getObsId()); continue;
                 default: continue;
             }
         }

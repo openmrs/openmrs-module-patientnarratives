@@ -1,6 +1,14 @@
-Notes:
+Notes
+=====
 
-To create new concepts:
-use this tool > https://groups.google.com/a/openmrs.org/d/msg/implementers/Ki8Jk1PX_Qo/bP19QS0s4REJ
+1) How to clear the database <-- Remove test encounters
+use the below sql script.
 
-Get a SQL Dump of OpenMRS db
+----------------------
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE  concept_proposal;
+TRUNCATE  encounter_provider;
+TRUNCATE  obs;
+TRUNCATE  encounter;
+SET FOREIGN_KEY_CHECKS=1;
+----------------------
