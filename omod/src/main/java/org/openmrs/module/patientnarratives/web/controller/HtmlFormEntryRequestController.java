@@ -30,22 +30,26 @@ import java.util.List;
 @Controller
 public class HtmlFormEntryRequestController {
 
+    /////////////Important/////////////
+    /* HTMLform entry version: 2.1.3 */
+    /////////////Important/////////////
+
     Boolean alert = null;
     private String returnUrl;
     public final static String FORM_PATH = "/module/patientnarratives/htmlFormProcess.form";
     protected final Log log = LogFactory.getLog(getClass());
 
-    private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/";
-
     @RequestMapping(FORM_PATH)
-    public ModelAndView handleRequest(HttpServletRequest request) throws Exception {
+    public ModelAndView handleRequest(HttpServletRequest request) {
 
         returnUrl = request.getContextPath() + "/module/patientnarratives/patientNarrativesForm.form";
 
-        HtmlFormEntryPortletController htmlFormEntryPortletController = new HtmlFormEntryPortletController();
-        FormEntrySession session = htmlFormEntryPortletController.getFormEntrySession(request);
-
+        HtmlFormEntryPortletController htmlFormEntryPortletController;
+        FormEntrySession session = null;
         try {
+                htmlFormEntryPortletController = new HtmlFormEntryPortletController();
+            session = htmlFormEntryPortletController.getFormEntrySession(request);
+
             List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
             if (validationErrors != null && validationErrors.size() > 0) {
 //                errors.reject("Fix errors");
@@ -61,16 +65,17 @@ public class HtmlFormEntryRequestController {
 
         // no form validation errors, proceed with submission
 
-        session.prepareForSubmit();
-
-        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
-                && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
-            throw new IllegalArgumentException("This form is not going to create an Patient");
-
-        if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
-            throw new IllegalArgumentException("This form is not going to create an encounter");
-
         try {
+            session.prepareForSubmit();
+
+            if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasPatientTag() && session.getPatient() == null
+                    && (session.getSubmissionActions().getPersonsToCreate() == null || session.getSubmissionActions().getPersonsToCreate().size() == 0))
+                throw new IllegalArgumentException("This form is not going to create an Patient");
+
+            if (session.getContext().getMode() == FormEntryContext.Mode.ENTER && session.hasEncouterTag() && (session.getSubmissionActions().getEncountersToCreate() == null || session.getSubmissionActions().getEncountersToCreate().size() == 0))
+                throw new IllegalArgumentException("This form is not going to create an encounter");
+
+
             session.getSubmissionController().handleFormSubmission(session, request);
             HtmlFormEntryUtil.getService().applyActions(session);
             String successView = session.getReturnUrlWithParameters();

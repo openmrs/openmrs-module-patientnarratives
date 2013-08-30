@@ -102,18 +102,16 @@
             <th width="400">Video</th>
             <td>
 
-                <div id="mediaspace">Loading the player...</div>
+                <%--<div id="mediaspace">Loading the player...</div>--%>
 
-
-                <embed height="385" width="640" type="application/x-flv" src="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" id="movie_player" flashvars="rv.7.length_seconds=107&amp;rv.2.thumbnailUrl=http%3A%2F%2Fi4....." allowscriptaccess="always" allowfullscreen="true" bgcolor="#000000" />
 
             <%--<video id="test123-video" src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" width="320" height="240" controls>--%>
                 <%--</video>--%>
 
-                <%--<video--%>
-                        <%--src="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"--%>
-                        <%--id="myvideo" controls="controls" preload="true">--%>
-                <%--</video>--%>
+                <video
+                        src="<openmrs:contextPath/>/moduleServlet/patientnarratives/videoDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"
+                        id="myvideo" controls="controls" preload="true">
+                </video>
 
                 <%--<object id="flowplayer" width="300" height="200"--%>
                         <%--data="http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf"--%>
