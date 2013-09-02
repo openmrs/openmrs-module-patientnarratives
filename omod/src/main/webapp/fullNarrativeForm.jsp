@@ -10,9 +10,6 @@
 
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/jwplayer/jwplayer.js" />
 
-
-
-
 <script>
     $j(document).ready(function()
     {
@@ -40,10 +37,10 @@
 <div class="box" >
     <table id="table">
         <tr>
-        </tr>
-        <tr>
             <th width="100">Encounter Id</th>
-            <td><c:out value="${encounterId} "/> </td>
+            <td>
+                <c:out value="${encounterId} "/> -- <a target="_blank" href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=<c:out value="${encounterId}"/>">[View Encounter]</a>
+            </td>
         </tr>
         <tr>
             <th width="400">Date of Encounter</th>
@@ -89,9 +86,16 @@
                 </div>
             </td>
         </tr>
+
+        <%--<tr>--%>
+            <%--<th width="400">Full Narrative Form</th>--%>
+            <%--<td>--%>
+                <%--<a href="http://www.w3schools.com">View Encounter</a>--%>
+            <%--</td>--%>
+        <%--</tr>--%>
+
     </table>
 </div>
-
 
 <b class="boxHeader">Narrative Video and Attachments</b>
 <div class="box" >
@@ -206,7 +210,7 @@
 
     <b class="boxHeader">Status of the Narrative</b>
     <div class="box" >
-        <table id="table5">
+        <table id="table9">
             <tr>
                 <th width="400">Status</th>
                 <td>
@@ -226,9 +230,35 @@
                 </td>
 
             </tr>
-
         </table>
     </div>
+
+<b class="boxHeader">Register Valid Patient</b>
+<div class="box" >
+    <table id="table5">
+        <tr>
+            <th width="400">Register</th>
+            <td>
+
+                <c:if test="${patientId}">
+                    <c:out value="${patientId}"/>
+                </c:if>
+
+                <form method="post">
+                    <input type=hidden name=registerEncounterId value=<c:out value="${encounterId}"/> >
+                    <input type="submit" value="Register" />
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+
+<%--<form method="post">--%>
+<%--<input type="hidden" name="textEncID" value="${encountersObj.encounterId}">--%>
+<%--<input type="submit" value="Register">--%>
+<%--</form>--%>
 
 
     <%--<div class="box" >--%>

@@ -16,6 +16,8 @@ package org.openmrs.module.patientnarratives.web.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +27,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.*;
 import org.openmrs.api.ConceptService;
+import org.openmrs.api.EncounterService;
 import org.openmrs.api.ObsService;
+import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.patientnarratives.NarrativeComments;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
@@ -56,6 +60,8 @@ public class FullNarrativeFormController extends SimpleFormController {
 
         map.put("encDate", encounter.getEncounterDatetime());
         map.put("encounterId", encounterId);
+
+        map.put("patientId", encounter.getPatient().getPatientId());
 
         Set<Obs> obs = encounter.getObs();
         Iterator<Obs> observation = obs.iterator();
@@ -133,6 +139,82 @@ public class FullNarrativeFormController extends SimpleFormController {
 
                 request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.status.updated");
             }
+
+            if (StringUtils.hasLength(request.getParameter("registerEncounterId"))){
+                Integer encounterId = Integer.parseInt(request.getParameter("registerEncounterId"));
+
+                PatientService patientService = Context.getPatientService();
+                Patient patient = new Patient();
+
+                EncounterService encounterService = Context.getEncounterService();
+                Encounter encounter = encounterService.getEncounter(encounterId);
+
+                String patientName = "";
+                String patientAge = "";
+                String patientGender = "";
+
+                Set<Obs> obs = encounter.getObs();
+                Iterator<Obs> observation = obs.iterator();
+
+                while(observation.hasNext()) {
+                    Obs nowOb = observation.next();
+
+                    if (nowOb.getConcept().getConceptId() == 12) {
+                        patientName = nowOb.getValueText();
+                    }
+                    if (nowOb.getConcept().getConceptId() == 8) {
+                        patientAge = nowOb.getValueText();
+                    }
+                    if (nowOb.getConcept().getConceptId() == 13) {
+                        patientGender = nowOb.getValueText();
+                    }
+                }
+
+                PersonName personName = new PersonName();
+                int patientCount = patientService.getAllPatients().size();
+                int newPatientId = patientCount + 5;
+
+                String nameArr[] = patientName.split(" ");
+
+                if (nameArr.length == 1){
+                    personName.setGivenName(nameArr[0]);
+                    personName.setFamilyName("----");
+                }
+                else if (nameArr.length == 2){
+                    personName.setGivenName(nameArr[0]);
+                    personName.setFamilyName(nameArr[1]);
+                }
+                else if (nameArr.length >= 3){
+                    String nameArr2[] = parseFullName(patientName);
+
+                    personName.setGivenName(nameArr2[0]);
+                    personName.setMiddleName(nameArr2[1]);
+                    personName.setFamilyName(nameArr2[2]);
+                }
+
+                Set<PersonName> personNameSet = new TreeSet<PersonName>();
+                personNameSet.add(personName);
+
+                patient.setNames(personNameSet);
+                patient.setGender(patientGender);
+
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+                patient.setBirthdateFromAge(Integer.parseInt(patientAge), df.parse(date));
+
+                PatientIdentifierType patientIdentifierType = Context.getPatientService().getPatientIdentifierType(2);
+                Location location = Context.getLocationService().getDefaultLocation();
+
+                PatientIdentifier patientIdentifier = new PatientIdentifier(String.valueOf(newPatientId), patientIdentifierType, location);
+                patient.addIdentifier(patientIdentifier);
+                patientService.savePatient(patient);
+
+                int patientId = patientService.getPatients(String.valueOf(newPatientId)).get(0).getPatientId();
+                encounter.setPatient(patientService.getPatient(patientId));
+                encounterService.saveEncounter(encounter);
+                request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "patientnarratives.newpatient.created.alert");
+
+            }
         }catch (Exception e){
             e.getMessage();
         }
@@ -140,6 +222,31 @@ public class FullNarrativeFormController extends SimpleFormController {
         return new ModelAndView(new RedirectView(getSuccessView()));
 
     }
+
+    public String[] parseFullName(String name) {
+        String nameArr[] = new String[3];
+
+        int start = name.indexOf(' ');
+        int end = name.lastIndexOf(' ');
+
+        String firstName = "";
+        String middleName = "";
+        String lastName = "";
+
+        if (start >= 0) {
+            firstName = name.substring(0, start);
+            if (end > start)
+                middleName = name.substring(start + 1, end);
+            lastName = name.substring(end + 1, name.length());
+        }
+
+        nameArr[0] = firstName;
+        nameArr[1] = middleName;
+        nameArr[2] = lastName;
+
+        return nameArr;
+    }
+
 
     @Override
     protected Object formBackingObject(HttpServletRequest request) throws Exception {

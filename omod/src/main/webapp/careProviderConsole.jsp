@@ -16,10 +16,8 @@
             "bProcessing": true,
             "bJQueryUI": true,
             "sPaginationType": "full_numbers",
-            "aaSorting": [[ 7, "desc" ]],
+            "aaSorting": [[ 6, "desc" ]],
             "aoColumns": [
-                { "bSearchable": true,
-                    "bVisible":    true },
                 { "bSearchable": true,
                     "bVisible":    true },
                 { "bSearchable": true,
@@ -59,7 +57,7 @@
             <th width="300">Telephone</th>
             <th width="300">Status</th>
 
-            <th width="100">Register</th>
+            <%--<th width="100">Register</th>--%>
 
         </tr>
         </thead>
@@ -128,12 +126,12 @@
                 <td><c:out value="${narrative_patient_tp} "/> </td>
                 <td><c:out value="${narrative_patient_status} "/> </td>
 
-                <td>
-                    <form method="post">
-                        <input type="hidden" name="textEncID" value="${encountersObj.encounterId}">
-                        <input type="submit" value="Register">
-                    </form>
-                </td>
+                <%--<td>--%>
+                    <%--<form method="post">--%>
+                        <%--<input type="hidden" name="textEncID" value="${encountersObj.encounterId}">--%>
+                        <%--<input type="submit" value="Register">--%>
+                    <%--</form>--%>
+                <%--</td>--%>
             </tr>
         </c:forEach>
 

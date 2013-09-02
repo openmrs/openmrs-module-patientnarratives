@@ -142,19 +142,19 @@
             </center>
 
         </div>
-        <div id="info-wrap">
-            </br></br>
-            <table border="1">
-                <tr>
-                    <td> <span>Additional Information</span></td>
-                    <td>
-                        <textarea rows="4" cols="50">
-                            Describe here.
-                        </textarea>
-                    </td>
-                </tr>
-            </table>
-        </div>
+        <%--<div id="info-wrap">--%>
+            <%--</br></br>--%>
+            <%--<table border="1">--%>
+                <%--<tr>--%>
+                    <%--<td> <span>Additional Information</span></td>--%>
+                    <%--<td>--%>
+                        <%--<textarea rows="4" cols="50">--%>
+                            <%--Describe here.--%>
+                        <%--</textarea>--%>
+                    <%--</td>--%>
+                <%--</tr>--%>
+            <%--</table>--%>
+        <%--</div>--%>
         <div id="info-wrap">
 
             </br></br>
