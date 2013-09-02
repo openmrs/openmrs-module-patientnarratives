@@ -71,7 +71,7 @@
     <!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> -->
     <servlet>
         <servlet-name>videoDownloadServlet</servlet-name>
-        <servlet-class>org.openmrs.module.patientnarratives.web.controller.VideoDownloadServlet</servlet-class>
+        <servlet-class>org.openmrs.module.patientnarratives.web.servlet.VideoDownloadServlet</servlet-class>
     </servlet>
 
     <!--<advice>-->

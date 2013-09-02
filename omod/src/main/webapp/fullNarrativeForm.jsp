@@ -233,23 +233,24 @@
         </table>
     </div>
 
-<b class="boxHeader">Register Valid Patient</b>
+<b class="boxHeader">Register patient & Transfer the Encounter</b>
 <div class="box" >
     <table id="table5">
         <tr>
-            <th width="400">Register</th>
+            <th width="400">(Registered) Patient Id</th>
             <td>
-
-                <c:if test="${patientId}">
-                    <c:out value="${patientId}"/>
-                </c:if>
-
-                <form method="post">
-                    <input type=hidden name=registerEncounterId value=<c:out value="${encounterId}"/> >
-                    <input type="submit" value="Register" />
-                </form>
+                <c:choose>
+                    <c:when test="${patientId == defaultPatientId}">
+                        <form method="post">
+                            <input type=hidden name=registerEncounterId value=<c:out value="${encounterId}"/> >
+                            <input type="submit" value="Register" />
+                        </form>
+                    </c:when>
+                    <c:otherwise>
+                        <c:out value="${patientId}"/> -- <a target="_blank" href="<openmrs:contextPath/>/patientDashboard.form?patientId=<c:out value="${patientId}"/>">[View Patient]</a>
+                    </c:otherwise>
+                </c:choose>
             </td>
-
         </tr>
 
     </table>

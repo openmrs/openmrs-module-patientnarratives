@@ -63,6 +63,9 @@ public class FullNarrativeFormController extends SimpleFormController {
 
         map.put("patientId", encounter.getPatient().getPatientId());
 
+        String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
+        map.put("defaultPatientId", globalPropertyPatientId);
+
         Set<Obs> obs = encounter.getObs();
         Iterator<Obs> observation = obs.iterator();
 
