@@ -74,6 +74,11 @@
         <servlet-class>org.openmrs.module.patientnarratives.web.servlet.VideoDownloadServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>fileDownloadServlet</servlet-name>
+        <servlet-class>org.openmrs.module.patientnarratives.web.servlet.FileServlet</servlet-class>
+    </servlet>
+
     <!--<advice>-->
         <!--<point>org.openmrs.api.EncounterService</point>-->
         <!--<class>org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor</class>-->
