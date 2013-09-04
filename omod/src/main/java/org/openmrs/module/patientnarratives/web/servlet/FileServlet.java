@@ -97,13 +97,9 @@ public class FileServlet extends HttpServlet {
         String requestedFile = tempMergedVideoFile.getCanonicalPath();
 
         Integer videoObsId = Integer.parseInt(request.getParameter("videoObsId"));
-
         Obs complexObs = Context.getObsService().getComplexObs(videoObsId, OpenmrsConstants.RAW_VIEW);
         ComplexData complexData = complexObs.getComplexData();
-//        Object complexObject = complexData.getData();
         byte[] videoObjectData = ((byte[]) complexData.getData());
-
-//        byte[] videoObjectData = SerializationUtils.serialize(complexObject);
         FileUtils.writeByteArrayToFile(new File(requestedFile), videoObjectData);
 
         // Check if file is actually supplied to the request URL.
