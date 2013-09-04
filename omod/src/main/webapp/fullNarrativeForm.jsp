@@ -4,11 +4,12 @@
 
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/patientnarratives/"%>
 
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/flowplayer/flowplayer-3.2.12.min.js" />
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/css/mediaelementplayer.css" />
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/mediaelement-and-player.min.js" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/videojs/video-js.min.css" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/videojs/video.js" />
 
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/jwplayer/jwplayer.js" />
+<script>
+    videojs.options.flash.swf = "<openmrs:contextPath/>/moduleResources/patientnarratives/videojs/video-js.swf";
+</script>
 
 <script>
     $j(document).ready(function()
@@ -29,9 +30,6 @@
 <h2>
     <spring:message code="patientnarratives.fullinfo"/>
 </h2>
-<%--<div id="feedbackPhotoDialog">--%>
-    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?encounterId=<c:out value="${feedback.encounterId}"/>" >--%>
-<%--</div>--%>
 
 <b class="boxHeader">General Information</b>
 <div class="box" >
@@ -86,14 +84,6 @@
                 </div>
             </td>
         </tr>
-
-        <%--<tr>--%>
-            <%--<th width="400">Full Narrative Form</th>--%>
-            <%--<td>--%>
-                <%--<a href="http://www.w3schools.com">View Encounter</a>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-
     </table>
 </div>
 
@@ -106,37 +96,18 @@
             <th width="400">Video</th>
             <td>
 
-                <%--<div id="mediaspace">Loading the player...</div>--%>
+                <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
+                       poster="http://video-js.zencoder.com/oceans-clip.png"
+                       data-setup="{}">
+                    <source src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" type='video/flv' />
+                    <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
+                </video>
 
 
-            <%--<video id="test123-video" src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" width="320" height="240" controls>--%>
-                <%--</video>--%>
-
-                <%--<video--%>
-                        <%--src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"--%>
-                        <%--id="myvideo" controls="controls" preload="true">--%>
-                <%--</video>--%>
-
-                <object id="flowplayer" width="300" height="200"
-                        data="http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf"
-                        type="application/x-shockwave-flash">
-
-                    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.16.swf" />
-                    <param name="allowfullscreen" value="true" />
-
-                    <param name="flashvars"
-                           value='config={"clip":"http://localhost:8088/openmrs/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>"}' />
-                </object>
-
-                <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" >--%>
-                <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.feedbackId}"/>" height="200" width="400">--%>
-                <%--</img>--%>
-                <%--</a>--%>
-
-                <br/>  <br/>
+                <br/>
                 <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" >
-                TEST VIDEO
-                </a>
+                Download Video</a>
+
                 <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" >--%>
                 <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" height="200" width="400">--%>
                 <%--</img>--%>
