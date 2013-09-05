@@ -5,7 +5,7 @@
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/patientnarratives/"%>
 
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/videojs/video-js.min.css" />
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/videojs/video.js" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/videojs/video.dev.js" />
 
 <script>
     videojs.options.flash.swf = "<openmrs:contextPath/>/moduleResources/patientnarratives/videojs/video-js.swf";

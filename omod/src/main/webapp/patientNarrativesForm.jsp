@@ -47,7 +47,7 @@
 
             var oReq = new XMLHttpRequest();
 
-            formSubmitURL = "http://localhost:8088/openmrs/module/patientnarratives/webRtcMedia.form";
+            formSubmitURL = "<openmrs:contextPath/>/openmrs/module/patientnarratives/webRtcMedia.form";
             console.log(formSubmitURL);
 
             oReq.open("POST", formSubmitURL);
@@ -157,7 +157,7 @@
             </br></br>
 
             <div id="fileupload">
-                <form action="Handler.ashx" method="POST" enctype="multipart/form-data">
+                <form action="<openmrs:contextPath/>/module/patientnarratives/multiFileUpload.form" method="POST" enctype="multipart/form-data">
                     <div class="fileupload-buttonbar">
                         <label class="fileinput-button">
                             <span>Add files...</span>
