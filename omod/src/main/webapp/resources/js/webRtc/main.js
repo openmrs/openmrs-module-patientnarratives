@@ -74,7 +74,7 @@
 
         var oReq = new XMLHttpRequest();
 
-        formSubmitURL = "http://localhost:8088/openmrs/module/patientnarratives/webRtcMedia.form";
+        formSubmitURL = "webRtcMedia.form";
         console.log(formSubmitURL);
 
         oReq.open("POST", formSubmitURL);
