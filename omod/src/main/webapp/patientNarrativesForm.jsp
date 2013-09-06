@@ -85,18 +85,11 @@
                 </div>
             </c:if>
         </div>
-
-
     </div>
 
     <div id="content-wrap">
         <div id="info-wrap">
-
-            <%--WebRTC--%>
-
             <center>
-                <%--<h2 id="demo">Demo</h2>--%>
-
                 <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
                 <br/><br/>
@@ -106,52 +99,16 @@
                 <button id="upload-record">Upload</button>
 
                 <br/><br/>
+                <div style="display: none;" id="result"></div>
+                <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% Completed</progress>
 
-                <div id="result"></div>
-
-                <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/whammy.js" />
-                <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/StereoRecorder.js" />
-                <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/record-rtc.js" />
-                <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/main.js" />
-
-                <%--<p>--%>
-                <%--<video id="video" width="400" height="250" autoplay="autoplay">--%>
-                <%--Your browser does not support the HTML5 video tag.--%>
-                <%--</video>--%>
-                <%--</p>--%>
-                <%--<p><input type="button" id="buttonSnap" value="Take screenshot" onclick="snapshot()" /></p>--%>
-                <%--<p>--%>
-                <%--<input type="button" id="buttonStart" value="Start" onclick="start()" />--%>
-                <%--<input type="button" id="buttonStop" value="Stop" onclick="stop()" />--%>
-                <%--</p>--%>
-
-                <progress min="0" max="100" value="0">0% complete</progress>
-
-                <%--<p><canvas id="canvas" width="640" height="480"></canvas></p>--%>
-
-                <%----%>
-
-                <%--<canvas id="myCanvas" width="400" height="200" style="border:1px solid #000000;">--%>
-                <%--Your browser does not support the HTML5 canvas tag.--%>
-                <%--</canvas>--%>
             </center>
-
         </div>
-        <%--<div id="info-wrap">--%>
-        <%--</br></br>--%>
-        <%--<table border="1">--%>
-        <%--<tr>--%>
-        <%--<td> <span>Additional Information</span></td>--%>
-        <%--<td>--%>
-        <%--<textarea rows="4" cols="50">--%>
-        <%--Describe here.--%>
-        <%--</textarea>--%>
-        <%--</td>--%>
-        <%--</tr>--%>
-        <%--</table>--%>
-        <%--</div>--%>
+
         <div id="info-wrap">
 
+            </br></br>
+            <span>Upload files (X-ray, reports, etc)</span>
             </br></br>
 
             <div id="fileupload">
@@ -277,6 +234,11 @@
 <script src="//ajax.aspnetcdn.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 
 <%--<openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.tmpl.min.js" />--%>
+
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/whammy.js" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/StereoRecorder.js" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/record-rtc.js" />
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/main.js" />
 
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.iframe-transport.js" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload.js" />
