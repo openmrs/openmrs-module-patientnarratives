@@ -120,7 +120,7 @@
             <td>
                 <c:forEach items="${uploadedFilesMap}" var="entry">
                     <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${entry.key}"/>" >
-                    Download ${entry.value}</a>
+                    ${entry.value}</a>
                     <br/>
                 </c:forEach>
             </td>

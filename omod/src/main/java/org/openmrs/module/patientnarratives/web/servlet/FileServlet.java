@@ -100,8 +100,10 @@ public class FileServlet extends HttpServlet {
         ComplexData complexData = complexObs.getComplexData();
         byte[] videoObjectData = ((byte[]) complexData.getData());
 
-        String fileExt = complexData.getTitle();
-        tempMergedVideoFile = createFile(fileExt);
+        String fileExt_file = complexData.getTitle();
+        String arrFileExt[] = fileExt_file.split(" ");
+
+        tempMergedVideoFile = createFile(arrFileExt[0]);
         String requestedFile = tempMergedVideoFile.getCanonicalPath();
 
         FileUtils.writeByteArrayToFile(new File(requestedFile), videoObjectData);
