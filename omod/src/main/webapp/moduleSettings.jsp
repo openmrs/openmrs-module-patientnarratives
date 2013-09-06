@@ -4,6 +4,29 @@
 <%@ include file="template/localHeader.jsp"%>
 <%@ taglib prefix="fn" uri="/WEB-INF/taglibs/fn.tld" %>
 
+<script type="text/javascript">
+    $j(document).ready(function(){
+        $j("input[name='formType']").change(function(event)  {
+            var formType = $j("input:radio[name ='formType']:checked").val();
+            if (formType == 'X-Form'){
+                $j('#formID').val('1');
+            } else{
+                $j('#formID').val('3');
+            }
+            $j('#updated').fadeIn(800).delay(3000).fadeOut(800)
+
+        });
+    });
+</script>
+
+<style>
+    #updated{
+        display: none;
+        font-weight: bold;
+        color:#FF0000;
+    }
+</style>
+
 <form method="post" >
     <b class="boxHeader">Module Properties</b>
     <div class="box" >
@@ -17,7 +40,10 @@
             </tr>
             <tr>
                 <td valign="top">Form ID</td>
-                <td><input type="text" name="formID" value="<openmrs:globalProperty key="patientnarratives.formid"/>"></td>
+                <td>
+                    <input type="text" id="formID" name="formID" value="<openmrs:globalProperty key="patientnarratives.formid"/>">
+                    <div id='updated'>^ Please change the FormID now..</div>
+                </td>
             </tr>
             <tr>
                 <td valign="top"><br/></td>
