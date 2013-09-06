@@ -15,6 +15,7 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,6 +53,8 @@ public class FullNarrativeFormController extends SimpleFormController {
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
+        HashMap<Integer,String> uploadedFilesMap = new HashMap<Integer,String>();
+
         PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
         map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encounterId"))));
 
@@ -69,8 +72,6 @@ public class FullNarrativeFormController extends SimpleFormController {
         Set<Obs> obs = encounter.getObs();
         Iterator<Obs> observation = obs.iterator();
 
-        Integer complexObsId = null;
-
         while(observation.hasNext()) {
             Obs nowOb = observation.next();
 
@@ -85,11 +86,29 @@ public class FullNarrativeFormController extends SimpleFormController {
                 case 15: map.put("status", nowOb.getValueText()); continue;
                 case 16: map.put("subject", nowOb.getValueText()); continue;
                 case 14: map.put("videoObsId", nowOb.getObsId()); continue;
+                case 17: uploadedFilesMap.put(nowOb.getObsId(), getFilename(nowOb.getObsId())); continue;
                 default: continue;
             }
         }
+        map.put("uploadedFilesMap", uploadedFilesMap);
 
         return map;
+    }
+
+    public File multipartToFile(MultipartFile multipart) throws IllegalStateException, IOException {
+        File tmpFile = new File(System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") +
+                multipart.getOriginalFilename());
+        multipart.transferTo(tmpFile);
+        return tmpFile;
+    }
+
+
+    public String getFilename( Integer obsId ){
+        Obs complexObs = Context.getObsService().getComplexObs(obsId, OpenmrsConstants.RAW_VIEW);
+        ComplexData complexData = complexObs.getComplexData();
+        String fileExt = complexData.getTitle();
+        String arr[] = fileExt.split(" ");
+        return arr[0];
     }
 
     @Override

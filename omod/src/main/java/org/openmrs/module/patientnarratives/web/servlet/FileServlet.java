@@ -23,6 +23,7 @@ import org.openmrs.api.context.Context;
 import org.openmrs.obs.ComplexData;
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.util.SerializationUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -93,13 +94,16 @@ public class FileServlet extends HttpServlet {
     {
         // Validate the requested file ------------------------------------------------------------
 
-        tempMergedVideoFile = File.createTempFile("downloadVideoFile", ".flv");
-        String requestedFile = tempMergedVideoFile.getCanonicalPath();
 
-        Integer videoObsId = Integer.parseInt(request.getParameter("videoObsId"));
+        Integer videoObsId = Integer.parseInt(request.getParameter("obsId"));
         Obs complexObs = Context.getObsService().getComplexObs(videoObsId, OpenmrsConstants.RAW_VIEW);
         ComplexData complexData = complexObs.getComplexData();
         byte[] videoObjectData = ((byte[]) complexData.getData());
+
+        String fileExt = complexData.getTitle();
+        tempMergedVideoFile = createFile(fileExt);
+        String requestedFile = tempMergedVideoFile.getCanonicalPath();
+
         FileUtils.writeByteArrayToFile(new File(requestedFile), videoObjectData);
 
         // Check if file is actually supplied to the request URL.
@@ -347,6 +351,12 @@ public class FileServlet extends HttpServlet {
             close(input);
             tempMergedVideoFile.delete();
         }
+    }
+
+    public File createFile(String fileTitle) throws IllegalStateException, IOException {
+        File tmpFile = new File(System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") +
+                fileTitle);
+        return tmpFile;
     }
 
     // Helpers (can be refactored to public utility class) ----------------------------------------

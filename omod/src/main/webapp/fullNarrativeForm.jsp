@@ -99,13 +99,13 @@
                 <video id="example_video_1" class="video-js vjs-default-skin" controls preload="none" width="640" height="264"
                        poster="http://video-js.zencoder.com/oceans-clip.png"
                        data-setup="{}">
-                    <source src="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" type='video/flv' />
+                    <source src="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${videoObsId}"/>" type='video/flv' />
                     <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
                 </video>
 
 
                 <br/>
-                <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/fileDownloadServlet?videoObsId=<c:out value="${videoObsId}"/>" >
+                <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${videoObsId}"/>" >
                 Download Video</a>
 
                 <%--<a target="_blank" href="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?feedbackScreenshotId=<c:out value="${feedback.encounterId}"/>" >--%>
@@ -116,12 +116,13 @@
 
 
         <tr>
-            <th width="400">Attachements</th>
+            <th width="400">Attachments</th>
             <td>
-                <%--<a href="javascript:fdbkPhotoPopUp()" >--%>
-                    <%--<img src="<openmrs:contextPath/>/moduleServlet/feedback/fileDownloadServlet?encounterId=<c:out value="${feedback.encounterId}"/>" height="100" width="100">--%>
-                    <%--</img>--%>
-                </a>
+                <c:forEach items="${uploadedFilesMap}" var="entry">
+                    <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${entry.key}"/>" >
+                    Download ${entry.value}</a>
+                    <br/>
+                </c:forEach>
             </td>
         </tr>
 
