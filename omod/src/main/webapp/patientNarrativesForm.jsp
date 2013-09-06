@@ -8,10 +8,8 @@
 <openmrs:htmlInclude file="/dwr/util.js" />
 <openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
 
-<openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
-
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/css/styles.css"/>
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload-ui.css" />
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/style.css" />
 
 <script type="text/javascript">
     var RecaptchaOptions = {
