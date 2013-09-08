@@ -58,6 +58,15 @@
 </script>
 
 
+<style>
+    #uploadStatus{
+        display: none;
+        font-weight: bold;
+        color:#000099;
+    }
+</style>
+
+
 <div id="main-wrap">
 
     <div id="sidebar">
@@ -94,13 +103,15 @@
 
                 <br/><br/>
 
+                <button id="clear-record" disabled>Clear</button>
                 <button id="start-record">Start Recording</button>
-                <button id="stop-record">Stop</button>
-                <button id="upload-record">Upload</button>
+                <button id="stop-record" disabled>Stop</button>
+                <button id="upload-record" disabled>Upload</button>
 
                 <br/><br/>
                 <div style="display: none;" id="result"></div>
                 <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% Completed</progress>
+                <div id="uploadStatus"> Video uploaded successfully!</div>
 
             </center>
         </div>

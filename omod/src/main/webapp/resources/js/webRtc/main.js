@@ -22,28 +22,41 @@
     recorder.onVideoReady(function(blob) {
         attachLink(blob, "video");
         videoBlob = blob;
-        localStorage.setItem('videoFile', videoBlob);
-//        upload(blob);
     });
 
     recorder.onAudioReady(function(blob) {
         attachLink(blob, "audio");
         audioBlob = blob;
-        localStorage.setItem('audioFile', audioBlob);
-//        upload(blob);
     });
 
     document.getElementById("start-record").addEventListener("click", function() {
+        $j('#start-record').attr('disabled','disabled');
+        $j('#stop-record').removeAttr('disabled');
         progressBar.value = 0;
         recorder.start();
     });
 
     document.getElementById("stop-record").addEventListener("click", function() {
+        $j('#stop-record').attr('disabled','disabled');
+        $j('#upload-record').removeAttr('disabled');
+        $j('#clear-record').removeAttr('disabled');
         recorder.stop();
     });
 
     document.getElementById("upload-record").addEventListener("click", function() {
+        $j('#upload-record').attr('disabled','disabled');
+        $j('#clear-record').attr('disabled','disabled');
+        $j('#start-record').removeAttr('disabled');
         sendAudioVideoBlobs();
+    });
+
+
+    document.getElementById("clear-record").addEventListener("click", function() {
+        videoBlob = null;
+        audioBlob = null;
+        $j('#upload-record').attr('disabled','disabled');
+        $j('#clear-record').attr('disabled','disabled');
+        $j('#start-record').removeAttr('disabled');
     });
 
     function attachLink(blob, str) {
@@ -62,6 +75,7 @@
 
     var result = document.getElementById('result');
     var progressBar = document.getElementById('videoUploadProgressBar');
+    var uploadStatus = document.getElementById('uploadStatus');
 
     function sendAudioVideoBlobs(){
 
@@ -87,6 +101,11 @@
                 progressBar.value = (e.loaded / e.total) * 100;
                 progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
             }
+
+            if(progressBar.value == 100){
+                $j('#uploadStatus').fadeIn(800).delay(2000).fadeOut(800)
+                progressBar.value = 0;
+            }
         };
 
         oReq.send(recordForm);
@@ -94,3 +113,4 @@
     }
 
 })();
+
