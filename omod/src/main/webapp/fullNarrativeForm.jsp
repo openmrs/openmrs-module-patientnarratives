@@ -285,7 +285,7 @@
 </div>
 
 
-<b class="boxHeader"><spring:message code="feedback.manage.form.comments"/></b>
+<b class="boxHeader">Comments..</b>
 <div class="box" >
     <%--<table id="table3">--%>
     <%--<tr>--%>
