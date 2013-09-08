@@ -48,7 +48,7 @@ public class XFormEntryPortletController extends PortletController{
         model.put("formName", ((FormService) Context.getService(FormService.class)).getForm(formId).getName());
         model.put("entityFormDefDownloadUrlSuffix", "moduleServlet/xforms/xformDownload?target=xformentry&contentType=xml&");
         model.put("formDataUploadUrlSuffix", "module/xforms/xformDataUpload.form");
-        model.put("afterSubmitUrlSuffix", "module/patientnarratives/patientNarrativesForm.form?");
+//        model.put("afterSubmitUrlSuffix", "module/patientnarratives/patientNarrativesForm.form?");
         model.put("afterCancelUrlSuffix", "module/patientnarratives/patientNarrativesForm.form?");
 
         model.put(XformConstants.FORM_DESIGNER_KEY_DATE_SUBMIT_FORMAT, Context.getAdministrationService().getGlobalProperty(XformConstants.GLOBAL_PROP_KEY_DATE_SUBMIT_FORMAT, XformConstants.DEFAULT_DATE_SUBMIT_FORMAT));

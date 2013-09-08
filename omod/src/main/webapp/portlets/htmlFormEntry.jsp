@@ -343,9 +343,6 @@
 
 	function doSubmitHtmlForm() {
 
-
-        console.log("************asdsad");
-
 		// first call any beforeSubmit functions that may have been defined by the form
 		var state_beforeSubmit=true;
 		if (beforeSubmit.length > 0){
@@ -363,8 +360,24 @@
 
 		// only do the submit if all the beforeSubmit functions returned "true"
 		if (state_beforeSubmit){
-			var form = document.getElementById('htmlform');
-			form.submit();			
+
+            var urlProcess = "<openmrs:contextPath/>/module/patientnarratives/htmlFormProcess.form"; // the script where you handle the form input.
+
+            $j.ajax({
+                type: "POST",
+                url: urlProcess,
+                data: $j("#htmlform").serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    console.log("************Form Submitted!*********");
+//                    alert(data); // show response from the php script.
+                }
+            });
+
+            return false; // avoid to execute the actual submit of the form.
+
+//			var form = document.getElementById('htmlform');
+//			form.submit();
 		}
 		tryingToSubmit = false;
 	}
@@ -460,7 +473,7 @@
 </c:if>
 
 <c:if test="${model.command.context.mode != 'VIEW'}">
-	<form id="htmlform" method="post" action="<openmrs:contextPath/>/module/patientnarratives/htmlFormProcess.form"  onSubmit="submitHtmlForm(); return false;">
+	<form id="htmlform" >
 		<input type="hidden" name="personId" value="${ model.command.patient.personId }"/>
 		<input type="hidden" name="htmlFormId" value="${ model.command.htmlFormId }"/>
 		<input type="hidden" name="formModifiedTimestamp" value="${ model.command.formModifiedTimestamp }"/>
