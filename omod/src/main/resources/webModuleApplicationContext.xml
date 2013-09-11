@@ -38,9 +38,8 @@
 
                 <prop key="/module/patientnarratives/moduleSettings.form">moduleSettings</prop>
                 <prop key="**/xFormEntry.portlet">xFormEntry</prop>
-
-
                 <prop key="**/htmlFormEntry.portlet">htmlFormEntry</prop>
+                <prop key="**/uploadsPopup.portlet">uploadsPopup</prop>
             </props>
         </property>
     </bean>
@@ -50,6 +49,9 @@
     </bean>
 
     <bean id="htmlFormEntry" class="org.openmrs.module.patientnarratives.web.controller.HtmlFormEntryPortletController">
+    </bean>
+
+    <bean id="uploadsPopup" class="org.openmrs.module.patientnarratives.web.controller.UploadsPopupPortletController">
     </bean>
 
     <bean id="patientNarrativesForm" class="org.openmrs.module.patientnarratives.web.controller.PatientNarrativesFormController">

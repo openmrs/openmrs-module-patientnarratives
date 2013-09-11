@@ -8,6 +8,7 @@
 <openmrs:htmlInclude file="/dwr/util.js" />
 <openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
 
+<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/popup.js"/>
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/css/styles.css"/>
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload-ui.css" />
 
@@ -33,6 +34,10 @@
     $j(document).ready(function(){
 
         logging: true;
+
+        $j("#nextUploads").click(function() {
+            popUpUploadsWindow();
+        });
 
         $j("#submitMainForm").click(function() {
             var recordForm = new FormData();
@@ -171,6 +176,7 @@
             <br> <br>
 
             <input id="submitMainForm" type="button" value="Submit" disabled />
+            <input id="nextUploads" type="button" value="Next" />
 
         </div>
     </div>
