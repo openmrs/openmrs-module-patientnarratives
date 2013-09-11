@@ -31,27 +31,13 @@
     }
 
     $j(document).ready(function(){
-
         logging: true;
 
-        $j("#submitMainForm").click(function() {
-            var recordForm = new FormData();
-
-            recordForm.append("video", localStorage.getItem('videoFile'));
-            recordForm.append("audio", localStorage.getItem('audioFile'));
-
-//        data.append("video", videoBlob, (new Date()).getTime() + ".webm");
-//        data.append("audio", audioBlob, (new Date()).getTime() + ".wav");
-
-            var oReq = new XMLHttpRequest();
-
-            formSubmitURL = "<openmrs:contextPath/>/openmrs/module/patientnarratives/webRtcMedia.form";
-            console.log(formSubmitURL);
-
-            oReq.open("POST", formSubmitURL);
-            oReq.send(recordForm);
-
-
+        $j("#nextUploads").click(function() {
+                $j('#dialogUploads').dialog({
+                    autoOpen: true,
+                    width: '50%'
+                });
         });
     });
 
@@ -171,9 +157,15 @@
             <br> <br>
 
             <input id="submitMainForm" type="button" value="Submit" disabled />
-
+            <input id="nextUploads" type="button" value="Next" />
         </div>
     </div>
+</div>
+
+<div id="dialogUploads" style="display: none">
+
+    asdasdasd
+
 </div>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
