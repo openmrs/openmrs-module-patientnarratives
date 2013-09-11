@@ -39,25 +39,25 @@
             popUpUploadsWindow();
         });
 
-        $j("#submitMainForm").click(function() {
-            var recordForm = new FormData();
-
-            recordForm.append("video", localStorage.getItem('videoFile'));
-            recordForm.append("audio", localStorage.getItem('audioFile'));
-
-//        data.append("video", videoBlob, (new Date()).getTime() + ".webm");
-//        data.append("audio", audioBlob, (new Date()).getTime() + ".wav");
-
-            var oReq = new XMLHttpRequest();
-
-            formSubmitURL = "<openmrs:contextPath/>/openmrs/module/patientnarratives/webRtcMedia.form";
-            console.log(formSubmitURL);
-
-            oReq.open("POST", formSubmitURL);
-            oReq.send(recordForm);
-
-
-        });
+//        $j("#submitMainForm").click(function() {
+//            var recordForm = new FormData();
+//
+//            recordForm.append("video", localStorage.getItem('videoFile'));
+//            recordForm.append("audio", localStorage.getItem('audioFile'));
+//
+////        data.append("video", videoBlob, (new Date()).getTime() + ".webm");
+////        data.append("audio", audioBlob, (new Date()).getTime() + ".wav");
+//
+//            var oReq = new XMLHttpRequest();
+//
+//            formSubmitURL = "<openmrs:contextPath/>/openmrs/module/patientnarratives/webRtcMedia.form";
+//            console.log(formSubmitURL);
+//
+//            oReq.open("POST", formSubmitURL);
+//            oReq.send(recordForm);
+//
+//
+//        });
     });
 
 </script>
@@ -181,6 +181,12 @@
         </div>
     </div>
 </div>
+
+<div id="dialog123" style="display: none"  title="sdsd">
+
+    asddddddddddddddddddddddddddddddddddddddddd
+</div>
+
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
 
