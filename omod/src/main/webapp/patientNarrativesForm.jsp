@@ -38,6 +38,11 @@
     $j(document).ready(function(){
         logging: true;
 
+        $j('#dialogUploads').dialog({
+            autoOpen: false,
+            modal: true
+        });
+
         $j("#nextUploads").click(function() {
                 $j('#dialogUploads').dialog({
                     autoOpen: true,
