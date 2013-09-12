@@ -20,7 +20,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.patientnarratives.NarrativeComments;
-import org.openmrs.module.patientnarratives.NarrativeStatus;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 
 import java.util.List;
@@ -60,14 +59,6 @@ public class HibernatePatientNarrativesDAO implements PatientNarrativesDAO {
         criteria.add(Restrictions.eq("encounterId", encounterId));
 
         return criteria.list();
-    }
-
-    public void saveNarrativeStatus(NarrativeStatus narrativeStatus) throws DAOException {
-        sessionFactory.getCurrentSession().saveOrUpdate(narrativeStatus);
-    }
-
-    public NarrativeStatus getNarrativeStatus(Integer encounterId) {
-        return (NarrativeStatus) sessionFactory.getCurrentSession().get(NarrativeStatus.class, encounterId);
     }
 
 }

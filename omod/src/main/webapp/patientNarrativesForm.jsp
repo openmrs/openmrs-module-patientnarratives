@@ -11,6 +11,8 @@
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/css/styles.css"/>
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload-ui.css" />
 
+<openmrs:hasPrivilege privilege="Add Patient Narratives">
+
 <script type="text/javascript">
     var RecaptchaOptions = {
         theme : 'clean'
@@ -186,6 +188,8 @@
         </div>
     </div>
 </div>
+
+</openmrs:hasPrivilege>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
 

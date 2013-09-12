@@ -15,7 +15,6 @@ package org.openmrs.module.patientnarratives.api.db;
 
 import org.openmrs.api.db.DAOException;
 import org.openmrs.module.patientnarratives.NarrativeComments;
-import org.openmrs.module.patientnarratives.NarrativeStatus;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 
 import java.util.List;
@@ -28,9 +27,5 @@ public interface PatientNarrativesDAO {
     public void saveNarrativeComments(NarrativeComments narrativeComments) throws DAOException;
 
     public List<NarrativeComments> getNarrativeComments(Integer encounterId) throws DAOException;
-
-    public void saveNarrativeStatus(NarrativeStatus narrativeStatus) throws DAOException;
-
-    public NarrativeStatus getNarrativeStatus(Integer encounterId) throws DAOException;
 
 }

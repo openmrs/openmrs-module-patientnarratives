@@ -1,12 +1,16 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
-<%@ include file="template/localHeader.jsp"%>
 
+<openmrs:hasPrivilege privilege="Manage Patient Narratives">
+
+<%@ include file="template/localHeader.jsp"%>
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/patientnarratives/"%>
 
 <openmrs:htmlInclude file="${pageContext.request.contextPath}/moduleResources/patientnarratives/css/styles.css"/>
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/css/demo_table_jui.css" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/jquery.dataTables.min.js" />
+
+
 
 <script type="text/javascript">
     $j(document).ready(function() {
@@ -138,6 +142,8 @@
         </tbody>
     </table>
 </div>
+
+</openmrs:hasPrivilege>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
 

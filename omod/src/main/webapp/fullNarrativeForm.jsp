@@ -1,5 +1,8 @@
 <%@ include file="/WEB-INF/template/include.jsp"%>
 <%@ include file="/WEB-INF/template/header.jsp"%>
+
+<openmrs:hasPrivilege privilege="Manage Patient Narratives">
+
 <%@ include file="template/localHeader.jsp"%>
 
 <%@ taglib prefix="kc" tagdir="/WEB-INF/tags/module/patientnarratives/"%>
@@ -308,6 +311,8 @@
     <%--</tr>--%>
     <%--</table>--%>
 </div>
+
+</openmrs:hasPrivilege>
 
 <%@ include file="/WEB-INF/template/footer.jsp" %>
 

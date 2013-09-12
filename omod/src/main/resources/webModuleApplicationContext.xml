@@ -20,14 +20,6 @@
   		    http://www.springframework.org/schema/util
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-
-    <!--<bean id="authorizationInterceptor" class="org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor>-->
-
-    <!--<util:list id="serviceInterceptors">-->
-        <!--<ref local="authorizationInterceptor"/>-->
-    <!--</util:list>-->
-
-
     <bean id="patientNarrativeUrlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="order"><value>1</value></property>
         <property name="mappings">
@@ -35,16 +27,18 @@
                 <prop key="/module/patientnarratives/patientNarrativesForm.form">patientNarrativesForm</prop>
                 <prop key="/module/patientnarratives/careProviderConsole.form">careProviderConsole</prop>
                 <prop key="/module/patientnarratives/fullNarrativeForm.form">fullNarrativeForm</prop>
-
                 <prop key="/module/patientnarratives/moduleSettings.form">moduleSettings</prop>
                 <prop key="**/xFormEntry.portlet">xFormEntry</prop>
-
-
                 <prop key="**/htmlFormEntry.portlet">htmlFormEntry</prop>
             </props>
         </property>
     </bean>
 
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="10485760"/>  <!--10 MB-->
+    </bean>
 
     <bean id="xFormEntry" class="org.openmrs.module.patientnarratives.web.controller.XFormEntryPortletController">
     </bean>
@@ -83,8 +77,5 @@
 	<context:component-scan base-package="org.openmrs.module.patientnarratives.web.controller" />
 
     <!-- Add here beans related to the web context -->
-
-
-
 
 </beans>

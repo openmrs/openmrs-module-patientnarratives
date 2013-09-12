@@ -17,7 +17,6 @@ import org.openmrs.api.APIException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.patientnarratives.NarrativeComments;
-import org.openmrs.module.patientnarratives.NarrativeStatus;
 import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
 import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 
@@ -48,14 +47,6 @@ public class PatientNarrativesServiceImpl implements PatientNarrativesService {
 
     public List<NarrativeComments> getNarrativeComments(Integer encounterId) throws APIException {
         return getPatientNarrativesDAO().getNarrativeComments(encounterId);
-    }
-
-    public void saveNarrativeStatus(NarrativeStatus narrativeStatus) throws APIException {
-        getPatientNarrativesDAO().saveNarrativeStatus(narrativeStatus);
-    }
-
-    public NarrativeStatus getNarrativeStatus(Integer encounterId) throws APIException {
-        return getPatientNarrativesDAO().getNarrativeStatus(encounterId);
     }
 
 }

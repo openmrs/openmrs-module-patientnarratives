@@ -41,33 +41,4 @@
 
     </changeSet>
 
-    <changeSet id="patientnarratives-2013-08-29-11:26" author="harshadura">
-        <preConditions onFail="MARK_RAN">
-            <not><tableExists tableName="patientnarratives_status"/></not>
-        </preConditions>
-
-        <comment>
-            Creating the patient narratives comments tables
-        </comment>
-
-        <createTable tableName="patientnarratives_status">
-            <column name="encounterId" type="int">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="creator" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="changed_by" type="int">
-                <constraints nullable="true"/>
-            </column>
-            <column name="status" type="varchar(100)"/>
-            <column name="date_created" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
-            <column name="date_changed" type="timestamp" />
-            <column name="uuid" type="varchar(38)"/>
-        </createTable>
-
-    </changeSet>
-
 </databaseChangeLog>

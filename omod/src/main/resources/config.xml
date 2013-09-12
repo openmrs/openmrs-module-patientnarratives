@@ -22,12 +22,10 @@
         <require_module version="4.2.1.0">org.openmrs.module.xforms</require_module>
 
     </require_modules>
-
     <!-- / Required Modules -->
 
 	<!-- Module Activator -->
 	<activator>${project.parent.groupId}.${project.parent.artifactId}.PatientNarrativesActivator</activator>
-	
 	
 	<!-- Adds link to admin page -->
 	<extension>
@@ -48,22 +46,12 @@
                 <param name="class" value="org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService"/>
                 <include method="validateCaptcha"/>
             </create>
-
-            <create creator="new" javascript="DWRmediaStreamService">
-                <param name="class" value="org.openmrs.module.patientnarratives.dwr.DWRmediaStreamService"/>
-                <include method="validateCaptcha"/>
-            </create>
         </allow>
 
         <signatures>
             <![CDATA[
 				import org.openmrs.module.patientnarratives.dwr.DWRreCaptchaService;
 				DWRreCaptchaService.validateCaptcha(String challenge, String uresponse, String remoteip);
-			]]>
-
-            <![CDATA[
-				import org.openmrs.module.patientnarratives.dwr.DWRmediaStreamService;
-				DWRmediaStreamService.uploadVideo(MultipartFile videofile, MultipartFile audiofile);
 			]]>
         </signatures>
     </dwr>
@@ -74,16 +62,6 @@
         <servlet-class>org.openmrs.module.patientnarratives.web.servlet.FileServlet</servlet-class>
     </servlet>
 
-    <!--<advice>-->
-        <!--<point>org.openmrs.api.EncounterService</point>-->
-        <!--<class>org.openmrs.module.patientnarratives.api.advice.EncounterServiceAroundAdvisor</class>-->
-    <!--</advice>-->
-
-    <!--<advice>-->
-        <!--<point>org.openmrs.api.OpenmrsService</point>-->
-        <!--<class>org.openmrs.module.patientnarratives.api.advice.ObsServiceAroundAdvisor</class>-->
-    <!--</advice>-->
-
     <!-- Required Privileges -->
     <privilege>
         <name>Add Patient Narratives</name>
@@ -93,6 +71,11 @@
     <privilege>
         <name>Manage Patient Narratives</name>
         <description>Able to manage the Patient Narratives</description>
+    </privilege>
+
+    <privilege>
+        <name>Configure Patient Narratives</name>
+        <description>Able to admin the Patient Narratives Module</description>
     </privilege>
     <!-- /Required Privileges -->
 

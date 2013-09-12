@@ -10,7 +10,6 @@
 <openmrs:htmlInclude file="/scripts/timepicker/timepicker.js" />
 
 <openmrs:htmlInclude file="/dwr/interface/DWRreCaptchaService.js" />
-<%--<openmrs:htmlInclude file="/dwr/interface/DWRmediaStreamService.js" />--%>
 
 <c:if test="${usingJQuery}">
     <openmrs:htmlInclude file="/dwr/interface/DWRConceptService.js" />

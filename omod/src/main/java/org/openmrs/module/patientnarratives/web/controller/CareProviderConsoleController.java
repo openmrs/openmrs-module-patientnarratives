@@ -13,22 +13,14 @@
  */
 package org.openmrs.module.patientnarratives.web.controller;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.*;
-import org.openmrs.api.EncounterService;
-import org.openmrs.api.PatientService;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.patientnarratives.NarrativeStatus;
-import org.openmrs.module.patientnarratives.api.PatientNarrativesService;
-import org.openmrs.web.WebConstants;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
