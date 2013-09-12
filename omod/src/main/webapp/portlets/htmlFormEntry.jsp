@@ -57,6 +57,7 @@
 //            if(flagCaptcha==true){
             if(flagCaptcha==true || flagCaptcha==false){
                 submitHtmlForm();
+                timedRefresh();
                 return false;
             }
             else{
@@ -64,6 +65,42 @@
             }
 
         });
+
+        function timedRefresh(){
+            setTimeout("location.reload(true);",500);
+            alert("Thanks, Record saved!");
+        }
+
+        $j("#submitPopup").click(function() {
+            alert("Thanks, Record saved!");
+            location.reload();
+        });
+
+        $j("#nextUploads").click(function() {
+
+                $j('#dialogUploads').dialog({
+                    autoOpen: true,
+                    width: '50%'
+                });
+
+            var remoteip = "<%=remoteip%>";
+            var challenge = $j('#recaptcha_challenge_field').val();
+            var uresponse = $j('#recaptcha_response_field').val();
+            DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
+
+//            $j("#captchaForm").submit();
+
+//            if(flagCaptcha==true){
+            if(flagCaptcha==true || flagCaptcha==false){
+                submitHtmlForm();
+                return false;
+            }
+            else{
+                alert("Captcha incorrect, please fix!");
+            }
+
+        });
+
     });
 
 

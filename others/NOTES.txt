@@ -13,5 +13,6 @@ TRUNCATE  concept_proposal;
 TRUNCATE  encounter_provider;
 TRUNCATE  obs;
 TRUNCATE  encounter;
+TRUNCATE  patientnarratives_comments;
 SET FOREIGN_KEY_CHECKS=1;
 ----------------------

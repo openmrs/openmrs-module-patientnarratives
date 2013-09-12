@@ -55,7 +55,33 @@
             var uresponse = $j('#recaptcha_response_field').val();
 
             DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
-//            DWRmediaStreamService.uploadVideo(videoBlob, audioBlob, doneUpload);
+
+            if(flagCaptcha==true || flagCaptcha==false){
+                submitForm();
+                timedRefresh();
+//                alert("Thanks, Record saved!");
+//                location.reload();
+                return false;
+            }
+            else{
+                alert("Captcha incorrect, please fix!");
+            }
+
+        });
+
+
+        function timedRefresh(){
+            setTimeout("location.reload(true);",500);
+            alert("Thanks, Record saved!");
+        }
+
+        $j("#nextUploads").click(function() {
+
+            var remoteip = "<%=remoteip%>";
+            var challenge = $j('#recaptcha_challenge_field').val();
+            var uresponse = $j('#recaptcha_response_field').val();
+
+            DWRreCaptchaService.validateCaptcha(challenge, uresponse, remoteip, captchaValidate);
 
             if(flagCaptcha==true || flagCaptcha==false){
                 submitForm();

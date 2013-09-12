@@ -18,15 +18,18 @@
 
     EnableSubmit = function(val)
     {
-        var sbmt = document.getElementById("submitMainForm");
+        var submitMainForm = document.getElementById("submitMainForm");
+        var nextUploads = document.getElementById("nextUploads");
 
         if (val.checked == true)
         {
-            sbmt.disabled = false;
+            submitMainForm.disabled = false;
+            nextUploads.disabled = false;
         }
         else
         {
-            sbmt.disabled = true;
+            submitMainForm.disabled = true;
+            nextUploads.disabled = true;
         }
     }
 
@@ -39,6 +42,12 @@
                     width: '50%'
                 });
         });
+
+        $j("#submitPopup").click(function() {
+            alert("Thanks, Record saved!");
+            location.reload();
+        });
+
     });
 
 </script>
@@ -83,8 +92,16 @@
     </div>
 
     <div id="content-wrap">
+
+    <div id="dialogUploads" style="display: none" title="Upload Files/Record Video">
+
+        <b class="boxHeader">Narrate your sickness here</b>
+        <div class="box" >
+
         <div id="info-wrap">
             <center>
+                </br>
+
                 <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
                 <br/><br/>
@@ -101,12 +118,13 @@
 
             </center>
         </div>
+       </div>
+
+        <b class="boxHeader">Upload files (X-ray, reports, etc)</b>
+        <div class="box" >
 
         <div id="info-wrap">
-
-            </br></br>
-            <span>Upload files (X-ray, reports, etc)</span>
-            </br></br>
+            </br>
 
             <div id="fileupload">
                 <form action="<openmrs:contextPath/>/module/patientnarratives/multiFileUpload.form" method="POST" enctype="multipart/form-data">
@@ -125,7 +143,14 @@
                     <div class="fileupload-progressbar"></div>
                 </div>
             </div>
+        </div>
 
+        </div>
+
+        <br/>
+        <center> <input id="submitPopup" type="submit" value="Submit now!" /> </center>
+        <br/>
+    </div>
             <%--<table border="1">--%>
             <%--<tr>--%>
             <%--<td> <span>Upload files (X-ray, reports, etc)</span> </td>--%>
@@ -135,7 +160,7 @@
             <%--</tr>--%>
             <%--</table>--%>
 
-        </div>
+
         <div id="info-wrap">
             </br></br>
             <form id="captchaForm" method="post">
@@ -156,16 +181,10 @@
             </span>
             <br> <br>
 
-            <input id="submitMainForm" type="button" value="Submit" disabled />
-            <input id="nextUploads" type="button" value="Next" />
+            <input id="submitMainForm" type="button" value="Submit Now" disabled />
+            <input id="nextUploads" type="button" value="Next - Upload Files/Record Video" disabled />
         </div>
     </div>
-</div>
-
-<div id="dialogUploads" style="display: none">
-
-    asdasdasd
-
 </div>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
