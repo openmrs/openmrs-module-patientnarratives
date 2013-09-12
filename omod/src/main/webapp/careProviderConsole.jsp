@@ -10,8 +10,6 @@
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/css/demo_table_jui.css" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/jquery.dataTables.min.js" />
 
-
-
 <script type="text/javascript">
     $j(document).ready(function() {
         $j('#table').dataTable( {
