@@ -198,10 +198,12 @@
 <b class="boxHeader">Comments..</b>
 <div class="box" >
     <c:forEach items="${comments}" var="commentObj" >
-        <c:out value="${commentObj.comment}"/>
-        <div class="description">
-            <c:out value="${commentObj.creator.personName}"/>
-            <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
+        <div class="box" >
+            <c:out value="${commentObj.comment}"/>
+            <div class="description">
+                <c:out value="${commentObj.creator.personName}"/>
+                <kc:prettyTime date="${commentObj.dateCreated}"></kc:prettyTime>
+            </div>
         </div>
     </c:forEach>
 </div>
