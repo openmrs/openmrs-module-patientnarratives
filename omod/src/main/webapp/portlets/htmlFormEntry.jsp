@@ -73,11 +73,11 @@
 
         function timedRefresh(){
             setTimeout("location.reload(true);",500);
-            alert("Thanks, Record saved!");
+            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
         }
 
         $j("#submitPopup").click(function() {
-            alert("Thanks, Record saved!");
+            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
             location.reload();
         });
 
