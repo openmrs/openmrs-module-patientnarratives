@@ -38,10 +38,6 @@
     } );
 </script>
 
-<%--<h2><spring:message code="feedback.submittedFeedback"/></h2>--%>
-
-
-<%--<b class="boxHeader"><spring:message code="feedback.submit"/></b>--%>
 <div class="box" >
 
     <table cellspacing="0" cellpadding="2" id="table" class="display">
@@ -69,7 +65,6 @@
                 <%--<td><a href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=<c:out value="${encountersObj.encounterId}"/>"><c:out value="${encountersObj.encounterId} "/> </td>--%>
 
                 <td><a href="<openmrs:contextPath/>/module/patientnarratives/fullNarrativeForm.form?encounterId=<c:out value="${encountersObj.encounterId}"/>"><c:out value="${encountersObj.encounterId} "/> </td>
-
 
                 <%--<c:forEach items="${encountersObj.encounterProviders}" var="encProvidersObj" varStatus="loopStatus">--%>
                 <%--<td><c:out value="${encProvidersObj.provider} "/> </td>--%>

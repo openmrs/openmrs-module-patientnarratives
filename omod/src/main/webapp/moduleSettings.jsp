@@ -30,38 +30,39 @@
 </style>
 
 <form method="post" >
-    <b class="boxHeader">Module Properties</b>
+    <b class="boxHeader">Module Settings</b>
     <div class="box" >
         <table>
             <tr>
-                <td valign="top">Form Type</td>
+                <td>Form Type</td>
                 <td>
                     <input type="radio" name="formType" value="HTML-Form" <c:if test="${formType == 'HTML-Form'}">checked</c:if>>HTML-Form |
                     <input type="radio" name="formType" value="X-Form" <c:if test="${formType == 'X-Form'}">checked</c:if>>X-Form
                 </td>
             </tr>
             <tr>
-                <td valign="top">Form ID</td>
+                <td>Form Id</td>
                 <td>
                     <input type="text" id="formID" name="formID" value="<openmrs:globalProperty key="patientnarratives.formid"/>">
                     <div id='updated'>^ Please change the FormID now..</div>
                 </td>
             </tr>
             <tr>
-                <td valign="top"><br/></td>
+                <td><br/></td>
                 <td></td>
             </tr>
             <tr>
-                <td valign="top">Patient ID</td>
+                <td>Default Patient Id</td>
                 <td><input type="text" name="patientID" value="<openmrs:globalProperty key="patientnarratives.patientid"/>"></td>
             </tr>
             <tr>
-                <td valign="top">Encounter Type</td>
+                <td>Encounter Type</td>
                 <td><input type="text" name="encType" value="<openmrs:globalProperty key="patientnarratives.enctype"/>"></td>
             </tr>
             <tr>
                 <td> </td>
                 <td>
+                    <br/>
                     <input type="submit" value="Save" />
                 </td>
             </tr>
