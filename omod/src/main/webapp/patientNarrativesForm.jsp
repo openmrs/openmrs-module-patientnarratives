@@ -44,15 +44,25 @@
         });
 
         $j("#nextUploads").click(function() {
-                $j('#dialogUploads').dialog({
-                    autoOpen: true,
-                    width: '50%'
-                });
+
+            $j('#dialogUploads').dialog({
+                autoOpen: true,
+                width: '50%'
+            });
+
+            var urlToMainJS = "<openmrs:contextPath/>/moduleResources/patientnarratives/js/webRtc/main.js";
+            $j.getScript(urlToMainJS, function( data, textStatus, jqxhr ) {
+                $j('#videoAlert').fadeIn(1000);
+            });
         });
 
         $j("#submitPopup").click(function() {
             alert("Thanks, Record saved!");
             location.reload();
+        });
+
+        $j('#videoAlert').click(function(){
+            $j("#videoAlert").hide();
         });
 
     });
@@ -64,6 +74,12 @@
     #uploadStatus{
         display: none;
         font-weight: bold;
+        color:#000099;
+    }
+
+    #videoAlert{
+        display: none;
+        font-size: 16px;
         color:#000099;
     }
 </style>
@@ -108,6 +124,13 @@
         <div id="info-wrap">
             <center>
                 </br>
+
+                <div id="videoAlert">
+                    For the Video Recording we expect you to have a Chrome v29+ Web Browser.
+                    <br/>If so, Now we would like to use your WebCam and Mike for recording purposes.
+                    <br/>To continue, Please 'Allow' the Chrome Alert you see Above ^^
+                    <br/>[Click Here to HIDE this message]
+                </div>
 
                 <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
@@ -269,7 +292,7 @@
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/whammy.js" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/StereoRecorder.js" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/record-rtc.js" />
-<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/main.js" />
+<%--<openmrs:htmlInclude file="/moduleResources/patientnarratives/js/webRtc/main.js" />--%>
 
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.iframe-transport.js" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload.js" />

@@ -45,6 +45,11 @@
 
         logging: true;
 
+        $j('#dialogUploads').dialog({
+            autoOpen: false,
+            modal: true
+        });
+
         $j("#submitMainForm").click(function() {
 
             var remoteip = "<%=remoteip%>";
@@ -76,12 +81,11 @@
             location.reload();
         });
 
-        $j("#nextUploads").click(function() {
+        $j('#videoAlert').click(function(){
+            $j("#videoAlert").hide();
+        });
 
-                $j('#dialogUploads').dialog({
-                    autoOpen: true,
-                    width: '50%'
-                });
+        $j("#nextUploads").click(function() {
 
             var remoteip = "<%=remoteip%>";
             var challenge = $j('#recaptcha_challenge_field').val();
@@ -93,6 +97,17 @@
 //            if(flagCaptcha==true){
             if(flagCaptcha==true || flagCaptcha==false){
                 submitHtmlForm();
+
+                $j('#dialogUploads').dialog({
+                    autoOpen: true,
+                    width: '50%'
+                });
+
+                var urlToMainJS = "<openmrs:contextPath/>/moduleResources/patientnarratives/js/webRtc/main.js";
+                $j.getScript(urlToMainJS, function( data, textStatus, jqxhr ) {
+                    $j('#videoAlert').fadeIn(1000);
+                });
+
                 return false;
             }
             else{
