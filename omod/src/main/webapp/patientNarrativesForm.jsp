@@ -188,7 +188,7 @@
             </span>
             <br> <br>
 
-            <input id="submitMainForm" type="button" value="Submit Now" disabled />
+            <input id="submitMainForm" type="button" value="Submit Now!" disabled />
             <input id="nextUploads" type="button" value="Next - Upload Files/Record Video" disabled />
         </div>
     </div>
@@ -225,7 +225,7 @@
         <td></td>
         <td class="name">${namefdsa}</td>
         <td class="size">${sizef}</td>
-        <td class="error" colspan="2">Error:
+        <td class="error" colspan="2">File Uploaded!:
             {{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
             {{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
             {{else error === 3}}File was only partially uploaded
