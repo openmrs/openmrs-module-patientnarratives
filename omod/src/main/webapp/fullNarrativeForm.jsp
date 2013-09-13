@@ -113,6 +113,7 @@
                             <track kind="captions" src="demo.captions.vtt" srclang="en" label="English"></track><!-- Tracks need an ending tag thanks to IE9 -->
                         </video>
 
+                        <br/>
                         <center>
                         <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${videoObsId}"/>" >
                         Download Video</a>
@@ -185,33 +186,14 @@
 
 <b class="boxHeader">Submit a Comment</b>
 <div class="box" >
-    <table id="table6">
-
-        <form method="post"   enctype="multipart/form-data">
-            <tr>
-                <th width="400">Attachments</th>
-                <td><input type="file" accept="image" name="file" size="40" />
-                    <div class="description">
-                        Attachments
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th valign="top">Comment </th>
-                <td><textarea name="comment" rows="10" cols="120" type="_moz" size="35"></textarea> </td>
-            </tr>
-
-            <td>
-            </td>
-            <td>
-                <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
-                <input type="submit" value="Add Comment" />
-            </td>
-        </form>
-
-    </table>
+    <form method="post"   enctype="multipart/form-data">
+        <textarea name="comment" rows="10" cols="80" type="_moz" size="35"></textarea>
+        <br/>
+        <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
+        <input type="submit" value="Add Comment" />
+        <br/>
+    </form>
 </div>
-
 
 <b class="boxHeader">Comments..</b>
 <div class="box" >
