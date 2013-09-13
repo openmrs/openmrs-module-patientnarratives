@@ -38,48 +38,48 @@
 <div class="box" >
     <table id="table">
         <tr>
-            <th width="100">Encounter Id</th>
+            <th width="200">Encounter Id</th>
             <td>
                 <c:out value="${encounterId} "/> -- <a target="_blank" href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=<c:out value="${encounterId}"/>">[View Encounter]</a>
             </td>
         </tr>
         <tr>
-            <th width="400">Date of Encounter</th>
+            <th width="200">Date of Encounter</th>
             <td><openmrs:formatDate date="${encDate}" type="long" /></td>
         </tr>
         <tr>
-            <th width="300">Patient Name</th>
+            <th width="200">Patient Name</th>
             <td><c:out value="${name} "/> </td>
         </tr>
         <tr>
-            <th width="400">Gender</th>
+            <th width="200">Gender</th>
             <td><c:out value="${sex} "/> </td>
         </tr>
         <tr>
-            <th width="300">Age</th>
+            <th width="200">Age</th>
             <td><c:out value="${age} "/> </td>
         </tr>
         <tr>
-            <th width="400">Hometown</th>
+            <th width="200">Hometown</th>
             <td><c:out value="${city} "/> </td>
         </tr>
         <tr>
-            <th width="400">Email</th>
+            <th width="200">Email</th>
             <td> <c:out value="${email}"/> </td>
         </tr>
 
         <tr>
-            <th width="400">Telephone</th>
+            <th width="200">Telephone</th>
             <td> <c:out value="${tp}"/> </td>
         </tr>
 
         <tr>
-            <th width="400">Subject</th>
+            <th width="200">Subject</th>
             <td> <c:out value="${subject}"/> </td>
         </tr>
 
         <tr>
-            <th width="400">Patient Narrative</th>
+            <th width="200">Patient Narrative</th>
             <td>
                 <a class="toggleAddTag" href="#">Show story</a>
                 <div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">
@@ -96,7 +96,7 @@
 
 
         <tr>
-            <th width="400">Video</th>
+            <th width="200">Video</th>
             <td>
 
                 <c:choose>
@@ -126,7 +126,7 @@
         </tr>
 
         <tr>
-            <th width="400">Attachments</th>
+            <th width="200">Attachments</th>
             <td>
                 <c:if test="${empty uploadedFilesMap}">
                     No attachments.
@@ -146,7 +146,7 @@
 <div class="box" >
     <table id="table9">
         <tr>
-            <th width="400">Status</th>
+            <th width="200">Status</th>
             <td>
                 <c:out value="${status}"/>
                 <form method="post">
@@ -165,7 +165,7 @@
 <div class="box" >
     <table id="table5">
         <tr>
-            <th width="400">(Registered) Patient Id</th>
+            <th width="200">(Registered) Patient Id</th>
             <td>
                 <c:choose>
                     <c:when test="${patientId == defaultPatientId}">
