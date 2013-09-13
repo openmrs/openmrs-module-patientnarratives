@@ -81,7 +81,7 @@
         <tr>
             <th width="200">Patient Narrative</th>
             <td>
-                <a class="toggleAddTag" href="#">Show story</a>
+                <a class="toggleAddTag" href="#">Show Narrative</a>
                 <div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">
                     <c:out value="${story}"/>
                 </div>
