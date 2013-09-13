@@ -276,3 +276,4 @@
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/jquery.fileupload-ui.js" />
 <openmrs:htmlInclude file="/moduleResources/patientnarratives/fileupload/application.js" />
 
+<openmrs:htmlInclude file="/scripts/jquery-ui/css/green/jquery-ui.custom.css" />
