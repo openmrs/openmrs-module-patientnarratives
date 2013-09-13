@@ -60,7 +60,7 @@
     </bean>
 
     <bean id="fullNarrativeForm" class="org.openmrs.module.patientnarratives.web.controller.FullNarrativeFormController">
-        <property name="commandName"><value>fullNarrativeForm</value></property>
+        <property name="commandName"><value>encounterId</value></property>
         <property name="formView"><value>/module/patientnarratives/fullNarrativeForm</value></property>
         <property name="successView"><value>redirect:fullNarrativeForm.form</value></property>
     </bean>

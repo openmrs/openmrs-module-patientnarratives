@@ -50,48 +50,52 @@ public class FullNarrativeFormController extends SimpleFormController {
     protected final Log log = LogFactory.getLog(getClass());
 
     @Override
-    protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
+    protected Map referenceData(HttpServletRequest request)  {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
-        HashMap<Integer,String> uploadedFilesMap = new HashMap<Integer,String>();
+        try{
+            HashMap<Integer,String> uploadedFilesMap = new HashMap<Integer,String>();
 
-        PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
-        map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encounterId"))));
+            PatientNarrativesService patientNarrativesService = Context.getService(PatientNarrativesService.class);
+            map.put("comments", patientNarrativesService.getNarrativeComments(Integer.parseInt(request.getParameter("encounterId"))));
 
-        int encounterId  = Integer.parseInt(request.getParameter("encounterId"));
-        Encounter encounter = Context.getEncounterService().getEncounter(encounterId);
+            int encounterId  = Integer.parseInt(request.getParameter("encounterId"));
+            Encounter encounter = Context.getEncounterService().getEncounter(encounterId);
 
-        map.put("encDate", encounter.getEncounterDatetime());
-        map.put("encounterId", encounterId);
+            map.put("encDate", encounter.getEncounterDatetime());
+            map.put("encounterId", encounterId);
 
-        map.put("patientId", encounter.getPatient().getPatientId());
+            map.put("patientId", encounter.getPatient().getPatientId());
 
-        String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
-        map.put("defaultPatientId", globalPropertyPatientId);
+            String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");
+            map.put("defaultPatientId", globalPropertyPatientId);
 
-        Set<Obs> obs = encounter.getObs();
-        Iterator<Obs> observation = obs.iterator();
+            Set<Obs> obs = encounter.getObs();
+            Iterator<Obs> observation = obs.iterator();
 
-        while(observation.hasNext()) {
-            Obs nowOb = observation.next();
+            while(observation.hasNext()) {
+                Obs nowOb = observation.next();
 
-            switch (nowOb.getConcept().getConceptId() ) {
-                case 9: map.put("story", nowOb.getValueText()); continue;
-                case 11: map.put("tp", nowOb.getValueText()); continue;
-                case 13: map.put("sex", nowOb.getValueText()); continue;
-                case 7: map.put("city", nowOb.getValueText()); continue;
-                case 12: map.put("name", nowOb.getValueText()); continue;
-                case 10: map.put("email", nowOb.getValueText()); continue;
-                case 8: map.put("age", nowOb.getValueText()); continue;
-                case 15: map.put("status", nowOb.getValueText()); continue;
-                case 16: map.put("subject", nowOb.getValueText()); continue;
-                case 14: map.put("videoObsId", nowOb.getObsId()); continue;
-                case 17: uploadedFilesMap.put(nowOb.getObsId(), getFilename(nowOb.getObsId())); continue;
-                default: continue;
+                switch (nowOb.getConcept().getConceptId() ) {
+                    case 9: map.put("story", nowOb.getValueText()); continue;
+                    case 11: map.put("tp", nowOb.getValueText()); continue;
+                    case 13: map.put("sex", nowOb.getValueText()); continue;
+                    case 7: map.put("city", nowOb.getValueText()); continue;
+                    case 12: map.put("name", nowOb.getValueText()); continue;
+                    case 10: map.put("email", nowOb.getValueText()); continue;
+                    case 8: map.put("age", nowOb.getValueText()); continue;
+                    case 15: map.put("status", nowOb.getValueText()); continue;
+                    case 16: map.put("subject", nowOb.getValueText()); continue;
+                    case 14: map.put("videoObsId", nowOb.getObsId()); continue;
+                    case 17: uploadedFilesMap.put(nowOb.getObsId(), getFilename(nowOb.getObsId())); continue;
+                    default: continue;
+                }
             }
-        }
-        map.put("uploadedFilesMap", uploadedFilesMap);
+            map.put("uploadedFilesMap", uploadedFilesMap);
 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return map;
     }
 
@@ -111,8 +115,40 @@ public class FullNarrativeFormController extends SimpleFormController {
         return arr[0];
     }
 
+//    @Override
+//    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
+//
+//        return new ModelAndView(new RedirectView(getSuccessView()));
+//
+//    }
+
+    public String[] parseFullName(String name) {
+        String nameArr[] = new String[3];
+
+        int start = name.indexOf(' ');
+        int end = name.lastIndexOf(' ');
+
+        String firstName = "";
+        String middleName = "";
+        String lastName = "";
+
+        if (start >= 0) {
+            firstName = name.substring(0, start);
+            if (end > start)
+                middleName = name.substring(start + 1, end);
+            lastName = name.substring(end + 1, name.length());
+        }
+
+        nameArr[0] = firstName;
+        nameArr[1] = middleName;
+        nameArr[2] = lastName;
+
+        return nameArr;
+    }
+
+
     @Override
-    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
+    protected Object formBackingObject(HttpServletRequest request) throws Exception {
 
         try{
             if (StringUtils.hasLength(request.getParameter("comment"))) {
@@ -238,41 +274,10 @@ public class FullNarrativeFormController extends SimpleFormController {
 
             }
         }catch (Exception e){
-            e.getMessage();
+            request.getSession().setAttribute(WebConstants.OPENMRS_MSG_ATTR, "Error occurred while Registering the Patient: " + e.getMessage());
+            log.error(e);
         }
 
-        return new ModelAndView(new RedirectView(getSuccessView()));
-
-    }
-
-    public String[] parseFullName(String name) {
-        String nameArr[] = new String[3];
-
-        int start = name.indexOf(' ');
-        int end = name.lastIndexOf(' ');
-
-        String firstName = "";
-        String middleName = "";
-        String lastName = "";
-
-        if (start >= 0) {
-            firstName = name.substring(0, start);
-            if (end > start)
-                middleName = name.substring(start + 1, end);
-            lastName = name.substring(end + 1, name.length());
-        }
-
-        nameArr[0] = firstName;
-        nameArr[1] = middleName;
-        nameArr[2] = lastName;
-
-        return nameArr;
-    }
-
-
-    @Override
-    protected Object formBackingObject(HttpServletRequest request) throws Exception {
-
-        return "Not Yet";
+        return request.getParameter("encounterId");
     }
 }

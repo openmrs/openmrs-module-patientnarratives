@@ -37,13 +37,7 @@ import java.util.*;
 
 public class PatientNarrativesFormController extends SimpleFormController{
 
-    /** Logger for this class and subclasses */
     protected final Log log = LogFactory.getLog(getClass());
-    public final static String FORM_IN_PROGRESS_KEY = "HTML_FORM_IN_PROGRESS_KEY";
-    public final static String FORM_IN_PROGRESS_VALUE = "HTML_FORM_IN_PROGRESS_VALUE";
-    public final static String FORM_PATH = "/module/patientnarratives/htmlFormEntry";
-
-    private String mergedUrl = "/home/harshadura/gsoc2013/TestWebm/";
 
     @Override
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
@@ -59,32 +53,11 @@ public class PatientNarrativesFormController extends SimpleFormController{
         return map;
     }
 
-
-    //Can't see current usage for this.
-    @Override
-    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
-
-        String hello = request.getParameter("ss");
-
-        List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, null, true);
-
-        Encounter lastEncounter = encounters.get(encounters.size()-1);
-        Integer lastEncId = lastEncounter.getId();
-
-        Person patient = lastEncounter.getPatient();
-        ConceptComplex conceptComplex = Context.getConceptService().getConceptComplex(14);
-        Location location = Context.getLocationService().getDefaultLocation();
-        Obs obs = new Obs(patient, conceptComplex, new Date(), location) ;
-
-        InputStream out1 = new FileInputStream(new File(mergedUrl, "mergedFile1.flv"));
-        ComplexData complexData = new ComplexData("mergedFile1.flv", out1);
-        obs.setComplexData(complexData);
-        obs.setEncounter(lastEncounter);
-
-        Context.getObsService().saveObs(obs, null);
-
-        return new ModelAndView(FORM_PATH, "command", null);
-    }
+//    @Override
+//    protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException errors) throws Exception {
+//
+//        return new ModelAndView(FORM_PATH, "command", null);
+//    }
 
     @Override
     protected Object formBackingObject(HttpServletRequest request) throws Exception {
