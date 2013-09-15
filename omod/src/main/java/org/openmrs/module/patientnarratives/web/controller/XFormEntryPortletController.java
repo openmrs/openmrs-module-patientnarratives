@@ -35,6 +35,10 @@ public class XFormEntryPortletController extends PortletController{
         Context.addProxyPrivilege("View Users");
         Context.addProxyPrivilege("View Global Properties");
 
+        Context.addProxyPrivilege("Purge HL7 Inbound Queue");
+
+
+
 //        Context.removeProxyPrivilege("View Users");
 
         String globalPropertyFormId = Context.getAdministrationService().getGlobalProperty("patientnarratives.formid");
