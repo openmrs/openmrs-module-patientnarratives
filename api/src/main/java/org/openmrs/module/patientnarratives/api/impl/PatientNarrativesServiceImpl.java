@@ -26,19 +26,19 @@ import java.util.List;
  * It is a default implementation of {@link PatientNarrativesService}.
  */
 public class PatientNarrativesServiceImpl implements PatientNarrativesService {
-	
-	protected final Log log = LogFactory.getLog(this.getClass());
-	
-	private PatientNarrativesDAO patientNarrativesDAO;
+
+    protected final Log log = LogFactory.getLog(this.getClass());
+
+    private PatientNarrativesDAO patientNarrativesDAO;
 
     public PatientNarrativesServiceImpl() {}
 
     public void setPatientNarrativesDAO(PatientNarrativesDAO patientNarrativesDAO) {
-	    this.patientNarrativesDAO = patientNarrativesDAO;
+        this.patientNarrativesDAO = patientNarrativesDAO;
     }
 
     public PatientNarrativesDAO getPatientNarrativesDAO() {
-	    return patientNarrativesDAO;
+        return patientNarrativesDAO;
     }
 
     public void saveNarrativesComment(NarrativeComments narrativeComments) throws APIException {

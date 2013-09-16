@@ -28,24 +28,24 @@ import java.util.List;
  * It is a default implementation of  {@link PatientNarrativesDAO}.
  */
 public class HibernatePatientNarrativesDAO implements PatientNarrativesDAO {
-	protected final Log log = LogFactory.getLog(this.getClass());
+    protected final Log log = LogFactory.getLog(this.getClass());
 
     public HibernatePatientNarrativesDAO() {}
 
     private SessionFactory sessionFactory;
-	
-	/**
+
+    /**
      * @param sessionFactory the sessionFactory to set
      */
     public void setSessionFactory(SessionFactory sessionFactory) {
-	    this.sessionFactory = sessionFactory;
+        this.sessionFactory = sessionFactory;
     }
-    
-	/**
+
+    /**
      * @return the sessionFactory
      */
     public SessionFactory getSessionFactory() {
-	    return sessionFactory;
+        return sessionFactory;
     }
 
     public void saveNarrativeComments(NarrativeComments narrativeComments) throws DAOException {

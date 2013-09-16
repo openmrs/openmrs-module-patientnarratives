@@ -27,37 +27,37 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 import org.springframework.web.servlet.view.RedirectView;
 
+/**
+ *  @CareProviderConsoleController
+ */
 public class CareProviderConsoleController extends SimpleFormController {
 
     protected final Log log = LogFactory.getLog(getClass());
 
     @Override
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
+
         HashMap<String,Object> map = new HashMap<String,Object>();
-
-
         Context.addProxyPrivilege("View Encounters");
-//        Patient defaultNarrativePatient = Context.getPatientService().getPatient(2);
 
+        /*
+         * Retrieving encounters filtered by "patientnarratives.enctype" global property
+         * where the system lets the user to enter at Patient Narratives - Module settings
+         */
         String globalPropertyEnctype = Context.getAdministrationService().getGlobalProperty("patientnarratives.enctype");
-//        String encounterType = "patient_narratives";
-
         List<EncounterType> var = new ArrayList<EncounterType>();
         var.add(Context.getEncounterService().getEncounterType(globalPropertyEnctype));
-
         List<Encounter> encounters = Context.getEncounterService().getEncounters(null, null, null, null, null, var, true);
+
         Context.removeProxyPrivilege("View Encounters");
 
         map.put("encounters", encounters);
 
-//        Encounter enc = new Encounter();
-//        enc.
         return map;
     }
 
     @Override
     protected ModelAndView onSubmit(HttpServletRequest request, HttpServletResponse response, Object object, BindException exceptions) throws Exception {
-
 
         return new ModelAndView(new RedirectView(getSuccessView()));
 

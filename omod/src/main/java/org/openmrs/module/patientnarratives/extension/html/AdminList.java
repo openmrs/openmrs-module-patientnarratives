@@ -24,33 +24,33 @@ import org.openmrs.module.web.extension.AdministrationSectionExt;
  * "patientnarratives.title" heading. 
  */
 public class AdminList extends AdministrationSectionExt {
-	
-	/**
-	 * @see AdministrationSectionExt#getMediaType()
-	 */
-	public Extension.MEDIA_TYPE getMediaType() {
-		return Extension.MEDIA_TYPE.html;
-	}
-	
-	/**
-	 * @see AdministrationSectionExt#getTitle()
-	 */
-	public String getTitle() {
-		return "patientnarratives.title";
-	}
-	
-	/**
-	 * @see AdministrationSectionExt#getLinks()
-	 */
-	public Map<String, String> getLinks() {
 
-		LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
+    /**
+     * @see AdministrationSectionExt#getMediaType()
+     */
+    public Extension.MEDIA_TYPE getMediaType() {
+        return Extension.MEDIA_TYPE.html;
+    }
+
+    /**
+     * @see AdministrationSectionExt#getTitle()
+     */
+    public String getTitle() {
+        return "patientnarratives.title";
+    }
+
+    /**
+     * @see AdministrationSectionExt#getLinks()
+     */
+    public Map<String, String> getLinks() {
+
+        LinkedHashMap<String, String> map = new LinkedHashMap<String, String>();
 
         map.put("/module/patientnarratives/patientNarrativesForm.form", "patientnarratives.careseeker.form");
         map.put("/module/patientnarratives/careProviderConsole.form", "patientnarratives.careprovider.console");
         map.put("/module/patientnarratives/moduleSettings.form", "patientnarratives.module.settings");
 
         return map;
-	}
-	
+    }
+
 }

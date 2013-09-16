@@ -27,7 +27,7 @@ import java.util.List;
  * <code>
  * Context.getService(PatientNarrativesService.class).someMethod();
  * </code>
- * 
+ *
  * @see org.openmrs.api.context.Context
  */
 @Transactional

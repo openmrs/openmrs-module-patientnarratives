@@ -14,7 +14,7 @@
 package org.openmrs.module.patientnarratives;
 
 
-import org.apache.commons.logging.Log; 
+import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.ModuleActivator;
 
@@ -22,49 +22,49 @@ import org.openmrs.module.ModuleActivator;
  * This class contains the logic that is run every time this module is either started or stopped.
  */
 public class PatientNarrativesActivator implements ModuleActivator {
-	
-	protected Log log = LogFactory.getLog(getClass());
-		
-	/**
-	 * @see ModuleActivator#willRefreshContext()
-	 */
-	public void willRefreshContext() {
-		log.info("Refreshing Patient Narratives Module");
-	}
-	
-	/**
-	 * @see ModuleActivator#contextRefreshed()
-	 */
-	public void contextRefreshed() {
-		log.info("Patient Narratives Module refreshed");
-	}
-	
-	/**
-	 * @see ModuleActivator#willStart()
-	 */
-	public void willStart() {
-		log.info("Starting Patient Narratives Module");
-	}
-	
-	/**
-	 * @see ModuleActivator#started()
-	 */
-	public void started() {
-		log.info("Patient Narratives Module started");
-	}
-	
-	/**
-	 * @see ModuleActivator#willStop()
-	 */
-	public void willStop() {
-		log.info("Stopping Patient Narratives Module");
-	}
-	
-	/**
-	 * @see ModuleActivator#stopped()
-	 */
-	public void stopped() {
-		log.info("Patient Narratives Module stopped");
-	}
-		
+
+    protected Log log = LogFactory.getLog(getClass());
+
+    /**
+     * @see ModuleActivator#willRefreshContext()
+     */
+    public void willRefreshContext() {
+        log.info("Refreshing Patient Narratives Module");
+    }
+
+    /**
+     * @see ModuleActivator#contextRefreshed()
+     */
+    public void contextRefreshed() {
+        log.info("Patient Narratives Module refreshed");
+    }
+
+    /**
+     * @see ModuleActivator#willStart()
+     */
+    public void willStart() {
+        log.info("Starting Patient Narratives Module");
+    }
+
+    /**
+     * @see ModuleActivator#started()
+     */
+    public void started() {
+        log.info("Patient Narratives Module started");
+    }
+
+    /**
+     * @see ModuleActivator#willStop()
+     */
+    public void willStop() {
+        log.info("Stopping Patient Narratives Module");
+    }
+
+    /**
+     * @see ModuleActivator#stopped()
+     */
+    public void stopped() {
+        log.info("Patient Narratives Module stopped");
+    }
+
 }

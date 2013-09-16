@@ -24,6 +24,7 @@ public class HeaderInclude extends HeaderIncludeExt {
     public List<String> getHeaderFiles() {
         List<String> myHeaderFiles = new ArrayList<String>();
 
+        myHeaderFiles.add("/moduleResources/patientnarratives/js/google_analytics.js");
 
         return myHeaderFiles;
     }
