@@ -15,39 +15,25 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.*;
-import org.openmrs.api.EncounterService;
-import org.openmrs.api.context.Context;
 import org.openmrs.module.htmlformentry.*;
-import org.openmrs.obs.ComplexData;
-import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.Date;
 import java.util.List;
 
+/**
+ * This class processes the narrative forms which are need to backed up by HTML form entry module
+ * Important: HTMLform entry version: 2.1.3 should be used.
+ */
 @Controller
 public class HtmlFormEntryRequestController {
 
-    /////////////Important/////////////
-    /* HTMLform entry version: 2.1.3 */
-    /////////////Important/////////////
-
-    Boolean alert = null;
     private String returnUrl;
     public final static String FORM_PATH = "/module/patientnarratives/htmlFormProcess.form";
     protected final Log log = LogFactory.getLog(getClass());
@@ -60,16 +46,16 @@ public class HtmlFormEntryRequestController {
         HtmlFormEntryPortletController htmlFormEntryPortletController;
         FormEntrySession session = null;
         try {
-                htmlFormEntryPortletController = new HtmlFormEntryPortletController();
+            htmlFormEntryPortletController = new HtmlFormEntryPortletController();
             session = htmlFormEntryPortletController.getFormEntrySession(request);
 
             List<FormSubmissionError> validationErrors = session.getSubmissionController().validateSubmission(session.getContext(), request);
             if (validationErrors != null && validationErrors.size() > 0) {
-//                errors.reject("Fix errors");
+                //errors.reject("Fix errors");
             }
         } catch (Exception ex) {
             log.error("Exception during form validation", ex);
-//            errors.reject("Exception during form validation, see log for more details: " + ex);
+            //errors.reject("Exception during form validation, see log for more details: " + ex);
         }
 
 //        if (errors.hasErrors()) {

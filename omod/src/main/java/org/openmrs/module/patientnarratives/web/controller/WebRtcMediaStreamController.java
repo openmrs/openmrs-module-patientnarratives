@@ -43,6 +43,14 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This is the Controller of the Video recording stuff, this controller will receive the user submitted
+ * video record as two multipart http requests. 1. Video blob, 2. Audio blob.
+ * (Since WebRTC currently doesn't support generating Video with Audio we had to do this)
+ *
+ * After that the two blobs are been merged together using the "Xuggler library" which is a (FFMPEG Java wrapper)
+ * Then the merged single file will be saved as a OpenMRS complex observation inside Hard disc (~/.OpenMRS/complex_obs folder)
+ */
 @Controller
 public class WebRtcMediaStreamController {
 
@@ -60,6 +68,9 @@ public class WebRtcMediaStreamController {
             MultipartFile videofile             = (MultipartFile) multipartRequest.getFile("video");
             MultipartFile audiofile             = (MultipartFile) multipartRequest.getFile("audio");
 
+            /**
+             * Xuggler merge process of the two binary streams
+             */
             try{
                 tempMergedVideoFile = File.createTempFile("mergedVideoFile", ".flv");
                 String mergedUrl = tempMergedVideoFile.getCanonicalPath();
@@ -174,6 +185,7 @@ public class WebRtcMediaStreamController {
                     }
                 }
             }catch (Exception e){
+                log.error(e);
                 e.getStackTrace();
             }
         }
@@ -184,6 +196,9 @@ public class WebRtcMediaStreamController {
         return new ModelAndView(new RedirectView(returnUrl));
     }
 
+    /**
+     * Saving the file as a Complex observation
+     */
     public void saveAndTransferVideoComplexObs(){
 
         try{
@@ -206,7 +221,7 @@ public class WebRtcMediaStreamController {
             tempMergedVideoFile.delete();
 
         }catch (Exception e){
-
+            log.error(e);
         }
     }
 }

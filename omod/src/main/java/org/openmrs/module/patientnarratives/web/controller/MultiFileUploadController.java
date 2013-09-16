@@ -34,6 +34,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ *  This Class defines the controller which handles the user files upload on the patient narratives form.
+ *  see patientNarrativesForm.jsp
+ */
 @Controller
 public class MultiFileUploadController {
 
@@ -45,12 +49,9 @@ public class MultiFileUploadController {
     @RequestMapping(FORM_PATH)
     public ModelAndView handleRequest(HttpServletRequest request) throws Exception {
 
-        String hello = request.getParameter("ss");
-
         if (request instanceof MultipartHttpServletRequest) {
             MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
             List<MultipartFile> uploadedFiles = multipartRequest.getFiles("files[]");
-            int s = uploadedFiles.size();
 
             try{
                 Iterator<MultipartFile> iterator = uploadedFiles.iterator();
@@ -61,6 +62,7 @@ public class MultiFileUploadController {
                 }
             }
             catch (Exception e){
+                log.error(e);
                 e.getStackTrace();
             }
         }
@@ -98,7 +100,7 @@ public class MultiFileUploadController {
             tempFile.delete();
 
         }catch (Exception e){
-
+            log.error(e);
         }
     }
 }

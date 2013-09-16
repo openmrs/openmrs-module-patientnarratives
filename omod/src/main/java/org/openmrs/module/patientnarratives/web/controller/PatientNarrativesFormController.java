@@ -15,26 +15,15 @@ package org.openmrs.module.patientnarratives.web.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.*;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.htmlformentry.*;
-import org.openmrs.obs.ComplexData;
-import org.openmrs.util.OpenmrsConstants;
-import org.openmrs.web.WebConstants;
-import org.springframework.util.StringUtils;
-import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.*;
 import java.util.*;
 
+/**
+ *  Main Controller of the Patient Narratives form
+ */
 public class PatientNarrativesFormController extends SimpleFormController{
 
     protected final Log log = LogFactory.getLog(getClass());
@@ -43,6 +32,7 @@ public class PatientNarrativesFormController extends SimpleFormController{
     protected Map referenceData(HttpServletRequest request, Object obj, Errors err) throws Exception {
         HashMap<String,Object> map = new HashMap<String,Object>();
 
+        /* If the user isn't authenticated use anonymous login */
         if (Context.isAuthenticated() == false){
             Context.authenticate("anonymous", "Password123");
         }

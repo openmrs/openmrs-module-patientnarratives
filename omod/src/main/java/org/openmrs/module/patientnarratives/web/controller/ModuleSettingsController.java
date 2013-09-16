@@ -17,7 +17,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
-import org.openmrs.util.OpenmrsConstants;
 import org.openmrs.web.WebConstants;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.mvc.SimpleFormController;
@@ -25,14 +24,9 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
- * Created with IntelliJ IDEA.
- * Author: harshadura
- * Date: 7/15/13
- * Time: 9:48 AM
+ *  Controls the user changes to the Module settings.
  */
 public class ModuleSettingsController extends SimpleFormController {
     protected final Log log = LogFactory.getLog(getClass());
@@ -45,11 +39,6 @@ public class ModuleSettingsController extends SimpleFormController {
         String formID = request.getParameter("formID");
         String patientID = request.getParameter("patientID");
         String encType = request.getParameter("encType");
-
-//            Context.addProxyPrivilege(OpenmrsConstants.PRIV_MANAGE_IMPLEMENTATION_ID);
-//            Context.getAdministrationService().setImplementationId(implId);
-//            Context.removeProxyPrivilege(OpenmrsConstants.PRIV_MANAGE_IMPLEMENTATION_ID);
-//            (OpenmrsConstants.PRIV_MANAGE_GLOBAL_PROPERTIES);
 
         if (StringUtils.hasLength(formType)) {
             GlobalProperty globalProperty = new GlobalProperty();

@@ -17,15 +17,15 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import org.openmrs.module.xforms.XformConstants;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.openmrs.api.FormService;
 import org.openmrs.api.context.Context;
-
 import org.openmrs.web.controller.PortletController;
 
+/**
+ * Custom Controller of the forms which are need to handle combined with Xforms module of the OpenMRS
+ */
 public class XFormEntryPortletController extends PortletController{
     protected final Log log = LogFactory.getLog(getClass());
 
@@ -34,12 +34,7 @@ public class XFormEntryPortletController extends PortletController{
 
         Context.addProxyPrivilege("View Users");
         Context.addProxyPrivilege("View Global Properties");
-
         Context.addProxyPrivilege("Purge HL7 Inbound Queue");
-
-
-
-//        Context.removeProxyPrivilege("View Users");
 
         String globalPropertyFormId = Context.getAdministrationService().getGlobalProperty("patientnarratives.formid");
         String globalPropertyPatientId = Context.getAdministrationService().getGlobalProperty("patientnarratives.patientid");

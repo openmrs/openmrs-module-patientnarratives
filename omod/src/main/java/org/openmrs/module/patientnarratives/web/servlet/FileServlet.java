@@ -18,11 +18,8 @@ import org.openmrs.Obs;
 import org.openmrs.api.context.Context;
 import org.openmrs.obs.ComplexData;
 import org.openmrs.util.OpenmrsConstants;
-import org.springframework.util.SerializationUtils;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,10 +32,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * A file servlet supporting resume of downloads and client-side caching and GZIP of text content.
+ * This file servlet is been used to control Patients multi file uploads.
+ *
+ * And this file servlet supports resume of downloads and client-side caching and GZIP of text content.
  * This servlet can also be used for images, client-side caching would become more efficient.
  * This servlet can also be used for text files, GZIP would decrease network bandwidth.
  *
+ * Credits:
  * @author BalusC
  * @link http://balusc.blogspot.com/2009/02/fileservlet-supporting-resume-and.html
  */
