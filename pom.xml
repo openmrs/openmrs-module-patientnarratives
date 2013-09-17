@@ -21,11 +21,25 @@
 		<url>http://openmrs.org</url>
 	</organization>
 
-	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/patientnarratives/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/patientnarratives/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/patientnarratives/trunk/</url>
-	</scm>
+    <scm>
+        <connection>scm:git:https://github.com/openmrs/openmrs-module-patientnarratives</connection>
+        <developerConnection>scm:git:https://github.com/openmrs/openmrs-module-patientnarratives</developerConnection>
+        <url>https://github.com/openmrs/openmrs-module-patientnarratives</url>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>openmrs-repo-modules</id>
+            <name>Modules</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules/</url>
+        </repository>
+        <snapshotRepository>
+            <id>openmrs-repo-snapshots</id>
+            <name>OpenMRS Snapshots</name>
+            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 	<modules>
 		<module>api</module>
