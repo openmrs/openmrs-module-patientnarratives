@@ -30,21 +30,21 @@
 </style>
 
 <form method="post" >
-    <b class="boxHeader">Module Settings</b>
+    <b class="boxHeader"><spring:message code="patientnarratives.settings"/></b>
     <div class="box" >
         <table>
             <tr>
-                <td>Form Type</td>
+                <td><spring:message code="patientnarratives.formType"/></td>
                 <td>
                     <input type="radio" name="formType" value="HTML-Form" <c:if test="${formType == 'HTML-Form'}">checked</c:if>>HTML-Form |
                     <input type="radio" name="formType" value="X-Form" <c:if test="${formType == 'X-Form'}">checked</c:if>>X-Form
                 </td>
             </tr>
             <tr>
-                <td>Form Id</td>
+                <td><spring:message code="patientnarratives.formId"/></td>
                 <td>
                     <input type="text" id="formID" name="formID" value="<openmrs:globalProperty key="patientnarratives.formid"/>">
-                    <div id='updated'>^ Please change the FormID now..</div>
+                    <div id='updated'><spring:message code="patientnarratives.formIdPrompt"/></div>
                 </td>
             </tr>
             <tr>
@@ -52,11 +52,11 @@
                 <td></td>
             </tr>
             <tr>
-                <td>Default Patient Id</td>
+                <td><spring:message code="patientnarratives.defPatientId"/></td>
                 <td><input type="text" name="patientID" value="<openmrs:globalProperty key="patientnarratives.patientid"/>"></td>
             </tr>
             <tr>
-                <td>Encounter Type</td>
+                <td><spring:message code="patientnarratives.encounterType"/></td>
                 <td><input type="text" name="encType" value="<openmrs:globalProperty key="patientnarratives.enctype"/>"></td>
             </tr>
             <tr>
