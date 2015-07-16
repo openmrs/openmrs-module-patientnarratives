@@ -57,7 +57,7 @@
         });
 
         $j("#submitPopup").click(function() {
-            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
+            alert(<spring:message code="patientnarratives.patientSubmitSuccess"/>);
             location.reload();
         });
 
@@ -118,7 +118,7 @@
 
     <div id="dialogUploads" style="display: none" title="Upload Files/Record Video">
 
-        <b class="boxHeader">Narrate your sickness here</b>
+        <b class="boxHeader"><spring:message code="patientnarratives.narrateHere"/></b>
         <div class="box" >
 
         <div id="info-wrap">
@@ -126,31 +126,28 @@
                 </br>
 
                 <div id="videoAlert">
-                    For the Video Recording we expect you to have a Chrome v29+ Web Browser.
-                    <br/>If so, Now we would like to use your WebCam and Mike for recording purposes.
-                    <br/>To continue, Please 'Allow' the Chrome Alert you see Above ^^
-                    <br/>[Click Here to HIDE this message]
+                    <spring:message code="patientnarratives.browserWarning"/>
                 </div>
 
                 <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
                 <br/><br/>
 
-                <button id="clear-record" disabled>Clear</button>
-                <button id="start-record">Start Recording</button>
-                <button id="stop-record" disabled>Stop</button>
-                <button id="upload-record" disabled>Upload</button>
+                <button id="clear-record" disabled><spring:message code="patientnarratives.clear"/></button>
+                <button id="start-record"><spring:message code="patientnarratives.startRec"/></button>
+                <button id="stop-record" disabled><spring:message code="patientnarratives.stop"/></button>
+                <button id="upload-record" disabled><spring:message code="patientnarratives.upload"/></button>
 
                 <br/><br/>
                 <div style="display: none;" id="result"></div>
-                <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% Completed</progress>
-                <div id="uploadStatus"> Video uploaded successfully!</div>
+                <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% <spring:message code="patientnarratives.progressCaption"/></progress>
+                <div id="uploadStatus"><spring:message code="patientnarratives.ulSuccess"/></div>
 
             </center>
         </div>
        </div>
 
-        <b class="boxHeader">Upload files (X-ray, reports, etc)</b>
+        <b class="boxHeader"><spring:message code="patientnarratives.uploadFiles"/></b>
         <div class="box" >
 
         <div id="info-wrap">
@@ -160,12 +157,12 @@
                 <form action="<openmrs:contextPath/>/module/patientnarratives/multiFileUpload.form" method="POST" enctype="multipart/form-data">
                     <div class="fileupload-buttonbar">
                         <label class="fileinput-button">
-                            <span>Add files...</span>
+                            <span><spring:message code="patientnarratives.add"/></span>
                             <input id="file" type="file" name="files[]" multiple>
                         </label>
-                        <button type="submit" class="start">Start upload</button>
-                        <button type="reset" class="cancel">Cancel upload</button>
-                        <button type="button" class="delete">Delete files</button>
+                        <button type="submit" class="start"><spring:message code="patientnarratives.startUpload"/></button>
+                        <button type="reset" class="cancel"><spring:message code="patientnarratives.cancelUpload"/></button>
+                        <button type="button" class="delete"><spring:message code="patientnarratives.deleteFiles"/></button>
                     </div>
                 </form>
                 <div class="fileupload-content">
@@ -178,7 +175,7 @@
         </div>
 
         <br/>
-        <center> <input id="submitPopup" type="submit" value="Submit now!" /> </center>
+        <center> <input id="submitPopup" type="submit" value="<spring:message code="patientnarratives.submit"/>" /> </center>
         <br/>
     </div>
             <%--<table border="1">--%>
@@ -206,13 +203,13 @@
 
             <span>
               <%--<strong>--%>
-                  I agree to the OpenMRS - Patient Narratives Module <br> <a target="_blank" href="http://openmrs.org/privacy/">Terms of Service</a> and <a target="_blank" id="PrivacyLink" href="http://openmrs.org/privacy/">Privacy Policy</a>
+                  <spring:message code="patientnarratives.agreeGeneric"/> <br> <a target="_blank" href="http://openmrs.org/privacy/"><spring:message code="patientnarratives.agreeTos"/></a> <spring:message code="patientnarratives.and"/> <a target="_blank" id="PrivacyLink" href="http://openmrs.org/privacy/"><spring:message code="patientnarratives.agreePp"/></a>
               <%--</strong>--%>
             </span>
             <br> <br>
 
-            <input id="submitMainForm" type="button" value="Submit Now!" disabled />
-            <input id="nextUploads" type="button" value="Next - Upload Files/Record Video" disabled />
+            <input id="submitMainForm" type="button" value="<spring:message code="patientnarratives.submit"/>" disabled />
+            <input id="nextUploads" type="button" value="<spring:message code="patientnarratives.nextUpload"/>" disabled />
         </div>
     </div>
 </div>
