@@ -63,7 +63,7 @@
                 return false;
             }
             else{
-                alert("Captcha incorrect, please fix!");
+                alert("<spring:message code='patientnarratives.captcha.incorrect'/>");
             }
 
         });
@@ -71,7 +71,7 @@
 
         function timedRefresh(){
             setTimeout("location.reload(true);",500);
-            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
+            alert("<spring:message code='patientnarratives.narrative.success'/>");
         }
 
         $j("#nextUploads").click(function() {
@@ -87,7 +87,7 @@
                 return false;
             }
             else{
-                alert("Captcha incorrect, please fix!");
+                alert("<spring:message code='patientnarratives.captcha.incorrect'/>");
             }
 
         });
@@ -490,6 +490,3 @@ function checkIfLoggedInCallback(isLoggedIn) {
 }
 
 </script>
-
-
-

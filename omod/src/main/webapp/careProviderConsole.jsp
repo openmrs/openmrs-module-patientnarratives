@@ -43,17 +43,17 @@
     <table cellspacing="0" cellpadding="2" id="table" class="display">
         <thead>
         <tr>
-            <th width="200">Encounter ID</th>
-            <th width="300">Encounter Date</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.encID"/></th>
+            <th width="300"><spring:message code="patientnarratives.patientInfo.encDate"/></th>
 
-            <th width="300">Patient Name</th>
+            <th width="300"><spring:message code="patientnarratives.patientInfo.name"/></th>
             <%--<th width="300">Gender</th>--%>
             <%--<th width="300">Age</th>--%>
             <%--<th width="300">Hometown</th>--%>
             <%--<th width="300">Narrative</th>--%>
-            <th width="300">Subject</th>
-            <th width="300">Telephone</th>
-            <th width="300">Status</th>
+            <th width="300"><spring:message code="patientnarratives.patientInfo.subject"/></th>
+            <th width="300"><spring:message code="patientnarratives.patientInfo.tel"/></th>
+            <th width="300"><spring:message code="patientnarratives.patientInfo.status"/></th>
 
             <%--<th width="100">Register</th>--%>
 
@@ -139,4 +139,3 @@
 </openmrs:hasPrivilege>
 
 <%@ include file="/WEB-INF/template/footer.jsp"%>
-
