@@ -34,54 +34,54 @@
     <spring:message code="patientnarratives.fullinfo"/>
 </h2>
 
-<b class="boxHeader">General Information</b>
+<b class="boxHeader"><spring:message code="patientnarratives.generalinfo"/></b>
 <div class="box" >
     <table id="table">
         <tr>
-            <th width="200">Encounter Id</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.encID"/></th>
             <td>
                 <c:out value="${encounterId} "/> -- <a target="_blank" href="<openmrs:contextPath/>/admin/encounters/encounter.form?encounterId=<c:out value="${encounterId}"/>">[View Encounter]</a>
             </td>
         </tr>
         <tr>
-            <th width="200">Date of Encounter</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.dateOfEnc"/></th>
             <td><openmrs:formatDate date="${encDate}" type="long" /></td>
         </tr>
         <tr>
-            <th width="200">Patient Name</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.name"/></th>
             <td><c:out value="${name} "/> </td>
         </tr>
         <tr>
-            <th width="200">Gender</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.genre"/></th>
             <td><c:out value="${sex} "/> </td>
         </tr>
         <tr>
-            <th width="200">Age</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.age"/></th>
             <td><c:out value="${age} "/> </td>
         </tr>
         <tr>
-            <th width="200">Hometown</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.hometown"/></th>
             <td><c:out value="${city} "/> </td>
         </tr>
         <tr>
-            <th width="200">Email</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.email"/></th>
             <td> <c:out value="${email}"/> </td>
         </tr>
 
         <tr>
-            <th width="200">Telephone</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.tel"/></th>
             <td> <c:out value="${tp}"/> </td>
         </tr>
 
         <tr>
-            <th width="200">Subject</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.subject"/></th>
             <td> <c:out value="${subject}"/> </td>
         </tr>
 
         <tr>
-            <th width="200">Patient Narrative</th>
+            <th width="200"><spring:message code="patientnarratives.patientNarrative"/></th>
             <td>
-                <a class="toggleAddTag" href="#">Show Narrative</a>
+                <a class="toggleAddTag" href="#"><spring:message code="patientnarratives.showNarrative"/></a>
                 <div id="addTag" style="border: 1px black solid; background-color: #e0e0e0; display: none">
                     <c:out value="${story}"/>
                 </div>
@@ -90,19 +90,19 @@
     </table>
 </div>
 
-<b class="boxHeader">Narrative Video and Attachments</b>
+<b class="boxHeader"><spring:message code="patientnarratives.narrativeVideoAndAttach"/></b>
 <div class="box" >
     <table id="table2">
 
 
         <tr>
-            <th width="200">Video</th>
+            <th width="200"><spring:message code="patientnarratives.video"/></th>
             <td>
 
                 <c:choose>
 
                     <c:when test="${empty videoObsId}">
-                        No Patient recorded video.
+                        <spring:message code="patientnarratives.noVideo"/>
                     </c:when>
 
                     <c:otherwise>
@@ -116,7 +116,7 @@
                         <br/>
                         <center>
                         <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${videoObsId}"/>" >
-                        Download Video</a>
+                        <spring:message code="patientnarratives.downloadVideo"/></a>
                         </center>
                     </c:otherwise>
 
@@ -126,10 +126,10 @@
         </tr>
 
         <tr>
-            <th width="200">Attachments</th>
+            <th width="200"><spring:message code="patientnarratives.attach"/></th>
             <td>
                 <c:if test="${empty uploadedFilesMap}">
-                    No attachments.
+                    <spring:message code="patientnarratives.noAttach"/>
                 </c:if>
                 <c:forEach items="${uploadedFilesMap}" var="entry">
                     <a target="_blank" href="<openmrs:contextPath/>/moduleServlet/patientnarratives/filesDownloadServlet?obsId=<c:out value="${entry.key}"/>" >
@@ -142,18 +142,18 @@
     </table>
 </div>
 
-<b class="boxHeader">Status of the Narrative</b>
+<b class="boxHeader"><spring:message code="patientnarratives.statusOfNarrative"/></b>
 <div class="box" >
     <table id="table9">
         <tr>
-            <th width="200">Status</th>
+            <th width="200"><spring:message code="patientnarratives.patientInfo.status"/></th>
             <td>
                 <c:out value="${status}"/>
                 <form method="post">
                     <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
                     <br/>
                     <input type="text" name="newStatus" >
-                    <input type="submit" value="Update Status" />
+                    <input type="submit" value='<spring:message code="patientnarratives.updateStatus"/>' />
                 </form>
             </td>
 
@@ -161,21 +161,21 @@
     </table>
 </div>
 
-<b class="boxHeader">Register patient & Transfer the Encounter</b>
+<b class="boxHeader"><spring:message code="patientnarratives.registerPatientAndTransfer"/></b>
 <div class="box" >
     <table id="table5">
         <tr>
-            <th width="200">(Registered) Patient Id</th>
+            <th width="200"><spring:message code="patientnarratives.registeredPatient"/></th>
             <td>
                 <c:choose>
                     <c:when test="${patientId == defaultPatientId}">
                         <form method="post">
                             <input type=hidden name=registerEncounterId value=<c:out value="${encounterId}"/> >
-                            <input type="submit" value="Register this Patient" />
+                            <input type="submit" value='<spring:message code="patientnarratives.registereThisPatient"/>' />
                         </form>
                     </c:when>
                     <c:otherwise>
-                        <c:out value="${patientId}"/> -- <a target="_blank" href="<openmrs:contextPath/>/patientDashboard.form?patientId=<c:out value="${patientId}"/>">[View Patient]</a>
+                        <c:out value="${patientId}"/> -- <a target="_blank" href="<openmrs:contextPath/>/patientDashboard.form?patientId=<c:out value="${patientId}"/>">[<spring:message code="patientnarratives.viewPatient"/>]</a>
                     </c:otherwise>
                 </c:choose>
             </td>
@@ -184,18 +184,18 @@
     </table>
 </div>
 
-<b class="boxHeader">Submit a Comment</b>
+<b class="boxHeader"><spring:message code="patientnarratives.comment.submit"/></b>
 <div class="box" >
     <form method="post"   enctype="multipart/form-data">
         <textarea name="comment" rows="10" cols="80" type="_moz" size="35"></textarea>
         <br/>
         <input type=hidden name=encounterId value=<c:out value="${encounterId}"/> >
-        <input type="submit" value="Add Comment" />
+        <input type="submit" value='<spring:message code="patientnarratives.comment.add"/>' />
         <br/>
     </form>
 </div>
 
-<b class="boxHeader">Comments..</b>
+<b class="boxHeader"><spring:message code="patientnarratives.comment.comments"/></b>
 <div class="box" >
     <c:forEach items="${comments}" var="commentObj" >
         <div class="box" >

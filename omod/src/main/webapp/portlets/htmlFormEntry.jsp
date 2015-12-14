@@ -66,18 +66,18 @@
                 return false;
             }
             else{
-                alert("Captcha incorrect, please fix!");
+                alert("<spring:message code='patientnarratives.captcha.incorrect'/>");
             }
 
         });
 
         function timedRefresh(){
             setTimeout("location.reload(true);",500);
-            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
+            alert("<spring:message code='patientnarratives.narrative.success'/>");
         }
 
         $j("#submitPopup").click(function() {
-            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
+            alert("<spring:message code='patientnarratives.narrative.success'/>");
             location.reload();
         });
 
@@ -111,7 +111,7 @@
                 return false;
             }
             else{
-                alert("Captcha incorrect, please fix!");
+                alert("<spring:message code='patientnarratives.captcha.incorrect'/>");
             }
 
         });
@@ -130,7 +130,7 @@
 
 <script type="text/javascript">
 	var propertyAccessorInfo = new Array();
-	
+
 	// individual forms can define their own functions to execute before a form validation or submission by adding them to these lists
 	// if any function returns false, no further functions are called and the validation or submission is cancelled
 	var beforeValidation = new Array();     // a list of functions that will be executed before the validation of a form
@@ -147,14 +147,14 @@
 		$j('#deleteButton').click(function() {
 			// display a "deleting form" message
 			$j('#confirmDeleteFormPopup').children("center").html('<spring:message code="htmlformentry.deletingForm"/>');
-			
+
 			// do the post that does the actual delete
-			$j.post("<c:url value="/module/htmlformentry/deleteEncounter.form"/>", 
+			$j.post("<c:url value="/module/htmlformentry/deleteEncounter.form"/>",
 				{ 	encounterId: "${model.command.encounter.encounterId}",
 				    htmlFormId: "${model.command.htmlFormId}",
 					returnUrl: "${model.command.returnUrlWithParameters}",
 					reason: $j('#deleteReason').val()
-			 	}, 
+			 	},
 			 	function(data) {
 				 	var url = "${model.command.returnUrlWithParameters}";
 				 	if (url == null || url == "") {
@@ -228,7 +228,7 @@
 
 		// indicates this function has completed
 		initInd = false;
-		
+
 		//managing the id of the newly generated id's of dynamicAutocomplete widgets
 		$j('div .dynamicAutocomplete').each(function(index) {
 			var string=((this.id).split("_div",1))+"_hid";
@@ -249,10 +249,10 @@
 	        		 $j('#'+string+'_hid').attr('value',$j('#'+divId).data("count"));
 	        		 var hidId=spanid+'_hid';
 	          		 var v='<span id="'+spanid+'"></br>'+$j('#'+string).val()+'<input id="'+hidId+'"  class="autoCompleteHidden" type="hidden" name="'+hidId+'" value="'+conceptValue+'">';
-	                 var q='<input id="'+spanid+'_button" type="button" value="Remove" onClick="$j(\'#'+spanid+'\').remove();openmrs.htmlformentry.refresh(this.id)"></span>';
+	                 var q='<input id="'+spanid+'_button" type="button" value="<spring:message code="patientnarratives.remove"/>" onClick="$j(\'#'+spanid+'\').remove();openmrs.htmlformentry.refresh(this.id)"></span>';
 	                 $j('#'+divId).append(v+q);
 	                 $j('#'+string).val('');
-	        } 
+	        }
 	        });
 	});
 
@@ -274,7 +274,7 @@
 		    });
 		}
 	}
-	
+
 	// restores toggle container's inputs from the last time the trigger checkbox was unchecked
 	function restoreContainerInputs($container) {
 		if (!initInd) {
@@ -292,7 +292,7 @@
 	}
 
 	var tryingToSubmit = false;
-	
+
 	function submitHtmlForm() {
 	    if (!tryingToSubmit) {
 	        tryingToSubmit = true;
@@ -310,7 +310,7 @@
 					alert("<spring:message code='htmlformentry.error.autoCompleteAnswerNotValid'/>");
 					var id = value.id;
 					id = id.substring(0,id.length-4);
-					$j("#"+id).focus(); 					
+					$j("#"+id).focus();
 				}
 				containError=true;
 			}
@@ -337,23 +337,23 @@
     }
 
 	/*
-		It seems the logic of  showAuthenticateDialog and 
+		It seems the logic of  showAuthenticateDialog and
 		findAndHighlightErrors should be in the same callback function.
 		i.e. only authenticated user can see the error msg of
 	*/
 	function checkIfLoggedInAndErrorsCallback(isLoggedIn) {
-		
+
 		var state_beforeValidation=true;
-		
+
 //		if (!isLoggedIn) {
 //			showAuthenticateDialog();
 //		}else{
-			
+
 			// first call any beforeValidation functions that may have been defined by the html form
 			if (beforeValidation.length > 0){
 				for (var i=0, l = beforeValidation.length; i < l; i++){
 					if (state_beforeValidation){
-						var fncn=beforeValidation[i];						
+						var fncn=beforeValidation[i];
 						state_beforeValidation=eval(fncn);
 					}
 					else{
@@ -362,12 +362,12 @@
 					}
 				}
 			}
-			
+
 			// only do the validation if all the beforeValidationk functions returned "true"
 			if (state_beforeValidation){
 				var anyErrors = findAndHighlightErrors();
                 var optionSelectErrors = findOptionAutoCompleteErrors();
-			
+
         		if (anyErrors || optionSelectErrors) {
             		tryingToSubmit = false;
             		return;
@@ -384,13 +384,13 @@
 	}
 
 	function loginThenSubmitHtmlForm() {
-		
+
 		$j('#passwordPopup').hide();
 		var username = $j('#passwordPopupUsername').val();
 		var password = $j('#passwordPopupPassword').val();
 		$j('#passwordPopupUsername').val('');
 		$j('#passwordPopupPassword').val('');
-		DWRHtmlFormEntryService.authenticate(username, password, submitHtmlForm); 
+		DWRHtmlFormEntryService.authenticate(username, password, submitHtmlForm);
 	}
 
 	function doSubmitHtmlForm() {
@@ -400,8 +400,8 @@
 		if (beforeSubmit.length > 0){
 			for (var i=0, l = beforeSubmit.length; i < l; i++){
 				if (state_beforeSubmit){
-					var fncn=beforeSubmit[i];						
-					state_beforeSubmit=fncn();					
+					var fncn=beforeSubmit[i];
+					state_beforeSubmit=fncn();
 				}
 				else{
 					// forces the end of the loop
@@ -441,8 +441,8 @@
 	function cancelDeleteForm() {
 		$j('#confirmDeleteFormPopup').hide();
 	}
-	
-	
+
+
 </script>
 
 <%--<div id="htmlFormEntryBanner">--%>
@@ -555,15 +555,15 @@
 					<td colspan="2"><b><spring:message code="htmlformentry.loginAgainMessage"/></b></td>
 				</tr>
 				<tr>
-					<td align="right"><b>Username:</b></td>
+					<td align="right"><b><spring:message code="patientnarratives.username"/></b></td>
 					<td><input type="text" id="passwordPopupUsername"/></td>
 				</tr>
 				<tr>
-					<td align="right"><b>Password:</b></td>
+					<td align="right"><b><spring:message code="patientnarratives.password"/></b></td>
 					<td><input type="password" id="passwordPopupPassword"/></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="button" value="Submit" onClick="loginThenSubmitHtmlForm()"/></td>
+					<td colspan="2" align="center"><input type="button" value='<spring:message code="patientnarratives.submit"/>' onClick="loginThenSubmitHtmlForm()"/></td>
 				</tr>
 			</table>
 		</center>

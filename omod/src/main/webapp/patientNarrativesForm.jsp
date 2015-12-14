@@ -57,7 +57,7 @@
         });
 
         $j("#submitPopup").click(function() {
-            alert("Thanks, Your Patient Narrative Record saved Successfully! New ticket has been created & Await for feedback from our care-provider team shortly!");
+            alert('<spring:message code="patientnarratives.form.alert"/>');
             location.reload();
         });
 
@@ -116,9 +116,9 @@
 
     <div id="content-wrap">
 
-    <div id="dialogUploads" style="display: none" title="Upload Files/Record Video">
+    <div id="dialogUploads" style="display: none" title='<spring:message code="patientnarratives.form.title"/>'>
 
-        <b class="boxHeader">Narrate your sickness here</b>
+        <b class="boxHeader"><spring:message code="patientnarratives.form.narrateSickness"/></b>
         <div class="box" >
 
         <div id="info-wrap">
@@ -126,31 +126,31 @@
                 </br>
 
                 <div id="videoAlert">
-                    For the Video Recording we expect you to have a Chrome v29+ Web Browser.
-                    <br/>If so, Now we would like to use your WebCam and Mike for recording purposes.
-                    <br/>To continue, Please 'Allow' the Chrome Alert you see Above ^^
-                    <br/>[Click Here to HIDE this message]
+                    <spring:message code="patientnarratives.form.videoAlert1"/>
+                    <br/><spring:message code="patientnarratives.form.videoAlert2"/>
+                    <br/><spring:message code="patientnarratives.form.videoAlert3"/>
+                    <br/>[<spring:message code="patientnarratives.form.videoAlert4"/>]
                 </div>
 
                 <video id="client-video" width="320" height="240" autoplay loop muted></video>
 
                 <br/><br/>
 
-                <button id="clear-record" disabled>Clear</button>
-                <button id="start-record">Start Recording</button>
-                <button id="stop-record" disabled>Stop</button>
-                <button id="upload-record" disabled>Upload</button>
+                <button id="clear-record" disabled><spring:message code="patientnarratives.video.clear"/></button>
+                <button id="start-record"><spring:message code="patientnarratives.video.startRec"/></button>
+                <button id="stop-record" disabled><spring:message code="patientnarratives.video.stop"/></button>
+                <button id="upload-record" disabled><spring:message code="patientnarratives.video.upload"/></button>
 
                 <br/><br/>
                 <div style="display: none;" id="result"></div>
-                <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% Completed</progress>
-                <div id="uploadStatus"> Video uploaded successfully!</div>
+                <progress id="videoUploadProgressBar" min="0" max="100" value="0">0% <spring:message code="patientnarratives.video.complet"/></progress>
+                <div id="uploadStatus"> <spring:message code="patientnarratives.video.uploadSuccess"/></div>
 
             </center>
         </div>
        </div>
 
-        <b class="boxHeader">Upload files (X-ray, reports, etc)</b>
+        <b class="boxHeader"><spring:message code="patientnarratives.file.title"/></b>
         <div class="box" >
 
         <div id="info-wrap">
@@ -160,12 +160,12 @@
                 <form action="<openmrs:contextPath/>/module/patientnarratives/multiFileUpload.form" method="POST" enctype="multipart/form-data">
                     <div class="fileupload-buttonbar">
                         <label class="fileinput-button">
-                            <span>Add files...</span>
+                            <span><spring:message code="patientnarratives.file.add"/></span>
                             <input id="file" type="file" name="files[]" multiple>
                         </label>
-                        <button type="submit" class="start">Start upload</button>
-                        <button type="reset" class="cancel">Cancel upload</button>
-                        <button type="button" class="delete">Delete files</button>
+                        <button type="submit" class="start"><spring:message code="patientnarratives.file.start"/></button>
+                        <button type="reset" class="cancel"><spring:message code="patientnarratives.file.cancel"/></button>
+                        <button type="button" class="delete"><spring:message code="patientnarratives.file.delete"/></button>
                     </div>
                 </form>
                 <div class="fileupload-content">
@@ -178,7 +178,7 @@
         </div>
 
         <br/>
-        <center> <input id="submitPopup" type="submit" value="Submit now!" /> </center>
+        <center> <input id="submitPopup" type="submit" value='<spring:message code="patientnarratives.form.submit"/>' /> </center>
         <br/>
     </div>
             <%--<table border="1">--%>
@@ -202,17 +202,18 @@
                 </br>
             </form>
 
-            <input type="checkbox" name="agreement" value="Accept" onClick="EnableSubmit(this)">
+            <input type="checkbox" name="agreement" value='<spring:message code="patientnarratives.form.accept"/>' onClick="EnableSubmit(this)">
 
             <span>
               <%--<strong>--%>
-                  I agree to the OpenMRS - Patient Narratives Module <br> <a target="_blank" href="http://openmrs.org/privacy/">Terms of Service</a> and <a target="_blank" id="PrivacyLink" href="http://openmrs.org/privacy/">Privacy Policy</a>
+                  <spring:message code="patientnarratives.form.agreement"/> <br>
+                   <a target="_blank" href="http://openmrs.org/privacy/"><spring:message code="patientnarratives.form.termsOfServ"/></a> <spring:message code="patientnarratives.and"/> <a target="_blank" id="PrivacyLink" href="http://openmrs.org/privacy/"><spring:message code="patientnarratives.form.privacyPolicy"/></a>
               <%--</strong>--%>
             </span>
             <br> <br>
 
-            <input id="submitMainForm" type="button" value="Submit Now!" disabled />
-            <input id="nextUploads" type="button" value="Next - Upload Files/Record Video" disabled />
+            <input id="submitMainForm" type="button" value='<spring:message code="patientnarratives.form.submit"/>' disabled />
+            <input id="nextUploads" type="button" value='<spring:message code="patientnarratives.form.next"/>' disabled />
         </div>
     </div>
 </div>
@@ -227,19 +228,19 @@
         <td class="name">${name}</td>
         <td class="size">${sizef}</td>
         {{if error}}
-        <td class="error" colspan="2">Error:
-            {{if error === 'maxFileSize'}}File is too big
-            {{else error === 'minFileSize'}}File is too small
-            {{else error === 'acceptFileTypes'}}Filetype not allowed
-            {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
+        <td class="error" colspan="2"><spring:message code="patientnarratives.error.title"/>
+            {{if error === 'maxFileSize'}}<spring:message code="patientnarratives.error.tooBig"/>
+            {{else error === 'minFileSize'}}<spring:message code="patientnarratives.error.tooSmall"/>
+            {{else error === 'acceptFileTypes'}}<spring:message code="patientnarratives.error.notAllowed"/>
+            {{else error === 'maxNumberOfFiles'}}<spring:message code="patientnarratives.error.maxNumber"/>
             {{else}}${error}
             {{/if}}
         </td>
         {{else}}
         <td class="progress"><div></div></td>
-        <td class="start"><button>Start</button></td>
+        <td class="start"><button><spring:message code="patientnarratives.error.start"/></button></td>
         {{/if}}
-        <td class="cancel"><button>Cancel</button></td>
+        <td class="cancel"><button><spring:message code="patientnarratives.error.cancel"/></button></td>
     </tr>
 </script>
 <script id="template-download" type="text/x-jquery-tmpl">
@@ -248,20 +249,20 @@
         <td></td>
         <td class="name">${namefdsa}</td>
         <td class="size">${sizef}</td>
-        <td class="error" colspan="2">File Uploaded!:
-            {{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
-            {{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
-            {{else error === 3}}File was only partially uploaded
-            {{else error === 4}}No File was uploaded
-            {{else error === 5}}Missing a temporary folder
-            {{else error === 6}}Failed to write file to disk
-            {{else error === 7}}File upload stopped by extension
-            {{else error === 'maxFileSize'}}File is too big
-            {{else error === 'minFileSize'}}File is too small
-            {{else error === 'acceptFileTypes'}}Filetype not allowed
-            {{else error === 'maxNumberOfFiles'}}Max number of files exceeded
-            {{else error === 'uploadedBytes'}}Uploaded bytes exceed file size
-            {{else error === 'emptyResult'}}Empty file upload result
+        <td class="error" colspan="2"><spring:message code="patientnarratives.error.fileUploaded"/>
+            {{if error === 1}}<spring:message code="patientnarratives.error.fileUploadMaxSize"/>
+            {{else error === 2}}<spring:message code="patientnarratives.error.fileMaxSize"/>
+            {{else error === 3}}<spring:message code="patientnarratives.error.fileOnlyPartiall"/>
+            {{else error === 4}}<spring:message code="patientnarratives.error.noFileUploaded"/>
+            {{else error === 5}}<spring:message code="patientnarratives.error.fileMissingTmp"/>
+            {{else error === 6}}<spring:message code="patientnarratives.error.fileFailedWrite"/>
+            {{else error === 7}}<spring:message code="patientnarratives.error.fileStop"/>
+            {{else error === 'maxFileSize'}}<spring:message code="patientnarratives.error.tooBig"/>
+            {{else error === 'minFileSize'}}<spring:message code="patientnarratives.error.tooSmall"/>
+            {{else error === 'acceptFileTypes'}}<spring:message code="patientnarratives.error.notAllowed"/>
+            {{else error === 'maxNumberOfFiles'}}<spring:message code="patientnarratives.error.maxNumber"/>
+            {{else error === 'uploadedBytes'}}<spring:message code="patientnarratives.error.bytesExceedSize"/>
+            {{else error === 'emptyResult'}}<spring:message code="patientnarratives.error.fileEmpty"/>
             {{else}}${error}
             {{/if}}
         </td>
@@ -278,7 +279,7 @@
         <td colspan="2"></td>
         {{/if}}
         <td class="delete">
-            <button data-type="${delete_type}" data-url="${delete_url}">Delete</button>
+            <button data-type="${delete_type}" data-url="${delete_url}"><button><spring:message code="patientnarratives.error.delete"/></button>
         </td>
     </tr>
 </script>
