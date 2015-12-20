@@ -23,7 +23,7 @@ import org.openmrs.module.patientnarratives.api.db.PatientNarrativesDAO;
 import java.util.List;
 
 /**
- * It is a default implementation of {@link PatientNarrativesService}.
+ * This is the default implementation of {@link PatientNarrativesService}.
  */
 public class PatientNarrativesServiceImpl implements PatientNarrativesService {
 
