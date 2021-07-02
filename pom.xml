@@ -32,12 +32,12 @@
         <repository>
             <id>openmrs-repo-modules</id>
             <name>Modules</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/modules/</url>
+            <url>https://mavenrepo.openmrs.org/modules</url>
         </repository>
         <snapshotRepository>
             <id>openmrs-repo-snapshots</id>
             <name>OpenMRS Snapshots</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/snapshots</url>
+            <url>https://mavenrepo.openmrs.org/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -156,13 +156,13 @@
 
         <repository>
             <id>xuggle repo</id>
-            <url>http://xuggle.googlecode.com/svn/trunk/repo/share/java/</url>
+            <url>https://xuggle.googlecode.com/svn/trunk/repo/share/java</url>
         </repository>
 
         <repository>
             <id>openmrs-repo</id>
             <name>OpenMRS Nexus Repository</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+            <url>https://mavenrepo.openmrs.org/public</url>
         </repository>
     </repositories>
 
@@ -170,7 +170,7 @@
         <pluginRepository>
             <id>openmrs-repo</id>
             <name>OpenMRS Nexus Repository</name>
-            <url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
+            <url>https://mavenrepo.openmrs.org/public</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
